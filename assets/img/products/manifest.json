@@ -1,0 +1,141 @@
+{
+  "convention": {
+    "basePath": "assets/img/products",
+    "cover": "cover.jpg",
+    "galleryPattern": "gallery-XX.jpg"
+  },
+  "products": [
+    {
+      "id": 1,
+      "club": "Boca Juniors",
+      "stadium": "La Bombonera",
+      "directory": "assets/img/products/boca-juniors/la-bombonera"
+    },
+    {
+      "id": 2,
+      "club": "River Plate",
+      "stadium": "Mas Monumental",
+      "directory": "assets/img/products/river-plate/mas-monumental"
+    },
+    {
+      "id": 3,
+      "club": "Racing Club",
+      "stadium": "El Cilindro",
+      "directory": "assets/img/products/racing-club/el-cilindro"
+    },
+    {
+      "id": 4,
+      "club": "Independiente",
+      "stadium": "Libertadores de America",
+      "directory": "assets/img/products/independiente/libertadores-de-america"
+    },
+    {
+      "id": 5,
+      "club": "Penarol",
+      "stadium": "Campeon del Siglo",
+      "directory": "assets/img/products/penarol/campeon-del-siglo"
+    },
+    {
+      "id": 6,
+      "club": "Deportivo Moron",
+      "stadium": "Nuevo Francisco Urbano",
+      "directory": "assets/img/products/deportivo-moron/nuevo-francisco-urbano"
+    },
+    {
+      "id": 7,
+      "club": "Belgrano de Cordoba",
+      "stadium": "Julio Cesar Villagra",
+      "directory": "assets/img/products/belgrano-de-cordoba/julio-cesar-villagra"
+    },
+    {
+      "id": 8,
+      "club": "San Lorenzo",
+      "stadium": "Viejo Gasometro",
+      "directory": "assets/img/products/san-lorenzo/viejo-gasometro"
+    },
+    {
+      "id": 9,
+      "club": "Almirante Brown",
+      "stadium": "Frag. Pte. Sarmiento",
+      "directory": "assets/img/products/almirante-brown/frag-pte-sarmiento"
+    },
+    {
+      "id": 10,
+      "club": "Huracan",
+      "stadium": "Tomas Adolfo Duco",
+      "directory": "assets/img/products/huracan/tomas-adolfo-duco"
+    },
+    {
+      "id": 11,
+      "club": "Sarmiento de Junin",
+      "stadium": "Eva Peron",
+      "directory": "assets/img/products/sarmiento-de-junin/eva-peron"
+    },
+    {
+      "id": 12,
+      "club": "Nueva Chicago",
+      "stadium": "Republica de Mataderos",
+      "directory": "assets/img/products/nueva-chicago/republica-de-mataderos"
+    },
+    {
+      "id": 13,
+      "club": "Argentinos Juniors",
+      "stadium": "Diego Maradona",
+      "directory": "assets/img/products/argentinos-juniors/diego-maradona"
+    },
+    {
+      "id": 14,
+      "club": "Temperley",
+      "stadium": "Alfredo Beranger",
+      "directory": "assets/img/products/temperley/alfredo-beranger"
+    },
+    {
+      "id": 15,
+      "club": "Rosario Central",
+      "stadium": "Gigante de Arroyito",
+      "directory": "assets/img/products/rosario-central/gigante-de-arroyito"
+    },
+    {
+      "id": 16,
+      "club": "Seleccion de Japon",
+      "stadium": "Olimpico de Tokio",
+      "directory": "assets/img/products/seleccion-de-japon/olimpico-de-tokio"
+    },
+    {
+      "id": 17,
+      "club": "Estudiantes de Caseros",
+      "stadium": "Ciudad de Caseros",
+      "directory": "assets/img/products/estudiantes-de-caseros/ciudad-de-caseros"
+    },
+    {
+      "id": 18,
+      "club": "River Plate",
+      "stadium": "Monumental",
+      "directory": "assets/img/products/river-plate/monumental"
+    },
+    {
+      "id": 19,
+      "club": "Velez Sarsfield",
+      "stadium": "Jose Amalfitani",
+      "directory": "assets/img/products/velez-sarsfield/jose-amalfitani"
+    },
+    {
+      "id": 20,
+      "club": "Qatar 2022",
+      "stadium": "Lusail Stadium",
+      "directory": "assets/img/products/qatar/lusail-stadium"
+    },
+    {
+      "id": 21,
+      "club": "Platense",
+      "stadium": "Ciudad de Vicente Lopez",
+      "directory": "assets/img/products/platense/ciudad-de-vicente-lopez"
+    },
+    {
+      "id": 22,
+      "club": "Banfield",
+      "stadium": "Florencio Sola",
+      "directory": "assets/img/products/banfield/florencio-sola"
+    }
+  ]
+}

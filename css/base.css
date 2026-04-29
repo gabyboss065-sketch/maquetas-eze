@@ -1,0 +1,88 @@
+:root {
+    --font-primary: 'Inter', sans-serif;
+    
+    /* Variables de colores */
+    --color-bg: #d8d8d8;
+    --color-text: #ffffff;
+    --color-accent: #ffd700; /* Dorado */
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+/* 3. Mejorar la legibilidad y el comportamiento del texto */
+body {
+  line-height: 1.5;
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  padding-top: 100px;
+  color: var(--color-text);
+  font-family: var(--font-primary);
+}
+
+html,
+body {
+  width: 100%;
+  overflow-x: clip;
+}
+
+/* 4. Evitar problemas con imÃ¡genes, videos y elementos multimedia */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 5. Ajustar formularios y controles de entrada */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(245, 215, 110, 0.72);
+  outline-offset: 3px;
+}
+
+/* 6. Mejorar la gestiÃ³n de textos largos */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 7. Crear un contexto de apilamiento para modales y menÃºs */
+#root,
+#__next {
+  isolation: isolate;
+}
+
+ul,
+ol {
+  list-style: none;
+}

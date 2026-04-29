@@ -1,0 +1,270 @@
+.personalized {
+    position: relative;
+    padding: 110px 24px 120px;
+    color: #111417;
+    background:
+        radial-gradient(circle at top right, rgba(245, 215, 110, 0.35), transparent 26%),
+        linear-gradient(180deg, #f4f0e7 0%, #ece6db 100%);
+}
+
+.personalized__shell {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: 42px;
+    align-items: center;
+}
+
+.personalized__eyebrow {
+    display: inline-flex;
+    margin-bottom: 18px;
+    padding: 8px 14px;
+    border: 1px solid rgba(17, 20, 23, 0.12);
+    border-radius: 999px;
+    font-size: 0.75rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8c6b19;
+    background: rgba(255, 255, 255, 0.52);
+}
+
+.personalized h2 {
+    max-width: 720px;
+    margin-bottom: 16px;
+    font-size: clamp(2.4rem, 5vw, 4.6rem);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+}
+
+.personalized__lead {
+    max-width: 620px;
+    margin-bottom: 30px;
+    font-size: 1.06rem;
+    color: rgba(17, 20, 23, 0.76);
+}
+
+.personalized__points {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.personalized__point {
+    padding: 20px;
+    border: 1px solid rgba(17, 20, 23, 0.08);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.55);
+    box-shadow: 0 20px 40px rgba(76, 62, 38, 0.08);
+}
+
+.personalized__point strong {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.personalized__point p {
+    color: rgba(17, 20, 23, 0.74);
+    font-size: 0.92rem;
+}
+
+.personalized__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.personalized__button {
+    padding: 14px 24px;
+    border: 1px solid rgba(17, 20, 23, 0.12);
+    border-radius: 999px;
+    background: #111417;
+    color: #fff;
+    font-weight: 800;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.personalized__button:hover {
+    background: #232931;
+    transform: translateY(-2px);
+    box-shadow: 0 18px 30px rgba(17, 20, 23, 0.18);
+}
+
+.personalized__note {
+    color: rgba(17, 20, 23, 0.62);
+    font-size: 0.92rem;
+}
+
+.personalized__visual {
+    display: flex;
+    justify-content: center;
+}
+
+.personalized__card {
+    width: min(440px, 100%);
+    padding: 18px;
+    border: 1px solid rgba(17, 20, 23, 0.08);
+    border-radius: 34px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.54));
+    box-shadow: 0 30px 70px rgba(76, 62, 38, 0.12);
+}
+
+.personalized__image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    aspect-ratio: 4 / 5;
+}
+
+.personalized__media-slide,
+.personalized__meta-slide {
+    display: none;
+}
+
+.personalized__media-slide.is-active,
+.personalized__meta-slide.is-active {
+    display: block;
+}
+
+.personalized__media-slide {
+    width: 100%;
+    height: 100%;
+}
+
+.personalized__image-placeholder {
+    display: grid;
+    place-items: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 24px;
+    text-align: center;
+    color: rgba(17, 20, 23, 0.7);
+    background:
+        radial-gradient(circle at top, rgba(245, 215, 110, 0.42), transparent 38%),
+        linear-gradient(180deg, #f6f0e2 0%, #ddd3c3 100%);
+}
+
+.personalized__image-placeholder span {
+    margin-bottom: 8px;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.personalized__image-placeholder strong {
+    font-size: 1.4rem;
+    line-height: 1.05;
+}
+
+.personalized__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.personalized__card-body {
+    padding: 22px 10px 10px;
+}
+
+.personalized__meta-track {
+    min-height: 104px;
+}
+
+.personalized__card-label {
+    margin-bottom: 8px;
+    color: rgba(17, 20, 23, 0.5);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.personalized__card-body h3 {
+    margin-bottom: 8px;
+    font-size: 2rem;
+    line-height: 0.98;
+}
+
+.personalized__card-body p:last-child {
+    color: rgba(17, 20, 23, 0.72);
+}
+
+.personalized__controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-top: 18px;
+}
+
+.personalized__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 1px solid rgba(17, 20, 23, 0.12);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.62);
+    color: #111417;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.personalized__arrow:hover {
+    transform: scale(1.04);
+    background: rgba(255, 255, 255, 0.92);
+}
+
+.personalized__arrow svg {
+    width: 18px;
+    height: 18px;
+}
+
+.personalized__dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+}
+
+.personalized__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(17, 20, 23, 0.2);
+    transition: width 0.2s ease, background 0.2s ease;
+}
+
+.personalized__dot.is-active {
+    width: 28px;
+    background: #111417;
+}
+
+@media (max-width: 980px) {
+    .personalized__shell {
+        grid-template-columns: 1fr;
+    }
+
+    .personalized__points {
+        grid-template-columns: 1fr;
+    }
+
+    .personalized__visual {
+        justify-content: flex-start;
+    }
+}
+
+@media (max-width: 640px) {
+    .personalized {
+        padding: 80px 18px 88px;
+    }
+
+    .personalized__card {
+        border-radius: 26px;
+    }
+}
