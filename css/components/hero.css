@@ -55,7 +55,7 @@
 
 .slide-content h1 {
     margin-bottom: 0.75rem;
-    font-size: clamp(4.5rem, 9vw, 7.5rem);
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
     line-height: 0.9;
     font-weight: 800;
     letter-spacing: -0.06em;
@@ -173,5 +173,9 @@
     .slide-content p {
         margin-left: 0;
         margin-right: 0;
+    }
+
+    .slider-arrow {
+        backdrop-filter: none;
     }
 }

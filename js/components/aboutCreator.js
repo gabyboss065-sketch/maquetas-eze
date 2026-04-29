@@ -99,7 +99,7 @@ const createMediaImageMarkup = (card) => {
 
     return `
         <div class="about-creator__media-thumb-placeholder">
-            <span>Pega aca la URL de la imagen</span>
+            <span>Pegar aca la URL de la imagen</span>
         </div>
     `;
 };
