@@ -1,6 +1,7 @@
 // js/modules/heroSlider.js
 import { getIcon } from '../utils/icons.js';
 import { loadDeferredImage } from '../utils/imageLoader.js';
+import { getProductDetailUrl } from '../utils/productLinks.js';
 
 export const initHeroSlider = (container) => {
     const slides = container.querySelectorAll('.slide');
@@ -64,5 +65,17 @@ export const initHeroSlider = (container) => {
 
     loadDeferredImage(slides[0].querySelector('img[data-deferred-image]'));
     loadDeferredImage(slides[1]?.querySelector('img[data-deferred-image]'));
+
+    container.addEventListener('click', (event) => {
+        const discoverBtn = event.target.closest('[data-discover-btn]');
+        if (!discoverBtn) return;
+
+        const activeSlide = container.querySelector('.slide.active');
+        const productId = activeSlide?.dataset.productId;
+        if (productId) {
+            window.location.href = getProductDetailUrl(productId);
+        }
+    });
+
     startAutoPlay();
 };

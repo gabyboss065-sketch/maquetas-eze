@@ -1,5 +1,6 @@
 import { initPersonalizedSlider } from '../modules/personalizedSlider.js';
 import { getDeferredImageAttrs } from '../utils/imageLoader.js';
+import { getIcon } from '../utils/icons.js';
 
 const createVisualSlide = (product, index) => {
     const activeClass = index === 0 ? 'is-active' : '';
@@ -54,16 +55,19 @@ export const createPersonalized = (products) => {
 
                 <div class="personalized__points">
                     <article class="personalized__point">
-                        <strong>Diseno a medida</strong>
+                        <span class="personalized__point-icon">${getIcon('design')}</span>
+                        <strong>Diseño a medida personalizada</strong>
                         <p>Adaptamos escala, base y presentacion segun el espacio donde la vayas a exhibir.</p>
                     </article>
 
                     <article class="personalized__point">
+                        <span class="personalized__point-icon">${getIcon('premium')}</span>
                         <strong>Terminacion premium</strong>
                         <p>Trabajamos texturas, volumenes y detalles para que la maqueta tenga presencia real.</p>
                     </article>
 
                     <article class="personalized__point">
+                        <span class="personalized__point-icon">${getIcon('shipping')}</span>
                         <strong>Entrega a todo el pais</strong>
                         <p>Empaquetado reforzado y seguimiento para que la pieza llegue segura y lista para regalar.</p>
                     </article>
@@ -71,7 +75,7 @@ export const createPersonalized = (products) => {
 
                 <div class="personalized__actions">
                     <button class="personalized__button" type="button">Pedir maqueta personalizada</button>
-                    <span class="personalized__note">Tiempo estimado de produccion: 15 a 25 dias.</span>
+                    <span class="personalized__note">Tiempo estimado de produccion: consultar segun medida.</span>
                 </div>
             </div>
 
@@ -92,6 +96,22 @@ export const createPersonalized = (products) => {
     `;
 
     initPersonalizedSlider(section);
+
+    const ctaButton = section.querySelector('.personalized__button');
+    ctaButton?.addEventListener('click', () => {
+        const message = encodeURIComponent('Hola, me interesa solicitar una maqueta personalizada. ¿Qué información necesito proporcionar?');
+        window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank', 'noopener,noreferrer');
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                section.classList.add('is-animated');
+                observer.unobserve(section);
+            }
+        });
+    }, { threshold: 0.15 });
+    observer.observe(section);
 
     return section;
 };

@@ -9,13 +9,13 @@ export const createHeader = () => {
         <div class="nav-container">
             <button id="menu-toggle" class="icon-btn mobile-only">${getIcon('menu')}</button>
             
-            <div class="logo">MAQUETAS EZEQUIEL</div>
+            <a class="logo" href="./index.html">MAQUETAS EZEQUIEL</a>
             
             <nav class="nav-menu">
                 <ul>
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#todos-los-productos">Productos</a></li>
-                    <li><a href="#sobre-mi">Sobre mí</a></li>
+                    <li><a href="./index.html#inicio">Inicio</a></li>
+                    <li><a href="./index.html#todos-los-productos">Productos</a></li>
+                    <li><a href="./index.html#sobre-mi">Sobre mí</a></li>
                 </ul>
             </nav>
 
@@ -78,6 +78,33 @@ export const createHeader = () => {
         navMenu.classList.toggle('is-active');
     });
 
+    const navLinks = header.querySelectorAll('.nav-menu a');
+    const sectionIds = ['inicio', 'todos-los-productos', 'sobre-mi'];
+
+    const updateActiveLink = () => {
+        const scrollY = window.scrollY;
+        let activeId = 'inicio';
+
+        for (const id of sectionIds) {
+            const section = document.getElementById(id);
+            if (section) {
+                const offsetTop = section.offsetTop - 120;
+                if (scrollY >= offsetTop) {
+                    activeId = id;
+                }
+            }
+        }
+
+        navLinks.forEach((link) => {
+            const href = link.getAttribute('href');
+            const linkId = href?.split('#')[1];
+            link.classList.toggle('is-active', linkId === activeId);
+        });
+    };
+
+    updateActiveLink();
+    window.addEventListener('scroll', updateActiveLink, { passive: true });
+
     let lastScrollY = window.scrollY;
     const revealThreshold = 24;
 
@@ -93,6 +120,26 @@ export const createHeader = () => {
         }
 
         lastScrollY = currentScrollY;
+    }, { passive: true });
+
+    const scrollToTopBtn = document.createElement('button');
+    scrollToTopBtn.id = 'scroll-to-top';
+    scrollToTopBtn.className = 'scroll-to-top';
+    scrollToTopBtn.type = 'button';
+    scrollToTopBtn.setAttribute('aria-label', 'Volver arriba');
+    scrollToTopBtn.innerHTML = getIcon('arrow-up');
+    document.body.appendChild(scrollToTopBtn);
+
+    scrollToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            scrollToTopBtn.classList.add('is-visible');
+        } else {
+            scrollToTopBtn.classList.remove('is-visible');
+        }
     }, { passive: true });
 
     return header;

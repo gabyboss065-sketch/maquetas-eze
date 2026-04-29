@@ -66,9 +66,7 @@
 }
 
 .all-products__card:hover {
-    transform: translateY(-5px);
     border-color: rgba(140, 107, 25, 0.22);
-    box-shadow: 0 24px 48px rgba(17, 20, 23, 0.12);
 }
 
 .all-products__media-button,
@@ -98,7 +96,7 @@
 }
 
 .all-products__card:hover .all-products__media img {
-    transform: scale(1.03);
+    transform: scale(1.08);
 }
 
 .all-products__card:hover .all-products__title-button h3 {

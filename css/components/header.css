@@ -40,8 +40,10 @@
 }
 .logo {
     font-family: var(--font-primary);
-    font-weight: 800; /* Extra negrita para el logo */
-    letter-spacing: -0.5px; /* Ajuste Ã³ptico premium */
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    color: inherit;
+    text-decoration: none;
 }
 
 .nav-menu {
@@ -77,14 +79,52 @@
     text-transform: uppercase;
 }
 
-.nav-menu a:hover {
-    color: #ffd700; /* Dorado para destacar */
+.nav-menu a:hover,
+.nav-menu a.is-active {
+    color: #ffd700;
 }
 
 .nav-actions {
     display: flex;
     gap: 15px;
     align-items: center;
+}
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    z-index: 998;
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 50%;
+    background: #f5d76e;
+    color: #111417;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background 0.2s ease;
+}
+
+.scroll-to-top:hover {
+    background: #e8c547;
+    transform: translateY(-2px);
+}
+
+.scroll-to-top.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.scroll-to-top svg {
+    width: 18px;
+    height: 18px;
 }
 
 .search-shell {

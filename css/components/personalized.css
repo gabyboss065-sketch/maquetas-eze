@@ -8,6 +8,17 @@
 }
 
 .personalized__shell {
+    opacity: 0;
+    transform: translateX(60px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.personalized.is-animated .personalized__shell {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.personalized__shell {
     width: min(1200px, 100%);
     margin: 0 auto;
     display: grid;
@@ -52,22 +63,66 @@
 }
 
 .personalized__point {
-    padding: 20px;
+    position: relative;
+    padding: 28px 22px 24px;
     border: 1px solid rgba(17, 20, 23, 0.08);
-    border-radius: 24px;
-    background: rgba(255, 255, 255, 0.55);
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0.42) 100%);
     box-shadow: 0 20px 40px rgba(76, 62, 38, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.personalized__point::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #f5d76e, #e8c547);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.personalized__point:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 28px 52px rgba(76, 62, 38, 0.14);
+}
+
+.personalized__point:hover::before {
+    opacity: 1;
+}
+
+.personalized__point-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 18px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f5d76e 0%, #e8c547 100%);
+    color: #111417;
+    box-shadow: 0 8px 20px rgba(245, 215, 110, 0.35);
+}
+
+.personalized__point-icon svg {
+    width: 26px;
+    height: 26px;
 }
 
 .personalized__point strong {
     display: block;
     margin-bottom: 10px;
-    font-size: 1rem;
+    font-size: 1.08rem;
+    color: #111417;
 }
 
 .personalized__point p {
     color: rgba(17, 20, 23, 0.74);
     font-size: 0.92rem;
+    line-height: 1.6;
 }
 
 .personalized__actions {

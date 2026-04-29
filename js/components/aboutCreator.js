@@ -5,24 +5,24 @@ import { getDeferredImageAttrs } from '../utils/imageLoader.js';
 const stats = [
     { value: '6', label: 'Años de experiencia' },
     { value: '+200', label: 'Ventas concretadas' },
-    { value: '11k', label: 'Seguidores en TikTok' },
-    { value: '+60k', label: 'Seguidores en Instagram' }
+    { value: '11 mil', label: 'TikTok' },
+    { value: '+44 mil', label: 'Instagram' }
 ];
 
 const socialCards = [
     {
         platform: 'TikTok',
-        handle: '@gem.maquetas',
+        handle: '@ezequielarteenmadera',
         followers: '11k seguidores',
         icon: 'tiktok',
-        href: '#'
+        href: 'https://www.tiktok.com/@ezequielarteenmadera'
     },
     {
         platform: 'Instagram',
-        handle: '@gem.maquetas',
-        followers: '+60k seguidores',
+        handle: '@maquetas_ezequiel',
+        followers: '44k seguidores',
         icon: 'instagram',
-        href: '#'
+        href: 'https://www.instagram.com/maquetas_ezequiel/'
     }
 ];
 
@@ -199,6 +199,16 @@ export const createAboutCreator = () => {
     `;
 
     initMediaSlider(section);
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                section.classList.add('is-animated');
+                observer.unobserve(section);
+            }
+        });
+    }, { threshold: 0.15 });
+    observer.observe(section);
 
     return section;
 };

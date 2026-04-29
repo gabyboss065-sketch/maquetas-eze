@@ -15,7 +15,7 @@ export const createHero = (maquetas) => {
     hero.innerHTML = `
         <div class="slider-wrapper">
             ${slidesData.map((m, index) => `
-                <div class="slide ${index === 0 ? 'active' : ''}">
+                <div class="slide ${index === 0 ? 'active' : ''}" data-product-id="${m.id}">
                     ${getDeferredImageAttrs({
                         src: m.imagen,
                         alt: `Maqueta del estadio ${m.estadio}`,
@@ -26,7 +26,7 @@ export const createHero = (maquetas) => {
                     <div class="slide-content">
                         <h1>${m.estadio}</h1>
                         <p>${m.club} - Escala ${m.escala}</p>
-                        <button class="btn-cta">Descubrir</button>
+                        <button class="btn-cta" data-discover-btn>Descubrir</button>
                     </div>
                 </div>
             `).join('')}

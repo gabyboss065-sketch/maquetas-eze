@@ -71,8 +71,7 @@ export const createAllProductsPreview = (products) => {
                 <p class="all-products__eyebrow">Todos los productos</p>
                 <h2>Explora mas modelos del taller</h2>
                 <p>
-                    Una grilla mas amplia y compacta para recorrer el catalogo completo sin quitarle protagonismo
-                    a la seleccion destacada de mas vendidos.
+                    Descubrí todos los modelos disponibles.
                 </p>
             </div>
 

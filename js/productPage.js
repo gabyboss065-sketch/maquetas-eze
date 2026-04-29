@@ -2,12 +2,22 @@ import { maquetas } from './data.js';
 import { getIcon } from './utils/icons.js';
 import { createWhatsAppFloat } from './components/whatsappFloat.js';
 import { buildProductInquiryMessage, buildWhatsappUrl } from './utils/whatsapp.js';
+import { createHeader } from './components/header.js';
 
 const MIN_GALLERY_SLOTS = 6;
+const DEFAULT_SIZE_OPTIONS = ['25 x 18 cm', '35 x 24 cm', '45 x 30 cm'];
+const CUSTOM_SIZE_VALUE = '__custom__';
 
 const getProductIdFromUrl = () => {
     const params = new URLSearchParams(window.location.search);
     return Number(params.get('id'));
+};
+
+const getSizeOptions = (product) => {
+    if (Array.isArray(product.medidas) && product.medidas.length > 0) {
+        return product.medidas;
+    }
+    return DEFAULT_SIZE_OPTIONS;
 };
 
 const getGalleryItems = (product) => {
@@ -34,7 +44,21 @@ const getGalleryItems = (product) => {
 
 const getAvailabilityLabel = (product) => {
     if (product.referenciaPersonalizada) return 'Proyecto a pedido';
-    return 'Disponible para consulta y produccion por pedido';
+    return 'Disponible por pedido';
+};
+
+const getSelectionPayload = (size, customSize) => {
+    const useCustomSize = size === CUSTOM_SIZE_VALUE;
+    const selectedLabel = useCustomSize ? 'Medida personalizada' : size;
+    return {
+        medida: selectedLabel || 'A definir',
+        medidaPersonalizada: useCustomSize ? customSize : ''
+    };
+};
+
+const buildInquiryMessageWithSize = (product, size, customSize) => {
+    const selection = getSelectionPayload(size, customSize);
+    return buildProductInquiryMessage(product, selection);
 };
 
 const renderGalleryItem = (item, index, isActive) => {
@@ -125,24 +149,44 @@ const renderProductPage = (product) => {
 
                         <div class="product-detail__summary">
                             <article>
-                                <p>Modalidad</p>
-                                <strong>Consulta personalizada</strong>
-                            </article>
-                            <article>
                                 <p>Disponibilidad</p>
                                 <strong>${getAvailabilityLabel(product)}</strong>
                             </article>
                         </div>
 
-                        <div class="product-detail__note">
-                            <strong>Importante</strong>
-                            <p>Esta pagina esta pensada como ficha de producto y consulta comercial. No reemplaza un checkout ni un flujo de e-commerce.</p>
+                        <div class="product-detail__sizes" id="product-sizes">
+                            <div class="product-detail__sizes-head">
+                                <p>Elegí tu medida</p>
+                                <small>Seleccioná una opción o pedí una medida personalizada.</small>
+                            </div>
+                            <div class="product-detail__size-options" data-size-options>
+                                ${getSizeOptions(product).map((option, index) => `
+                                    <label class="product-detail__size-option ${index === 0 ? 'is-selected' : ''}">
+                                        <input type="radio" name="product-size" value="${option}" ${index === 0 ? 'checked' : ''}>
+                                        <span>${option}</span>
+                                    </label>
+                                `).join('')}
+                                <label class="product-detail__size-option">
+                                    <input type="radio" name="product-size" value="${CUSTOM_SIZE_VALUE}">
+                                    <span>Medida personalizada</span>
+                                </label>
+                            </div>
+                            <label class="product-detail__custom-size" data-custom-size-wrap hidden>
+                                <span>Especificá tu medida</span>
+                                <input
+                                    type="text"
+                                    class="product-detail__custom-size-input"
+                                    data-custom-size-input
+                                    placeholder="Ej: 52 x 36 cm"
+                                >
+                            </label>
                         </div>
 
                         <div class="product-detail__actions">
                             <a
                                 class="product-detail__cta product-detail__cta--primary"
-                                href="${buildWhatsappUrl(buildProductInquiryMessage(product))}"
+                                id="whatsapp-cta"
+                                href="${buildWhatsappUrl(buildProductInquiryMessage(product, { medida: getSizeOptions(product)[0], medidaPersonalizada: '' }))}"
                                 target="_blank"
                                 rel="noreferrer"
                             >
@@ -152,15 +196,6 @@ const renderProductPage = (product) => {
                             <a class="product-detail__cta product-detail__cta--ghost" href="./index.html#todos-los-productos">
                                 Volver al catalogo
                             </a>
-                        </div>
-
-                        <div class="product-detail__future">
-                            <h2>Espacio listo para crecer</h2>
-                            <ul>
-                                <li>Mas fotos reales del producto.</li>
-                                <li>Historias del proceso o terminaciones especiales.</li>
-                                <li>CTA mas directo para cerrar consultas por WhatsApp.</li>
-                            </ul>
                         </div>
                     </div>
                 </div>
@@ -207,6 +242,49 @@ const renderProductPage = (product) => {
 
         activeImage.requestFullscreen?.();
     });
+
+    const updateSizeSelection = () => {
+        const selectedRadio = root.querySelector('input[name="product-size"]:checked');
+        const customSizeWrap = root.querySelector('[data-custom-size-wrap]');
+        const customSizeInput = root.querySelector('[data-custom-size-input]');
+        const whatsappCta = root.querySelector('#whatsapp-cta');
+
+        if (!selectedRadio) return;
+
+        const currentSize = selectedRadio.value;
+        const showCustom = currentSize === CUSTOM_SIZE_VALUE;
+
+        if (customSizeWrap) {
+            customSizeWrap.hidden = !showCustom;
+        }
+
+        root.querySelectorAll('.product-detail__size-option').forEach((option) => {
+            const radio = option.querySelector('input');
+            if (radio) {
+                option.classList.toggle('is-selected', radio.checked);
+            }
+        });
+
+        let customSize = '';
+        if (showCustom && customSizeInput) {
+            customSizeInput.addEventListener('input', () => {
+                customSize = customSizeInput.value;
+                const selection = getSelectionPayload(currentSize, customSize);
+                whatsappCta.href = buildWhatsappUrl(buildInquiryMessageWithSize(product, currentSize, customSize));
+            }, { once: true });
+        }
+
+        const selection = getSelectionPayload(currentSize, customSize);
+        if (whatsappCta) {
+            whatsappCta.href = buildWhatsappUrl(buildInquiryMessageWithSize(product, currentSize, ''));
+        }
+    };
+
+    root.querySelectorAll('input[name="product-size"]').forEach((radio) => {
+        radio.addEventListener('change', updateSizeSelection);
+    });
+
+    updateSizeSelection();
 };
 
 const renderNotFound = () => {
@@ -231,6 +309,11 @@ const renderNotFound = () => {
 };
 
 const init = () => {
+    const headerSection = document.getElementById('header-section');
+    if (headerSection) {
+        headerSection.appendChild(createHeader());
+    }
+
     const productId = getProductIdFromUrl();
     const product = maquetas.find((item) => item.id === productId);
 
