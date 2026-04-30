@@ -234,6 +234,41 @@
     background: #6d747c;
 }
 
+.show-more {
+    display: none;
+}
+
+.is-hidden {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .show-more {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 32px;
+        flex-wrap: wrap;
+    }
+
+    .show-more__button {
+        padding: 12px 24px;
+        border-radius: 999px;
+        border: none;
+        background: #f5d76e;
+        color: #111417;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .show-more__button:hover {
+        background: #e8c547;
+        transform: translateY(-2px);
+    }
+}
+
 @media (max-width: 900px) {
     .all-products {
         padding-inline: 28px;
@@ -285,7 +320,7 @@
 
 @media (max-width: 425px) {
     .all-products__grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
     }
 
     .all-products__edition {

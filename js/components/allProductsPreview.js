@@ -1,5 +1,6 @@
 import { getProductDetailUrl } from '../utils/productLinks.js';
 import { getDeferredImageAttrs } from '../utils/imageLoader.js';
+import { initShowMore } from '../modules/showMore.js';
 
 const createProductCard = (product) => {
     return `
@@ -75,11 +76,19 @@ export const createAllProductsPreview = (products) => {
                 </p>
             </div>
 
-            <div class="all-products__grid">
+            <div class="all-products__grid" data-products-grid>
                 ${productsToShow.map(createProductCard).join('')}
             </div>
         </div>
     `;
+
+    initShowMore(section, {
+        batchSize: 10,
+        showAllThreshold: 10,
+        gridSelector: '[data-products-grid]',
+        itemSelector: 'article',
+        hiddenClass: 'is-hidden'
+    });
 
     section.addEventListener('click', (event) => {
         const viewButton = event.target.closest('[data-view-button]');
