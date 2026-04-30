@@ -1,4 +1,6 @@
 export const initShowMore = (section, config = {}) => {
+    if (window.innerWidth > 768) return;
+
     const {
         batchSize = 10,
         gridSelector = '[data-products-grid]',
@@ -43,7 +45,6 @@ export const initShowMore = (section, config = {}) => {
     grid.insertAdjacentElement('afterend', showMoreContainer);
 
     const getHiddenItems = () => grid.querySelectorAll(`.${hiddenClass}`);
-    const getVisibleCount = () => items.filter((item) => !item.classList.contains(hiddenClass)).length;
 
     showMoreBtn.addEventListener('click', () => {
         const currentlyHidden = getHiddenItems();

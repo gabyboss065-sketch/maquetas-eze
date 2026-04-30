@@ -160,7 +160,7 @@ export const maquetas = [
     {
         id: 8,
         estadio: 'Viejo Gasometro',
-        club: 'San Lorenzo de Almagro',
+        club: 'San Lorenzo',
         escala: '1:600',
         precio: 191000,
         stock: 6,
@@ -492,7 +492,7 @@ export const maquetas = [
     {
         id: 24,
         estadio: 'Nuevo Gasometro',
-        club: 'San Lorenzo de Almagro',
+        club: 'San Lorenzo',
         escala: '1:500',
         precio: 200000,
         stock: 0,
