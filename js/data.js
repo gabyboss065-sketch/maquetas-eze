@@ -140,7 +140,7 @@ export const maquetas = [
     {
         id: 7,
         estadio: 'Julio Cesar Villagra',
-        club: 'Belgrano',
+        club: 'Belgrano de Cordoba',
         escala: '1:650',
         precio: 224000,
         stock: 5,
@@ -160,11 +160,11 @@ export const maquetas = [
     {
         id: 8,
         estadio: 'Viejo Gasometro',
-        club: 'San Lorenzo',
+        club: 'San Lorenzo de Almagro',
         escala: '1:600',
         precio: 191000,
         stock: 6,
-        edicion: 'Arquitectura Moderna',
+        edicion: 'Edicion Clasica',
         material: 'Resina microtexturada',
         descripcion: 'Modelo de lineas limpias con estructura contemporanea y base lista para exhibicion.',
         imagen: 'assets/img/products/san-lorenzo/viejo-gasometro/cover.webp',
@@ -223,7 +223,7 @@ export const maquetas = [
     {
         id: 11,
         estadio: 'Eva Peron',
-        club: 'Sarmiento de Junin',
+        club: 'Sarmiento',
         escala: '1:630',
         precio: 179000,
         stock: 7,
@@ -349,7 +349,7 @@ export const maquetas = [
         escala: '1:550',
         precio: 0,
         stock: 0,
-        edicion: 'Proyecto Personalizado',
+        edicion: 'Clasicos',
         material: 'Base premium',
         descripcion: 'Referencia para el estadio del Pincha de Caseros, enfocada en los detalles caracteristicos de su arquitectura local.',
         imagen: 'assets/img/products/estudiantes-de-caseros/ciudad-de-caseros/cover.webp',
@@ -365,7 +365,7 @@ export const maquetas = [
     },
     {
         id: 18,
-        estadio: 'Monumental',
+        estadio: 'Estadio Monumental',
         club: 'River Plate',
         escala: '1:600',
         precio: 199000,
@@ -492,7 +492,7 @@ export const maquetas = [
     {
         id: 24,
         estadio: 'Nuevo Gasometro',
-        club: 'San Lorenzo',
+        club: 'San Lorenzo de Almagro',
         escala: '1:500',
         precio: 200000,
         stock: 0,
@@ -512,7 +512,7 @@ export const maquetas = [
     {
         id: 25,
         estadio: 'Estadio Chacarita Juniors',
-        club: 'Chacarita Juniors',
+        club: 'Chacarita',
         escala: '1:500',
         precio: 210000,
         stock: 0,
