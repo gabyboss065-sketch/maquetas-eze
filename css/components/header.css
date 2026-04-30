@@ -39,11 +39,33 @@
     align-items: center;
 }
 .logo {
-    font-family: var(--font-primary);
-    font-weight: 800;
-    letter-spacing: -0.5px;
-    color: inherit;
+    display: flex;
+    align-items: center;
     text-decoration: none;
+}
+
+.logo__text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    line-height: 1.1;
+    letter-spacing: 0.08em;
+}
+
+.logo__maquetas {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: #f5d76e;
+    text-transform: uppercase;
+}
+
+.logo__ezequiel {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 1.05rem;
+    color: #ffffff;
+    text-transform: uppercase;
 }
 
 .nav-menu {

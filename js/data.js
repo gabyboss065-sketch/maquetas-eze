@@ -140,7 +140,7 @@ export const maquetas = [
     {
         id: 7,
         estadio: 'Julio Cesar Villagra',
-        club: 'Belgrano de Cordoba',
+        club: 'Belgrano',
         escala: '1:650',
         precio: 224000,
         stock: 5,

@@ -9,7 +9,12 @@ export const createHeader = () => {
         <div class="nav-container">
             <button id="menu-toggle" class="icon-btn mobile-only">${getIcon('menu')}</button>
             
-            <a class="logo" href="./index.html">MAQUETAS EZEQUIEL</a>
+            <a class="logo" href="./index.html">
+                <span class="logo__text">
+                    <span class="logo__maquetas">MAQUETAS</span>
+                    <span class="logo__ezequiel">EZEQUIEL</span>
+                </span>
+            </a>
             
             <nav class="nav-menu">
                 <ul>
