@@ -65,14 +65,13 @@ export const createCartStore = (products, options = {}) => {
     };
 
     const increaseQuantity = (itemKey) => {
-        const item = read().find((cartItem) => cartItem.itemKey === itemKey);
-        if (!item) return false;
-        const product = getProductById(item.id);
-        if (!product) return false;
-        return addProduct(product, {
-            medida: item.medida,
-            medidaPersonalizada: item.medidaPersonalizada
-        });
+        const cart = read();
+        const target = cart.find((item) => item.itemKey === itemKey);
+        if (!target) return false;
+        target.quantity += 1;
+        write(cart);
+        notify();
+        return true;
     };
 
     const decreaseQuantity = (itemKey) => {
