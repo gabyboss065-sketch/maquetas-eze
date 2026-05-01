@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin — Maquetas Eze</title>
+    <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+<!-- ══ LOGIN ══════════════════════════════════════════════════════ -->
+<div id="login-screen">
+    <div class="login-card">
+        <h1>Panel de administración</h1>
+        <p>Maquetas Eze — ingresá con tu cuenta</p>
+
+        <form id="login-form">
+            <div class="field" style="margin-bottom:14px">
+                <label for="email">Email</label>
+                <input id="email" type="email" placeholder="admin@ejemplo.com" required autocomplete="email" />
+            </div>
+            <div class="field" style="margin-bottom:20px">
+                <label for="password">Contraseña</label>
+                <input id="password" type="password" placeholder="••••••••" required autocomplete="current-password" />
+            </div>
+            <p id="login-error" class="hidden" style="color:#f87171;font-size:12px;margin-bottom:14px"></p>
+            <button type="submit" class="btn btn-primary" style="width:100%" id="login-btn">
+                Ingresar
+            </button>
+        </form>
+    </div>
+</div>
+
+<!-- ══ DASHBOARD ══════════════════════════════════════════════════ -->
+<div id="dashboard" class="hidden">
+
+    <header class="admin-header">
+        <h1>Maquetas Eze · Admin</h1>
+        <span id="admin-email"></span>
+        <a href="index.html" target="_blank" class="btn btn-primary" style="padding:6px 14px">Ver sitio →</a>
+        <button class="btn btn-ghost" id="logout-btn" style="padding:6px 12px">Cerrar sesión</button>
+    </header>
+
+    <main class="admin-main">
+
+        <!-- Stats -->
+        <div class="stats" id="stats">
+            <div class="stat-card">
+                <div class="stat-value" id="stat-total">—</div>
+                <div class="stat-label">Productos</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-stock">—</div>
+                <div class="stat-label">Con stock</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-nostock">—</div>
+                <div class="stat-label">Sin stock</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="stat-custom">—</div>
+                <div class="stat-label">Personalizados</div>
+            </div>
+        </div>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <h2>Todos los productos</h2>
+            <div class="toolbar-right">
+                <input type="text" class="search-input" id="search" placeholder="Buscar estadio o club…" />
+                <button class="btn btn-primary" id="add-btn">+ Agregar producto</button>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Estadio / Club</th>
+                        <th>Escala</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Edición</th>
+                        <th>Estado</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="products-body">
+                    <tr class="empty-row"><td colspan="8">Cargando productos…</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+</div>
+
+<!-- ══ MODAL FORM ══════════════════════════════════════════════════ -->
+<div class="modal-backdrop hidden" id="form-modal">
+    <div class="modal">
+        <button class="modal-close" id="form-close" title="Cerrar">✕</button>
+        <h2 id="form-title">Agregar producto</h2>
+
+        <form id="product-form">
+            <div class="form-grid">
+                <div class="field">
+                    <label for="f-estadio">Estadio *</label>
+                    <input id="f-estadio" name="estadio" type="text" placeholder="La Bombonera" required />
+                </div>
+                <div class="field">
+                    <label for="f-club">Club *</label>
+                    <input id="f-club" name="club" type="text" placeholder="Boca Juniors" required />
+                </div>
+                <div class="field">
+                    <label for="f-escala">Escala *</label>
+                    <input id="f-escala" name="escala" type="text" placeholder="1:500" required />
+                </div>
+                <div class="field">
+                    <label for="f-edicion">Edición *</label>
+                    <input id="f-edicion" name="edicion" type="text" placeholder="Edicion Club" required />
+                </div>
+                <div class="field">
+                    <label for="f-precio">Precio (ARS)</label>
+                    <input id="f-precio" name="precio" type="number" min="0" placeholder="189000" />
+                </div>
+                <div class="field">
+                    <label for="f-stock">Stock</label>
+                    <input id="f-stock" name="stock" type="number" min="0" placeholder="5" />
+                </div>
+                <div class="field full">
+                    <label for="f-material">Material</label>
+                    <input id="f-material" name="material" type="text" placeholder="Resina + base acrilica" />
+                </div>
+                <div class="field full">
+                    <label for="f-descripcion">Descripción</label>
+                    <textarea id="f-descripcion" name="descripcion" placeholder="Descripción del producto…"></textarea>
+                </div>
+                <!-- Imagen principal -->
+                <div class="field full">
+                    <label>Imagen principal</label>
+                    <div class="upload-row">
+                        <div class="upload-preview-wrap" id="imagen-preview-wrap">
+                            <img id="imagen-preview" class="upload-thumb hidden" alt="preview" />
+                            <div id="imagen-placeholder" class="upload-placeholder">Sin imagen</div>
+                        </div>
+                        <div class="upload-right">
+                            <input type="file" id="imagen-file" accept="image/*" class="hidden" />
+                            <button type="button" class="btn btn-ghost" id="imagen-upload-btn">
+                                📁 Subir imagen
+                            </button>
+                            <span id="imagen-uploading" class="upload-status hidden">Subiendo…</span>
+                            <input id="f-imagen" name="imagen" type="text"
+                                placeholder="URL de la imagen (se llena automáticamente al subir)"
+                                style="margin-top:8px" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Galería -->
+                <div class="field full">
+                    <label>Galería de fotos</label>
+                    <div class="gallery-grid" id="galeria-grid"></div>
+                    <div style="display:flex;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap">
+                        <input type="file" id="galeria-files" accept="image/*" multiple class="hidden" />
+                        <button type="button" class="btn btn-ghost" id="galeria-upload-btn">
+                            📁 Agregar fotos
+                        </button>
+                        <span id="galeria-uploading" class="upload-status hidden">Subiendo…</span>
+                    </div>
+                    <input id="f-galeria" type="hidden" />
+                </div>
+                <div class="field full">
+                    <label for="f-medidas">Medidas (una por línea, opcional)</label>
+                    <textarea id="f-medidas" name="medidas" placeholder="25 x 18 cm&#10;35 x 24 cm&#10;45 x 30 cm" style="min-height:72px"></textarea>
+                </div>
+                <div class="field full" style="display:flex;gap:24px;flex-wrap:wrap">
+                    <label class="checkbox-field">
+                        <input type="checkbox" id="f-destacado" name="destacado" />
+                        <span>Producto destacado</span>
+                    </label>
+                    <label class="checkbox-field">
+                        <input type="checkbox" id="f-personalizado" name="referenciaPersonalizada" />
+                        <span>Referencia personalizada</span>
+                    </label>
+                </div>
+            </div>
+
+            <p id="form-error" class="hidden" style="color:#f87171;font-size:12px;margin-top:12px"></p>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-ghost" id="form-cancel">Cancelar</button>
+                <button type="submit" class="btn btn-primary" id="form-submit">Guardar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ══ CONFIRM DELETE ══════════════════════════════════════════════ -->
+<div class="modal-backdrop hidden" id="confirm-modal">
+    <div class="modal confirm-dialog">
+        <h2>¿Eliminar producto?</h2>
+        <p id="confirm-text">Esta acción no se puede deshacer.</p>
+        <div class="confirm-actions">
+            <button class="btn btn-ghost" id="confirm-cancel">Cancelar</button>
+            <button class="btn btn-danger" id="confirm-ok">Eliminar</button>
+        </div>
+    </div>
+</div>
+
+<!-- ══ FAB ══════════════════════════════════════════════════════════ -->
+<button id="fab-add" title="Agregar producto" aria-label="Agregar producto">
+    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+</button>
+
+<!-- ══ TOAST ═══════════════════════════════════════════════════════ -->
+<div id="toast" class="hidden"></div>
+
+<script type="module" src="js/admin.js"></script>
+</body>
+</html>

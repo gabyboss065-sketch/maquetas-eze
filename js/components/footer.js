@@ -4,7 +4,7 @@ const NAV_LINKS = [
     { label: 'Inicio',    href: './index.html#inicio' },
     { label: 'Productos', href: './index.html#todos-los-productos' },
     { label: 'Sobre mí', href: './index.html#sobre-mi' },
-    { label: 'Carrito',  href: '#carrito' },
+    { label: 'Ingresar', href: './admin.html' },
 ];
 
 const SOCIAL = [
