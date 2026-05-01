@@ -57,7 +57,7 @@ export const maquetas = [
         descripcion: 'Una maqueta pensada para resaltar la forma del estadio y su identidad inconfundible.',
         imagen: 'assets/img/products/racing-club/el-cilindro/cover.webp',
         galeria: [
-            'assets/img/products/racing-club/el-cilindro/cover.jpg',
+            'assets/img/products/racing-club/el-cilindro/cover.webp',
             'assets/img/products/racing-club/el-cilindro/gallery-01.jpg',
             'assets/img/products/racing-club/el-cilindro/gallery-02.jpg',
             'assets/img/products/racing-club/el-cilindro/gallery-03.jpg',
