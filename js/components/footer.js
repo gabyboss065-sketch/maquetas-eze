@@ -9,9 +9,9 @@ const NAV_LINKS = [
 
 const SOCIAL = [
     {
-        label: 'WhatsApp',
-        href: 'https://wa.me/5491141648955?text=Hola',
-        icon: getIcon('whatsapp'),
+        label: 'Facebook',
+        href: 'https://www.facebook.com/ezequiel.duende.37',
+        icon: getIcon('facebook'),
     },
     {
         label: 'Instagram',
