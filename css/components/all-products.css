@@ -95,7 +95,7 @@
     transition: transform 0.35s ease;
 }
 
-.all-products__card:hover .all-products__media img {
+.all-products__media:hover img {
     transform: scale(1.08);
 }
 

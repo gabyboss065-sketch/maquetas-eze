@@ -64,13 +64,13 @@ export const createCartDropdownController = (store) => {
             cartCta.setAttribute('aria-disabled', 'true');
             cartCta.tabIndex = -1;
             cartItemsWrap.innerHTML = `
-                <p class="cart-dropdown__empty">Todavia no agregaste productos.</p>
+                <p class="cart-dropdown__empty">Todavía no agregaste productos.</p>
                 <button type="button" class="cart-dropdown__clear" data-clear-cart disabled>Vaciar carrito</button>
             `;
             return;
         }
 
-        cartSummary.textContent = 'Envia esta seleccion al cliente y continua la conversacion por WhatsApp.';
+        cartSummary.textContent = 'Enviá esta selección y continuá la conversación por WhatsApp.';
         cartCta.href = buildWhatsappUrl(buildCartInquiryMessage(items));
         cartCta.classList.remove('is-disabled');
         cartCta.setAttribute('aria-disabled', 'false');

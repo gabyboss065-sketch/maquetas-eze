@@ -112,6 +112,9 @@ const renderMainMedia = (item, product) => {
     if (item.kind === 'image') {
         return `
             <img class="product-detail__main-image" src="${item.src}" alt="Detalle de ${product.estadio}" loading="eager" decoding="async">
+            <button class="product-detail__fullscreen-close" type="button" data-gallery-fullscreen-close aria-label="Salir de pantalla completa">
+                ${getIcon('close')}
+            </button>
             <button class="product-detail__fullscreen" type="button" data-gallery-fullscreen aria-label="Ver imagen en pantalla completa">
                 ${getIcon('fullscreen')}
             </button>
@@ -136,10 +139,10 @@ const renderProductPage = (product) => {
     root.innerHTML = `
         <section class="product-detail">
             <div class="product-detail__shell">
-                <nav class="product-detail__breadcrumbs" aria-label="Navegacion secundaria">
+                <nav class="product-detail__breadcrumbs" aria-label="Navegación secundaria">
                     <a href="./inicio.html">Inicio</a>
                     <span>/</span>
-                    <a href="./inicio.html#todos-los-productos">Catalogo</a>
+                    <a href="./inicio.html#todos-los-productos">Catálogo</a>
                     <span>/</span>
                     <strong>${product.estadio}</strong>
                 </nav>
@@ -156,16 +159,16 @@ const renderProductPage = (product) => {
                     </div>
 
                     <div class="product-detail__content">
-                        <p class="product-detail__eyebrow">${product.club || 'Coleccion GEM'}</p>
+                        <p class="product-detail__eyebrow">${product.club || 'Colección'}</p>
                         <h1>${product.estadio}</h1>
                         <p class="product-detail__lead">
-                            ${product.descripcion || 'Una pieza pensada para exhibicion, coleccion y regalo.'}
+                            ${product.descripcion || 'Una pieza pensada para exhibición, colección y regalo.'}
                         </p>
 
                         <div class="product-detail__chips">
                             <span>Escala ${product.escala || 'A definir'}</span>
                             <span>${product.material || 'Material a definir'}</span>
-                            <span>${product.edicion || 'Edicion especial'}</span>
+                            <span>${product.edicion || 'Edición especial'}</span>
                         </div>
 
                         <div class="product-detail__summary">
@@ -215,7 +218,7 @@ const renderProductPage = (product) => {
                                 <span>Consultar por WhatsApp</span>
                             </a>
                             <a class="product-detail__cta product-detail__cta--ghost" href="./inicio.html#todos-los-productos">
-                                Volver al catalogo
+                                Volver al catálogo
                             </a>
                         </div>
                     </div>
@@ -224,8 +227,8 @@ const renderProductPage = (product) => {
                 <section class="product-detail__related">
                     <div class="product-detail__related-head">
                         <div>
-                            <p class="product-detail__eyebrow">Segui explorando</p>
-                            <h2>Volver al catalogo completo</h2>
+                            <p class="product-detail__eyebrow">Seguí explorando</p>
+                            <h2>Volver al catálogo completo</h2>
                         </div>
                         <a href="./inicio.html#todos-los-productos">Ver todos los productos</a>
                     </div>
@@ -250,18 +253,17 @@ const renderProductPage = (product) => {
     });
 
     root.addEventListener('click', (event) => {
-        const fullscreenButton = event.target.closest('[data-gallery-fullscreen]');
-        if (!fullscreenButton) return;
+        const mainMedia = root.querySelector('[data-gallery-main]');
 
-        const activeImage = root.querySelector('.product-detail__main-image');
-        if (!activeImage) return;
-
-        if (document.fullscreenElement) {
-            document.exitFullscreen?.();
+        const fullscreenCloseButton = event.target.closest('[data-gallery-fullscreen-close]');
+        if (fullscreenCloseButton) {
+            mainMedia?.classList.remove('is-fullscreen');
             return;
         }
 
-        activeImage.requestFullscreen?.();
+        const fullscreenButton = event.target.closest('[data-gallery-fullscreen]');
+        if (!fullscreenButton) return;
+        mainMedia?.classList.add('is-fullscreen');
     });
 
     const updateSizeSelection = () => {
@@ -318,6 +320,14 @@ const renderProductPage = (product) => {
     whatsappCta?.addEventListener('click', (event) => {
         if (whatsappCta.classList.contains('is-disabled')) {
             event.preventDefault();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') return;
+        const mainMedia = root.querySelector('[data-gallery-main]');
+        if (mainMedia?.classList.contains('is-fullscreen')) {
+            mainMedia.classList.remove('is-fullscreen');
         }
     });
 

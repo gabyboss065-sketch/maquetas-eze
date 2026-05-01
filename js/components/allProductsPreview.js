@@ -13,11 +13,12 @@ const createProductCard = (product) => {
             aria-label="Ver detalle de ${product.estadio}"
         >
             <div class="all-products__media">
-                ${getDeferredImageAttrs({
-                    src: product.imagen,
-                    alt: `Maqueta de ${product.estadio}`,
-                    fetchpriority: 'low'
-                })}
+                <img
+                    src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+                    data-src="${product.imagen}"
+                    data-deferred-image
+                    alt="Maqueta de ${product.estadio}"
+                    loading="lazy" decoding="async">
             </div>
         </button>
 
@@ -32,7 +33,7 @@ const createProductCard = (product) => {
                 href="${getProductDetailUrl(product.id)}"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Abrir ficha de ${product.estadio} en una nueva pestana"
+                aria-label="Abrir ficha de ${product.estadio} en una nueva pestaña"
             >
                 <h3>${product.estadio}</h3>
             </a>
@@ -70,7 +71,7 @@ export const createAllProductsPreview = (products) => {
         <div class="all-products__shell">
             <div class="all-products__heading">
                 <p class="all-products__eyebrow">Todos los productos</p>
-                <h2>Explora mas modelos del taller</h2>
+                <h2>Explorá más modelos del taller</h2>
                 <p>
                     Descubrí todos los modelos disponibles.
                 </p>

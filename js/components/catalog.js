@@ -4,15 +4,14 @@ import { getDeferredImageAttrs } from '../utils/imageLoader.js';
 
 const topSellerClubs = ['Boca Juniors', 'River Plate', 'Racing Club', 'Independiente'];
 
-const createProductCard = (product, index) => `
+const createProductCard = (product, index) => {
+    const eager = index < 2;
+    return `
     <article class="product-card">
         <div class="product-card__media">
-            ${getDeferredImageAttrs({
-                src: product.imagen,
-                alt: `Maqueta de ${product.estadio}`,
-                eager: index < 2,
-                fetchpriority: index < 2 ? 'high' : 'low'
-            })}
+            <img
+                ${eager ? `src="${product.imagen}" loading="eager" fetchpriority="high"` : `src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="${product.imagen}" data-deferred-image loading="lazy" fetchpriority="low"`}
+                alt="Maqueta de ${product.estadio}" decoding="async">
             <span class="product-card__badge">${product.edicion}</span>
         </div>
 
@@ -27,7 +26,7 @@ const createProductCard = (product, index) => `
                 href="${getProductDetailUrl(product.id)}"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Abrir ficha de ${product.estadio} en una nueva pestana"
+                aria-label="Abrir ficha de ${product.estadio} en una nueva pestaña"
             >
                 <h3>${product.estadio}</h3>
             </a>
@@ -63,6 +62,7 @@ const createProductCard = (product, index) => `
         </div>
     </article>
 `;
+};
 
 export const createCatalog = (products) => {
     const topSellers = products.filter((product) => topSellerClubs.includes(product.club));
@@ -77,12 +77,12 @@ export const createCatalog = (products) => {
     section.innerHTML = `
         <div class="catalog__shell">
             <div class="catalog__intro">
-                <p class="catalog__eyebrow">Mas Vendidos</p>
+                <p class="catalog__eyebrow">Más Vendidos</p>
                 <div class="catalog__heading">
                     <div>
-                        <h2>Las maquetas que mas salen del taller</h2>
+                        <h2>Las maquetas que más salen del taller</h2>
                         <p>
-                            Una seleccion con los cuatro estadios mas pedidos por los coleccionistas:
+                            Una selección con los cuatro estadios más pedidos por los coleccionistas:
                             Boca, River, Racing e Independiente.
                         </p>
                     </div>

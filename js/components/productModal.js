@@ -68,7 +68,7 @@ export const createProductModal = (options = {}) => {
                     <div class="product-modal__sizes">
                         <div class="product-modal__sizes-head">
                             <p>Medidas disponibles</p>
-                            <small>Elegi una opcion o pedi una medida personalizada.</small>
+                            <small>Elegí una opción o pedí una medida personalizada.</small>
                         </div>
                         <div class="product-modal__size-options" data-size-options></div>
                         <label class="product-modal__custom-size" data-custom-size-wrap hidden>
@@ -198,7 +198,7 @@ export const createProductModal = (options = {}) => {
         const isAvailable = canAddProduct(currentProduct) && customSizeReady;
         addToCartButton.disabled = !isAvailable;
         addToCartButton.textContent = currentSize === CUSTOM_SIZE_VALUE && !customSizeReady
-            ? 'Completa tu medida personalizada'
+            ? 'Completá tu medida personalizada'
             : 'Agregar a consulta';
         addToCartButton.setAttribute('aria-disabled', String(!isAvailable));
     };
@@ -232,7 +232,7 @@ export const createProductModal = (options = {}) => {
         description.textContent = product.descripcion || '';
         scale.textContent = `Escala: ${product.escala || 'A definir'}`;
         material.textContent = `Material: ${product.material || 'A definir'}`;
-        edition.textContent = `Edicion: ${product.edicion || 'A definir'}`;
+        edition.textContent = `Edición: ${product.edicion || 'A definir'}`;
         availability.textContent = 'Disponible por pedido y consulta personalizada';
 
         updateGallery();
