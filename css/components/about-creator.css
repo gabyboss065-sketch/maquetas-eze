@@ -397,6 +397,14 @@
         grid-template-columns: 1fr;
     }
 
+    .about-creator__social-card {
+        grid-template-columns: auto 1fr;
+    }
+
+    .about-creator__social-followers {
+        display: none;
+    }
+
     .about-creator__media-slider {
         grid-template-columns: 1fr;
         gap: 12px;

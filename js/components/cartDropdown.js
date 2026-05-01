@@ -80,11 +80,14 @@ export const createCartDropdownController = (store) => {
             + '<button type="button" class="cart-dropdown__clear" data-clear-cart>Vaciar carrito</button>';
     };
 
-    const bindEvents = () => {
+    const bindEvents = (closeOther = () => {}) => {
         if (!cartButton || !cartDropdown) return;
 
         cartButton.addEventListener('click', (event) => {
             event.stopPropagation();
+            if (!cartDropdown.classList.contains('is-open')) {
+                closeOther();
+            }
             toggle();
         });
 

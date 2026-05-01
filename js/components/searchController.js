@@ -130,7 +130,7 @@ export const createSearchController = (products) => {
         navigateToProduct(suggestions[0]);
     };
 
-    const bindEvents = () => {
+    const bindEvents = (closeOther = () => {}) => {
         searchButton.addEventListener('click', (event) => {
             event.stopPropagation();
             if (searchPanel.classList.contains('is-open')) {
@@ -138,6 +138,7 @@ export const createSearchController = (products) => {
                 return;
             }
 
+            closeOther();
             open();
             renderSuggestions(searchInput.value);
         });

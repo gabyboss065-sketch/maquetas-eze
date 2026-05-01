@@ -85,8 +85,8 @@ const init = () => {
         }
     });
 
-    cartDropdown.bindEvents();
-    searchController.bindEvents();
+    cartDropdown.bindEvents(() => searchController.close());
+    searchController.bindEvents(() => cartDropdown.close());
 
     const syncUI = () => {
         cartDropdown.render();
