@@ -10,29 +10,50 @@ export const buildWhatsappUrl = (message) => {
     return `${getWhatsappBaseUrl()}?text=${encodedMessage}`;
 };
 
-export const buildProductInquiryMessage = (product, selection = {}) => [
-    'Hola, quiero consultar por esta maqueta:',
-    `Producto: ${product.estadio}`,
-    `Club: ${product.club}`,
-    `Escala: ${product.escala || 'A definir'}`,
-    `Medida elegida: ${selection.medida || 'A definir'}`,
-    `Medida personalizada: ${selection.medidaPersonalizada || 'No'}`
+const DIVIDER = '────────────────────';
+
+const formatItem = (item) => [
+    DIVIDER,
+    `📦 Producto: ${item.estadio}`,
+    `Cantidad: ${item.quantity}`,
+    `Club: ${item.club || 'A definir'}`,
+    `Escala: ${item.escala || 'A definir'}`,
+    `Medida: ${item.medida || 'A definir'}`,
 ].join('\n');
 
-export const buildCartInquiryMessage = (items) => {
-    const lines = items.map((item, index) => [
-        `${index + 1}. ${item.estadio} x${item.quantity}`,
-        `   Club: ${item.club || 'A definir'}`,
-        `   Escala: ${item.escala || 'A definir'}`,
-        `   Medida: ${item.medida || 'A definir'}`,
-        `   Personalizada: ${item.medidaPersonalizada || 'No'}`
-    ].join('\n'));
+export const buildProductInquiryMessage = (product, selection = {}) => [
+    'Hola, ¿cómo estás?',
+    '',
+    'Quisiera consultar por la siguiente maqueta:',
+    '',
+    DIVIDER,
+    `📦 Producto: ${product.estadio}`,
+    `Cantidad: 1`,
+    `Club: ${product.club || 'A definir'}`,
+    `Escala: ${product.escala || 'A definir'}`,
+    `Medida: ${selection.medida || 'A definir'}`,
+    DIVIDER,
+    '',
+    'Agradecería información sobre:',
+    '• Disponibilidad',
+    '• Tiempo de producción',
+    '• Precio final',
+    '',
+    'Muchas gracias.',
+].join('\n');
 
-    return [
-        'Hola, quiero realizar una consulta por estas maquetas:',
-        '',
-        ...lines,
-        '',
-        'Quedo atento a la informacion y disponibilidad.'
-    ].join('\n');
-};
+export const buildCartInquiryMessage = (items) => [
+    'Hola, ¿cómo estás?',
+    '',
+    'Quisiera consultar por las siguientes maquetas:',
+    '',
+    ...items.map(formatItem),
+    DIVIDER,
+    '',
+    'Agradecería información sobre:',
+    '• Disponibilidad',
+    '• Tiempo de producción',
+    '• Precio final',
+    '',
+    'Muchas gracias.',
+].join('\n');
