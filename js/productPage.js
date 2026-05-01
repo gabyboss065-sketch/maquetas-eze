@@ -132,9 +132,9 @@ const renderProductPage = (product) => {
         <section class="product-detail">
             <div class="product-detail__shell">
                 <nav class="product-detail__breadcrumbs" aria-label="Navegacion secundaria">
-                    <a href="./index.html">Inicio</a>
+                    <a href="./inicio.html">Inicio</a>
                     <span>/</span>
-                    <a href="./index.html#todos-los-productos">Catalogo</a>
+                    <a href="./inicio.html#todos-los-productos">Catalogo</a>
                     <span>/</span>
                     <strong>${product.estadio}</strong>
                 </nav>
@@ -209,7 +209,7 @@ const renderProductPage = (product) => {
                                 ${getIcon('whatsapp')}
                                 <span>Consultar por WhatsApp</span>
                             </a>
-                            <a class="product-detail__cta product-detail__cta--ghost" href="./index.html#todos-los-productos">
+                            <a class="product-detail__cta product-detail__cta--ghost" href="./inicio.html#todos-los-productos">
                                 Volver al catalogo
                             </a>
                         </div>
@@ -222,7 +222,7 @@ const renderProductPage = (product) => {
                             <p class="product-detail__eyebrow">Segui explorando</p>
                             <h2>Volver al catalogo completo</h2>
                         </div>
-                        <a href="./index.html#todos-los-productos">Ver todos los productos</a>
+                        <a href="./inicio.html#todos-los-productos">Ver todos los productos</a>
                     </div>
                 </section>
             </div>
@@ -331,7 +331,7 @@ const renderNotFound = () => {
                     <p class="product-detail__eyebrow">Producto no encontrado</p>
                     <h1>No pudimos cargar esta ficha</h1>
                     <p>Revisa el enlace o volve al catalogo para elegir otro producto.</p>
-                    <a class="product-detail__cta product-detail__cta--primary" href="./index.html#todos-los-productos">
+                    <a class="product-detail__cta product-detail__cta--primary" href="./inicio.html#todos-los-productos">
                         Volver al catalogo
                     </a>
                 </div>

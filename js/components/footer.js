@@ -1,9 +1,9 @@
 import { getIcon } from '../utils/icons.js';
 
 const NAV_LINKS = [
-    { label: 'Inicio',    href: './index.html#inicio' },
-    { label: 'Productos', href: './index.html#todos-los-productos' },
-    { label: 'Sobre mí', href: './index.html#sobre-mi' },
+    { label: 'Inicio',    href: './inicio.html#inicio' },
+    { label: 'Productos', href: './inicio.html#todos-los-productos' },
+    { label: 'Sobre mí', href: './inicio.html#sobre-mi' },
     { label: 'Ingresar', href: './admin.html' },
 ];
 
