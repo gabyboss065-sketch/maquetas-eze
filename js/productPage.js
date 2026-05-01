@@ -1,4 +1,4 @@
-import { maquetas } from './data.js';
+import { productsService } from './services/productsService.js';
 import { getIcon } from './utils/icons.js';
 import { createWhatsAppFloat } from './components/whatsappFloat.js';
 import { buildProductInquiryMessage, buildWhatsappUrl } from './utils/whatsapp.js';
@@ -340,7 +340,9 @@ const renderNotFound = () => {
     `;
 };
 
-const init = () => {
+const init = async () => {
+    const maquetas = await productsService.getAll();
+
     const headerSection = document.getElementById('header-section');
     let cartStore = null;
 
@@ -375,11 +377,6 @@ const init = () => {
 
     document.title = `${product.estadio} | GEM Maquetas`;
     renderProductPage(product);
-
-    const productCta = document.querySelector('.product-page__contact-link');
-    if (productCta) {
-        productCta.href = buildWhatsappUrl(buildProductInquiryMessage(product));
-    }
 };
 
 document.addEventListener('DOMContentLoaded', init);

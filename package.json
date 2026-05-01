@@ -1,0 +1,7 @@
+{
+    "name": "maquetas-eze",
+    "type": "module",
+    "scripts": {
+        "sync": "node scripts/sync-data.js"
+    }
+}

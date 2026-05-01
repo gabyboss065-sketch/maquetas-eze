@@ -12,7 +12,7 @@ import { createFooter } from './components/footer.js';
 import { createWhatsAppFloat } from './components/whatsappFloat.js';
 import { createSearchController } from './components/searchController.js';
 import { createToastController } from './components/toast.js';
-import { maquetas } from './data.js';
+import { productsService } from './services/productsService.js';
 import { createCartStore } from './store/cartStore.js';
 import { observeDeferredImages } from './utils/imageLoader.js';
 
@@ -35,7 +35,8 @@ const updateCatalogAddButtons = (store) => {
     });
 };
 
-const init = () => {
+const init = async () => {
+    const maquetas = await productsService.getAll();
     const heroSection = document.getElementById('hero-section');
     const catalogSection = document.getElementById('catalog-section');
     const footerSection = document.getElementById('footer-section');
@@ -112,7 +113,7 @@ const init = () => {
             return;
         }
 
-        const selectedProduct = maquetas.find((product) => product.id === productId);
+        const selectedProduct = maquetas.find(product => product.id === productId);
         if (!selectedProduct) return;
         productModal.open(selectedProduct);
     });
