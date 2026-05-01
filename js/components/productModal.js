@@ -41,6 +41,9 @@ export const createProductModal = (options = {}) => {
                             ${getIcon('chevron-left')}
                         </button>
                         <img class="product-modal__main-image" src="" alt="" loading="eager" decoding="async">
+                        <button class="product-modal__fullscreen-close" type="button" data-gallery-fullscreen-close aria-label="Salir de pantalla completa">
+                            ${getIcon('close')}
+                        </button>
                         <button class="product-modal__fullscreen" type="button" data-gallery-fullscreen aria-label="Ver imagen en pantalla completa">
                             ${getIcon('fullscreen')}
                         </button>
@@ -262,6 +265,12 @@ export const createProductModal = (options = {}) => {
             return;
         }
 
+        const fullscreenCloseButton = event.target.closest('[data-gallery-fullscreen-close]');
+        if (fullscreenCloseButton) {
+            document.exitFullscreen?.();
+            return;
+        }
+
         const fullscreenButton = event.target.closest('[data-gallery-fullscreen]');
         if (fullscreenButton && mainImage) {
             if (document.fullscreenElement) {
@@ -269,7 +278,8 @@ export const createProductModal = (options = {}) => {
                 return;
             }
 
-            mainImage.requestFullscreen?.();
+            const wrap = modal.querySelector('.product-modal__main-image-wrap');
+            (wrap ?? mainImage).requestFullscreen?.();
             return;
         }
 

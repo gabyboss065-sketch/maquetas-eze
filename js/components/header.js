@@ -117,10 +117,11 @@ export const createHeader = () => {
         const currentScrollY = window.scrollY;
         const isScrollingDown = currentScrollY > lastScrollY;
         const isBeyondHeaderArea = currentScrollY > 120;
+        const isDesktop = window.innerWidth >= 768;
 
-        if (isScrollingDown && isBeyondHeaderArea) {
+        if (isDesktop && isScrollingDown && isBeyondHeaderArea) {
             header.classList.add('main-header--hidden');
-        } else if (!isScrollingDown || currentScrollY <= revealThreshold) {
+        } else if (!isScrollingDown || currentScrollY <= revealThreshold || !isDesktop) {
             header.classList.remove('main-header--hidden');
         }
 
