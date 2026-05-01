@@ -1,65 +1,99 @@
 import { getIcon } from '../utils/icons.js';
 
+const NAV_LINKS = [
+    { label: 'Inicio',    href: './index.html#inicio' },
+    { label: 'Productos', href: './index.html#todos-los-productos' },
+    { label: 'Sobre mí', href: './index.html#sobre-mi' },
+    { label: 'Carrito',  href: '#carrito' },
+];
+
+const SOCIAL = [
+    {
+        label: 'WhatsApp',
+        href: 'https://api.whatsapp.com/send?text=Hola',
+        icon: getIcon('whatsapp'),
+    },
+    {
+        label: 'Instagram',
+        href: 'https://www.instagram.com/maquetas_ezequiel/',
+        icon: getIcon('instagram'),
+    },
+    {
+        label: 'TikTok',
+        href: 'https://www.tiktok.com/@ezequielarteenmadera',
+        icon: getIcon('tiktok'),
+    },
+];
+
+const CONTACT = [
+    {
+        label: '+54 9 11 2666-6219',
+        icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.8 19.8 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.84a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"/></svg>`,
+    },
+    {
+        label: 'difulvioezequiel28@gmail.com',
+        icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+    },
+    {
+        label: 'W. Morris, Buenos Aires',
+        icon: `<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>`,
+    },
+];
+
 export const createFooter = () => {
-    const footer = document.createElement('div');
+    const footer = document.createElement('footer');
     footer.className = 'site-footer';
 
     footer.innerHTML = `
         <div class="site-footer__shell">
-            <div class="site-footer__main">
+            <div class="site-footer__grid">
+
                 <div class="site-footer__brand">
-                    <a class="site-footer__logo" href="./index.html">Maquetas Ezequiel</a>
+                    <p class="site-footer__name">Maquetas Ezequiel</p>
+                    <p class="site-footer__tagline">Estadios a escala de colección, hechos a mano con materiales premium.</p>
                     <div class="site-footer__social">
-                        <a class="site-footer__social-link" href="https://wa.me/540000000000" target="_blank" rel="noreferrer" aria-label="WhatsApp">
-                            ${getIcon('whatsapp')}
-                        </a>
-                        <a class="site-footer__social-link" href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Instagram">
-                            ${getIcon('instagram')}
-                        </a>
-                        <a class="site-footer__social-link" href="https://www.tiktok.com/" target="_blank" rel="noreferrer" aria-label="TikTok">
-                            ${getIcon('tiktok')}
-                        </a>
+                        ${SOCIAL.map(({ label, href, icon }) => `
+                            <a
+                                class="site-footer__social-btn"
+                                href="${href}"
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                aria-label="${label}"
+                            >${icon}</a>
+                        `).join('')}
                     </div>
+                </div>
+
+                <div class="site-footer__nav">
+                    <p class="site-footer__col-title">Navegación</p>
+                    <ul>
+                        ${NAV_LINKS.map(({ label, href }) => `
+                            <li><a href="${href}">${label}</a></li>
+                        `).join('')}
+                    </ul>
                 </div>
 
                 <div class="site-footer__contact">
-                    <div class="site-footer__contact-item">
-                        <span class="site-footer__contact-icon">${getIcon('phone')}</span>
-                        <div>
-                            <strong>Teléfono / WhatsApp</strong>
-                            <a href="tel:+540000000000">+54 00 0000-0000</a>
-                        </div>
-                    </div>
-
-                    <div class="site-footer__contact-item">
-                        <span class="site-footer__contact-icon">${getIcon('mail')}</span>
-                        <div>
-                            <strong>E-mail</strong>
-                            <a href="mailto:tuemail@ejemplo.com">tuemail@ejemplo.com</a>
-                        </div>
-                    </div>
-
-                    <div class="site-footer__contact-item">
-                        <span class="site-footer__contact-icon">${getIcon('location')}</span>
-                        <div>
-                            <strong>Ubicación</strong>
-                            <span>Agregar ciudad, provincia o zona de entrega</span>
-                        </div>
-                    </div>
+                    <p class="site-footer__col-title">Contacto</p>
+                    <ul>
+                        ${CONTACT.map(({ label, icon }) => `
+                            <li>
+                                <span class="site-footer__contact-icon">${icon}</span>
+                                <span>${label}</span>
+                            </li>
+                        `).join('')}
+                    </ul>
                 </div>
+
             </div>
+
+            <div class="site-footer__divider"></div>
 
             <div class="site-footer__bottom">
                 <p class="site-footer__disclaimer">
-                    Los nombres, escudos, camisetas, estadios, imágenes y demás signos distintivos de clubes,
-                    selecciones o instituciones deportivas pertenecen a sus respectivos titulares. En este sitio
-                    se utilizan únicamente con fines ilustrativos y descriptivos.
+                    Los nombres, escudos, camisetas, estadios, imágenes y demás signos distintivos de clubes, selecciones o instituciones deportivas pertenecen a sus respectivos titulares. En este sitio se utilizan únicamente con fines ilustrativos y descriptivos.
                 </p>
-
-                <div class="site-footer__meta">
-                    <span>© Maquetas Ezequiel</span>
-                    <span>Espacio para datos legales, CUIT, políticas o condiciones.</span>
-                </div>
+                <span class="site-footer__badge">Hecho a mano con amor</span>
             </div>
         </div>
     `;
