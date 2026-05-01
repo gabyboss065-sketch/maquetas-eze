@@ -36,8 +36,12 @@ const createMetaSlide = (product, index) => `
 
 export const createPersonalized = (products) => {
     const referenceProjects = products.filter((product) => product.referenciaPersonalizada);
-    const sliderProjects = referenceProjects.length > 0
-        ? referenceProjects
+    const lusail = referenceProjects.find((p) => p.estadio === 'Lusail Stadium');
+    const ordered = lusail
+        ? [lusail, ...referenceProjects.filter((p) => p !== lusail)]
+        : referenceProjects;
+    const sliderProjects = ordered.length > 0
+        ? ordered
         : [products.find((product) => product.destacado) || products[0]];
 
     const section = document.createElement('section');
