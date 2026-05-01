@@ -4,29 +4,14 @@ import { getDeferredImageAttrs } from '../utils/imageLoader.js';
 
 const topSellerClubs = ['Boca Juniors', 'River Plate', 'Racing Club', 'Independiente'];
 
-const getHoverSrc = (product) => {
-    const cover = product.imagen;
-    const coverFile = cover?.split('/').pop()?.split('?')[0] ?? '';
-    const extras = Array.isArray(product.galeria)
-        ? product.galeria.filter(src => src && src !== cover && src.split('/').pop()?.split('?')[0] !== coverFile)
-        : [];
-    return extras[0] || '';
-};
-
 const createProductCard = (product, index) => {
-    const hoverSrc = getHoverSrc(product);
     const eager = index < 2;
     return `
     <article class="product-card">
-        <div class="product-card__media${hoverSrc ? ' has-hover' : ''}">
-            <img class="product-card__img-primary"
+        <div class="product-card__media">
+            <img
                 ${eager ? `src="${product.imagen}" loading="eager" fetchpriority="high"` : `src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="${product.imagen}" data-deferred-image loading="lazy" fetchpriority="low"`}
                 alt="Maqueta de ${product.estadio}" decoding="async">
-            ${hoverSrc ? `<img class="product-card__img-hover"
-                src="${hoverSrc}"
-                alt=""
-                aria-hidden="true"
-                loading="lazy" decoding="async">` : ''}
             <span class="product-card__badge">${product.edicion}</span>
         </div>
 

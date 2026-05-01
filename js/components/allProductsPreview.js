@@ -2,17 +2,7 @@ import { getProductDetailUrl } from '../utils/productLinks.js';
 import { getDeferredImageAttrs } from '../utils/imageLoader.js';
 import { initShowMore } from '../modules/showMore.js';
 
-const getHoverSrc = (product) => {
-    const cover = product.imagen;
-    const coverFile = cover?.split('/').pop()?.split('?')[0] ?? '';
-    const extras = Array.isArray(product.galeria)
-        ? product.galeria.filter(src => src && src !== cover && src.split('/').pop()?.split('?')[0] !== coverFile)
-        : [];
-    return extras[0] || '';
-};
-
 const createProductCard = (product) => {
-    const hoverSrc = getHoverSrc(product);
     return `
     <article class="all-products__card">
         <button
@@ -22,18 +12,13 @@ const createProductCard = (product) => {
             data-view-button
             aria-label="Ver detalle de ${product.estadio}"
         >
-            <div class="all-products__media${hoverSrc ? ' has-hover' : ''}">
-                <img class="all-products__img-primary"
+            <div class="all-products__media">
+                <img
                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
                     data-src="${product.imagen}"
                     data-deferred-image
                     alt="Maqueta de ${product.estadio}"
                     loading="lazy" decoding="async">
-                ${hoverSrc ? `<img class="all-products__img-hover"
-                    src="${hoverSrc}"
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy" decoding="async">` : ''}
             </div>
         </button>
 
