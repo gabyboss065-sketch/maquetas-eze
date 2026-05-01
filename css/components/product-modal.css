@@ -127,13 +127,11 @@
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
 }
 
-.product-modal__main-image-wrap:fullscreen .product-modal__fullscreen-close,
-.product-modal__main-image-wrap:-webkit-full-screen .product-modal__fullscreen-close {
+.product-modal__main-image-wrap.is-fullscreen .product-modal__fullscreen-close {
     display: grid;
 }
 
-.product-modal__main-image-wrap:fullscreen .product-modal__fullscreen,
-.product-modal__main-image-wrap:-webkit-full-screen .product-modal__fullscreen {
+.product-modal__main-image-wrap.is-fullscreen .product-modal__fullscreen {
     display: none;
 }
 
@@ -331,21 +329,22 @@ body.is-modal-open {
     overflow: hidden;
 }
 
-.product-modal__main-image-wrap:fullscreen,
-.product-modal__main-image-wrap:-webkit-full-screen {
+.product-modal__main-image-wrap.is-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
     background: #000;
     min-height: unset;
-    overflow: visible;
+    overflow: hidden;
     border-radius: 0;
 }
 
-.product-modal__main-image-wrap:fullscreen .product-modal__main-image,
-.product-modal__main-image-wrap:-webkit-full-screen .product-modal__main-image {
-    width: 100vw;
-    height: 100vh;
+.product-modal__main-image-wrap.is-fullscreen .product-modal__main-image {
+    width: 100%;
+    height: 100%;
     min-height: unset;
     object-fit: contain;
 }
