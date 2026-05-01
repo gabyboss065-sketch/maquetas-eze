@@ -318,6 +318,21 @@ export const createProductModal = (options = {}) => {
         }
     });
 
+    customSizeInput?.addEventListener('focus', () => {
+        if (currentSize === CUSTOM_SIZE_VALUE) return;
+        currentSize = CUSTOM_SIZE_VALUE;
+        const customRadio = modal.querySelector(`input[value="${CUSTOM_SIZE_VALUE}"]`);
+        if (customRadio) {
+            customRadio.checked = true;
+            modal.querySelectorAll('.product-modal__size-option').forEach((option) => {
+                const radio = option.querySelector('input');
+                option.classList.toggle('is-selected', radio?.value === CUSTOM_SIZE_VALUE);
+            });
+        }
+        updateCustomSizeVisibility();
+        syncAddButtonState();
+    });
+
     customSizeInput?.addEventListener('input', (event) => {
         currentCustomSize = event.target.value;
         syncAddButtonState();

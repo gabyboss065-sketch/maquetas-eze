@@ -296,6 +296,13 @@ const renderProductPage = (product) => {
     const customSizeInput = root.querySelector('[data-custom-size-input]');
     const whatsappCta = root.querySelector('#whatsapp-cta');
 
+    customSizeInput?.addEventListener('focus', () => {
+        const customRadio = root.querySelector(`input[name="product-size"][value="${CUSTOM_SIZE_VALUE}"]`);
+        if (!customRadio || customRadio.checked) return;
+        customRadio.checked = true;
+        updateSizeSelection();
+    });
+
     customSizeInput?.addEventListener('input', () => {
         const selectedRadio = root.querySelector('input[name="product-size"]:checked');
         if (!selectedRadio) return;
