@@ -350,8 +350,8 @@ const init = () => {
         };
 
         cartStore.subscribe(syncHeaderUI);
-        cartDropdown.bindEvents();
-        searchController.bindEvents();
+        cartDropdown.bindEvents(() => searchController.close());
+        searchController.bindEvents(() => cartDropdown.close());
         syncHeaderUI();
     }
 

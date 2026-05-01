@@ -66,7 +66,8 @@ export const createSearchController = (products) => {
 
     if (!searchButton || !searchPanel || !searchInput || !searchSubmit || !searchSuggestions || !searchForm) {
         return {
-            bindEvents: () => {}
+            bindEvents: () => {},
+            close: () => {}
         };
     }
 
