@@ -1,4 +1,4 @@
-const WHATSAPP_PHONE = '5491141648955';
+const WHATSAPP_PHONE = '5491126666219';
 
 const getWhatsappBaseUrl = () => {
     const cleanPhone = WHATSAPP_PHONE.replace(/\D/g, '');

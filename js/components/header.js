@@ -60,7 +60,7 @@ export const createHeader = () => {
                             <a
                                 id="cart-dropdown-cta"
                                 class="cart-dropdown__cta is-disabled"
-                                href="https://api.whatsapp.com/send?text=Hola%2C%20quiero%20consultar%20por%20una%20maqueta."
+                                href="https://wa.me/5491126666219?text=Hola%2C%20quiero%20consultar%20por%20una%20maqueta."
                                 target="_blank"
                                 rel="noreferrer"
                                 aria-disabled="true"

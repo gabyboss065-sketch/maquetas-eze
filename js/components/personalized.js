@@ -1,6 +1,7 @@
 import { initPersonalizedSlider } from '../modules/personalizedSlider.js';
 import { getDeferredImageAttrs } from '../utils/imageLoader.js';
 import { getIcon } from '../utils/icons.js';
+import { buildWhatsappUrl } from '../utils/whatsapp.js';
 
 const createVisualSlide = (product, index) => {
     const activeClass = index === 0 ? 'is-active' : '';
@@ -99,8 +100,8 @@ export const createPersonalized = (products) => {
 
     const ctaButton = section.querySelector('.personalized__button');
     ctaButton?.addEventListener('click', () => {
-        const message = encodeURIComponent('Hola, me interesa solicitar una maqueta personalizada. ¿Qué información necesito proporcionar?');
-        window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank', 'noopener,noreferrer');
+        const url = buildWhatsappUrl('Hola, me interesa solicitar una maqueta personalizada. ¿Qué información necesito proporcionar?');
+        window.open(url, '_blank', 'noopener,noreferrer');
     });
 
     const observer = new IntersectionObserver((entries) => {
