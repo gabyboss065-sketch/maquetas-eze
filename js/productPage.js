@@ -112,6 +112,9 @@ const renderMainMedia = (item, product) => {
     if (item.kind === 'image') {
         return `
             <img class="product-detail__main-image" src="${item.src}" alt="Detalle de ${product.estadio}" loading="eager" decoding="async">
+            <button class="product-detail__fullscreen-close" type="button" data-gallery-fullscreen-close aria-label="Salir de pantalla completa">
+                ${getIcon('close')}
+            </button>
             <button class="product-detail__fullscreen" type="button" data-gallery-fullscreen aria-label="Ver imagen en pantalla completa">
                 ${getIcon('fullscreen')}
             </button>
@@ -250,18 +253,17 @@ const renderProductPage = (product) => {
     });
 
     root.addEventListener('click', (event) => {
-        const fullscreenButton = event.target.closest('[data-gallery-fullscreen]');
-        if (!fullscreenButton) return;
+        const mainMedia = root.querySelector('[data-gallery-main]');
 
-        const activeImage = root.querySelector('.product-detail__main-image');
-        if (!activeImage) return;
-
-        if (document.fullscreenElement) {
-            document.exitFullscreen?.();
+        const fullscreenCloseButton = event.target.closest('[data-gallery-fullscreen-close]');
+        if (fullscreenCloseButton) {
+            mainMedia?.classList.remove('is-fullscreen');
             return;
         }
 
-        activeImage.requestFullscreen?.();
+        const fullscreenButton = event.target.closest('[data-gallery-fullscreen]');
+        if (!fullscreenButton) return;
+        mainMedia?.classList.add('is-fullscreen');
     });
 
     const updateSizeSelection = () => {
@@ -318,6 +320,14 @@ const renderProductPage = (product) => {
     whatsappCta?.addEventListener('click', (event) => {
         if (whatsappCta.classList.contains('is-disabled')) {
             event.preventDefault();
+        }
+    });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') return;
+        const mainMedia = root.querySelector('[data-gallery-main]');
+        if (mainMedia?.classList.contains('is-fullscreen')) {
+            mainMedia.classList.remove('is-fullscreen');
         }
     });
 
