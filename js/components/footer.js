@@ -10,7 +10,7 @@ const NAV_LINKS = [
 const SOCIAL = [
     {
         label: 'WhatsApp',
-        href: 'https://api.whatsapp.com/send?text=Hola',
+        href: 'https://wa.me/5491141648955?text=Hola',
         icon: getIcon('whatsapp'),
     },
     {
