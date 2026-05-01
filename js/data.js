@@ -8,7 +8,7 @@ export const maquetas = [
         stock: 7,
         edicion: 'Edicion Club',
         material: 'Resina + base acrilica',
-        descripcion: 'Una pieza con volumenes marcados, tribunas iconicas y terminacion ideal para escritorio o living.',
+        descripcion: 'Una pieza con volumenes marcados, tribunas iconicas y terminacion ideal.',
         imagen: 'assets/img/products/boca-juniors/la-bombonera/cover.webp',
         galeria: [
             'assets/img/products/boca-juniors/la-bombonera/cover.webp',
@@ -33,7 +33,7 @@ export const maquetas = [
         stock: 5,
         edicion: 'Serie Arquitectura',
         material: 'Polimero tecnico',
-        descripcion: 'Modelo pensado para destacar la amplitud del anillo superior y el nuevo despliegue del estadio.',
+        descripcion: 'Modelo pensado para destacar sobre cualquier otro estadio del mundo.',
         imagen: 'assets/img/products/river-plate/mas-monumental/cover.png',
         galeria: [
             'assets/img/products/river-plate/mas-monumental/cover.png',
@@ -54,8 +54,8 @@ export const maquetas = [
         stock: 6,
         edicion: 'Hincha Edition',
         material: 'Resina microtexturada',
-        descripcion: 'Una maqueta pensada para resaltar la forma del estadio y su identidad inconfundible en exhibicion.',
-        imagen: 'assets/img/products/racing-club/el-cilindro/cover.jpg',
+        descripcion: 'Una maqueta pensada para resaltar la forma del estadio y su identidad inconfundible.',
+        imagen: 'assets/img/products/racing-club/el-cilindro/cover.webp',
         galeria: [
             'assets/img/products/racing-club/el-cilindro/cover.jpg',
             'assets/img/products/racing-club/el-cilindro/gallery-01.jpg',
@@ -80,7 +80,7 @@ export const maquetas = [
         stock: 4,
         edicion: 'Rojo Legendario',
         material: 'Composito premium',
-        descripcion: 'Una pieza sobria y potente, con tribunas definidas y base lista para sumar a cualquier coleccion.',
+        descripcion: 'Una pieza sobria y potente, con detalles de gran calidad.',
         imagen: 'assets/img/products/independiente/libertadores-de-america/cover.webp',
         galeria: [
             'assets/img/products/independiente/libertadores-de-america/cover.webp',

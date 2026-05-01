@@ -8,6 +8,7 @@ import { createPersonalized } from './components/personalized.js';
 import { createAboutCreator } from './components/aboutCreator.js';
 import { createAllProductsPreview } from './components/allProductsPreview.js';
 import { createClubStrip } from './components/clubStrip.js';
+import { createFooter } from './components/footer.js';
 import { createWhatsAppFloat } from './components/whatsappFloat.js';
 import { createSearchController } from './components/searchController.js';
 import { createToastController } from './components/toast.js';
@@ -37,7 +38,8 @@ const updateCatalogAddButtons = (store) => {
 const init = () => {
     const heroSection = document.getElementById('hero-section');
     const catalogSection = document.getElementById('catalog-section');
-    if (!heroSection || !catalogSection) return;
+    const footerSection = document.getElementById('footer-section');
+    if (!heroSection || !catalogSection || !footerSection) return;
 
     heroSection.appendChild(createHeader());
     heroSection.appendChild(createHero(maquetas));
@@ -57,6 +59,7 @@ const init = () => {
     catalogSection.appendChild(createPersonalized(maquetas));
     catalogSection.appendChild(createAboutCreator());
     catalogSection.appendChild(createClubStrip());
+    footerSection.appendChild(createFooter());
     document.body.appendChild(createWhatsAppFloat());
     document.body.appendChild(productModal.element);
     observeDeferredImages(document);

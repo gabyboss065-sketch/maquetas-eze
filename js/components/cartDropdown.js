@@ -34,6 +34,11 @@ export const createCartDropdownController = (store) => {
 
     const toggle = () => {
         if (!cartButton || !cartDropdown) return;
+        const willOpen = !cartDropdown.classList.contains('is-open');
+        if (willOpen) {
+            document.dispatchEvent(new CustomEvent('header:cart-opened'));
+        }
+
         const isOpen = cartDropdown.classList.toggle('is-open');
         cartButton.setAttribute('aria-expanded', String(isOpen));
         cartDropdown.setAttribute('aria-hidden', String(!isOpen));
@@ -88,6 +93,8 @@ export const createCartDropdownController = (store) => {
             if (clickedInside) return;
             close();
         });
+
+        document.addEventListener('header:search-opened', close);
 
         cartDropdown.addEventListener('click', (event) => {
             event.stopPropagation();

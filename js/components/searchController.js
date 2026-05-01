@@ -78,6 +78,7 @@ export const createSearchController = (products) => {
     };
 
     const open = () => {
+        document.dispatchEvent(new CustomEvent('header:search-opened'));
         searchPanel.classList.add('is-open');
         searchButton.setAttribute('aria-expanded', 'true');
         searchInput.focus();
@@ -179,9 +180,12 @@ export const createSearchController = (products) => {
             if (event.target.closest('.search-shell')) return;
             close();
         });
+
+        document.addEventListener('header:cart-opened', close);
     };
 
     return {
-        bindEvents
+        bindEvents,
+        close
     };
 };

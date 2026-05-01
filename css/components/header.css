@@ -151,13 +151,16 @@
 
 .search-shell {
     position: relative;
+    min-width: 0;
 }
 
 .search-panel {
     position: absolute;
     top: calc(100% + 12px);
     right: 0;
-    width: min(360px, calc(100vw - 32px));
+    left: auto;
+    width: min(360px, calc(100vw - 88px));
+    max-width: calc(100vw - 88px);
     padding: 14px;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.16);
@@ -181,9 +184,12 @@
     display: grid;
     grid-template-columns: 1fr auto;
     gap: 10px;
+    min-width: 0;
 }
 
 .search-panel__input {
+    width: 100%;
+    min-width: 0;
     min-height: 44px;
     padding: 0 14px;
     border: 1px solid rgba(255, 255, 255, 0.16);
@@ -212,6 +218,7 @@
     margin-top: 12px;
     display: grid;
     gap: 8px;
+    min-width: 0;
 }
 
 .search-panel__suggestion {
@@ -235,6 +242,7 @@
 
 .search-panel__suggestion strong {
     font-size: 0.96rem;
+    overflow-wrap: anywhere;
 }
 
 .search-panel__suggestion:hover,
@@ -250,6 +258,33 @@
     background: rgba(255, 255, 255, 0.04);
     color: rgba(255, 255, 255, 0.72);
     font-size: 0.88rem;
+}
+
+@media (max-width: 640px) {
+    .nav-actions {
+        gap: 10px;
+    }
+
+    .search-panel {
+        width: clamp(180px, calc(100vw - 120px), 320px);
+        max-width: calc(100vw - 56px);
+        padding: 12px;
+    }
+
+    .search-panel__form {
+        gap: 8px;
+    }
+}
+
+@media (max-width: 425px) {
+    .search-panel {
+        width: clamp(168px, calc(100vw - 116px), 280px);
+        max-width: calc(100vw - 44px);
+    }
+
+    .search-panel__input {
+        padding-inline: 12px;
+    }
 }
 
 .cart-menu {

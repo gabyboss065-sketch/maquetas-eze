@@ -3,6 +3,9 @@ import { getIcon } from './utils/icons.js';
 import { createWhatsAppFloat } from './components/whatsappFloat.js';
 import { buildProductInquiryMessage, buildWhatsappUrl } from './utils/whatsapp.js';
 import { createHeader } from './components/header.js';
+import { createCartStore } from './store/cartStore.js';
+import { createCartDropdownController } from './components/cartDropdown.js';
+import { createSearchController } from './components/searchController.js';
 
 const MIN_GALLERY_SLOTS = 6;
 const DEFAULT_SIZE_OPTIONS = ['25 x 18 cm', '35 x 24 cm', '45 x 30 cm'];
@@ -59,6 +62,19 @@ const getSelectionPayload = (size, customSize) => {
 const buildInquiryMessageWithSize = (product, size, customSize) => {
     const selection = getSelectionPayload(size, customSize);
     return buildProductInquiryMessage(product, selection);
+};
+
+const updateWhatsAppCta = (cta, product, size, customSize = '') => {
+    if (!cta) return;
+
+    const trimmedCustomSize = customSize.trim();
+    const isCustomSize = size === CUSTOM_SIZE_VALUE;
+    const isReady = !isCustomSize || Boolean(trimmedCustomSize);
+
+    cta.href = buildWhatsappUrl(buildInquiryMessageWithSize(product, size, trimmedCustomSize));
+    cta.classList.toggle('is-disabled', !isReady);
+    cta.setAttribute('aria-disabled', String(!isReady));
+    cta.tabIndex = isReady ? 0 : -1;
 };
 
 const renderGalleryItem = (item, index, isActive) => {
@@ -265,23 +281,32 @@ const renderProductPage = (product) => {
             }
         });
 
-        let customSize = '';
-        if (showCustom && customSizeInput) {
-            customSizeInput.addEventListener('input', () => {
-                customSize = customSizeInput.value;
-                const selection = getSelectionPayload(currentSize, customSize);
-                whatsappCta.href = buildWhatsappUrl(buildInquiryMessageWithSize(product, currentSize, customSize));
-            }, { once: true });
+        if (customSizeInput && !showCustom) {
+            customSizeInput.value = '';
         }
 
-        const selection = getSelectionPayload(currentSize, customSize);
-        if (whatsappCta) {
-            whatsappCta.href = buildWhatsappUrl(buildInquiryMessageWithSize(product, currentSize, ''));
-        }
+        const customSize = showCustom && customSizeInput ? customSizeInput.value : '';
+        updateWhatsAppCta(whatsappCta, product, currentSize, customSize);
     };
 
     root.querySelectorAll('input[name="product-size"]').forEach((radio) => {
         radio.addEventListener('change', updateSizeSelection);
+    });
+
+    const customSizeInput = root.querySelector('[data-custom-size-input]');
+    const whatsappCta = root.querySelector('#whatsapp-cta');
+
+    customSizeInput?.addEventListener('input', () => {
+        const selectedRadio = root.querySelector('input[name="product-size"]:checked');
+        if (!selectedRadio) return;
+
+        updateWhatsAppCta(whatsappCta, product, selectedRadio.value, customSizeInput.value);
+    });
+
+    whatsappCta?.addEventListener('click', (event) => {
+        if (whatsappCta.classList.contains('is-disabled')) {
+            event.preventDefault();
+        }
     });
 
     updateSizeSelection();
@@ -310,8 +335,24 @@ const renderNotFound = () => {
 
 const init = () => {
     const headerSection = document.getElementById('header-section');
+    let cartStore = null;
+
     if (headerSection) {
         headerSection.appendChild(createHeader());
+        cartStore = createCartStore(maquetas);
+
+        const cartDropdown = createCartDropdownController(cartStore);
+        const searchController = createSearchController(maquetas);
+
+        const syncHeaderUI = () => {
+            cartDropdown.render();
+            document.dispatchEvent(new CustomEvent('cart:updated'));
+        };
+
+        cartStore.subscribe(syncHeaderUI);
+        cartDropdown.bindEvents();
+        searchController.bindEvents();
+        syncHeaderUI();
     }
 
     const productId = getProductIdFromUrl();

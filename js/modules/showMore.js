@@ -1,5 +1,5 @@
 export const initShowMore = (section, config = {}) => {
-    if (window.innerWidth > 768) return;
+    if (window.innerWidth >= 1024) return;
 
     const {
         batchSize = 10,
@@ -14,9 +14,7 @@ export const initShowMore = (section, config = {}) => {
     const items = Array.from(grid.querySelectorAll(itemSelector));
     if (items.length <= batchSize) return;
 
-    const visibleItems = items.slice(0, batchSize);
     const hiddenItems = items.slice(batchSize);
-
     hiddenItems.forEach((item) => item.classList.add(hiddenClass));
 
     const showMoreContainer = document.createElement('div');
@@ -30,6 +28,7 @@ export const initShowMore = (section, config = {}) => {
     const showAllBtn = document.createElement('button');
     showAllBtn.type = 'button';
     showAllBtn.className = 'show-more__button';
+    showAllBtn.textContent = 'Mostrar todos';
     showAllBtn.style.display = 'none';
 
     const showLessBtn = document.createElement('button');
@@ -44,31 +43,34 @@ export const initShowMore = (section, config = {}) => {
 
     grid.insertAdjacentElement('afterend', showMoreContainer);
 
-    const getHiddenItems = () => grid.querySelectorAll(`.${hiddenClass}`);
+    const getHiddenItems = () => Array.from(grid.querySelectorAll(`.${hiddenClass}`));
 
     showMoreBtn.addEventListener('click', () => {
-        const currentlyHidden = getHiddenItems();
-        const toShow = Array.from(currentlyHidden).slice(0, batchSize);
-
+        const toShow = getHiddenItems().slice(0, batchSize);
         toShow.forEach((item) => item.classList.remove(hiddenClass));
 
+        if (getHiddenItems().length > 0) {
+            showMoreBtn.style.display = 'none';
+            showAllBtn.style.display = 'inline-flex';
+            return;
+        }
+
         showMoreBtn.style.display = 'none';
-        showAllBtn.textContent = 'Mostrar todos';
-        showAllBtn.style.display = 'inline-flex';
+        showAllBtn.style.display = 'none';
+        showLessBtn.style.display = 'inline-flex';
     });
 
     showAllBtn.addEventListener('click', () => {
         items.forEach((item) => item.classList.remove(hiddenClass));
 
+        showMoreBtn.style.display = 'none';
         showAllBtn.style.display = 'none';
         showLessBtn.style.display = 'inline-flex';
     });
 
     showLessBtn.addEventListener('click', () => {
         items.forEach((item, index) => {
-            if (index >= batchSize) {
-                item.classList.add(hiddenClass);
-            }
+            item.classList.toggle(hiddenClass, index >= batchSize);
         });
 
         showMoreBtn.style.display = 'inline-flex';
