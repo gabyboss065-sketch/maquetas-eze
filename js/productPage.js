@@ -136,10 +136,10 @@ const renderProductPage = (product) => {
     root.innerHTML = `
         <section class="product-detail">
             <div class="product-detail__shell">
-                <nav class="product-detail__breadcrumbs" aria-label="Navegacion secundaria">
+                <nav class="product-detail__breadcrumbs" aria-label="Navegación secundaria">
                     <a href="./inicio.html">Inicio</a>
                     <span>/</span>
-                    <a href="./inicio.html#todos-los-productos">Catalogo</a>
+                    <a href="./inicio.html#todos-los-productos">Catálogo</a>
                     <span>/</span>
                     <strong>${product.estadio}</strong>
                 </nav>
@@ -156,16 +156,16 @@ const renderProductPage = (product) => {
                     </div>
 
                     <div class="product-detail__content">
-                        <p class="product-detail__eyebrow">${product.club || 'Coleccion GEM'}</p>
+                        <p class="product-detail__eyebrow">${product.club || 'Colección'}</p>
                         <h1>${product.estadio}</h1>
                         <p class="product-detail__lead">
-                            ${product.descripcion || 'Una pieza pensada para exhibicion, coleccion y regalo.'}
+                            ${product.descripcion || 'Una pieza pensada para exhibición, colección y regalo.'}
                         </p>
 
                         <div class="product-detail__chips">
                             <span>Escala ${product.escala || 'A definir'}</span>
                             <span>${product.material || 'Material a definir'}</span>
-                            <span>${product.edicion || 'Edicion especial'}</span>
+                            <span>${product.edicion || 'Edición especial'}</span>
                         </div>
 
                         <div class="product-detail__summary">
@@ -215,7 +215,7 @@ const renderProductPage = (product) => {
                                 <span>Consultar por WhatsApp</span>
                             </a>
                             <a class="product-detail__cta product-detail__cta--ghost" href="./inicio.html#todos-los-productos">
-                                Volver al catalogo
+                                Volver al catálogo
                             </a>
                         </div>
                     </div>
@@ -224,8 +224,8 @@ const renderProductPage = (product) => {
                 <section class="product-detail__related">
                     <div class="product-detail__related-head">
                         <div>
-                            <p class="product-detail__eyebrow">Segui explorando</p>
-                            <h2>Volver al catalogo completo</h2>
+                            <p class="product-detail__eyebrow">Seguí explorando</p>
+                            <h2>Volver al catálogo completo</h2>
                         </div>
                         <a href="./inicio.html#todos-los-productos">Ver todos los productos</a>
                     </div>

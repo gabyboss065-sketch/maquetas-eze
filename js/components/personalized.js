@@ -52,23 +52,23 @@ export const createPersonalized = (products) => {
         <div class="personalized__shell">
             <div class="personalized__content">
                 <p class="personalized__eyebrow">Personalizados</p>
-                <h2>Llevamos tu estadio favorito a escala de coleccion</h2>
+                <h2>Llevamos tu estadio favorito a escala de colección</h2>
                 <p class="personalized__lead">
-                    Si queres una pieza unica, desarrollamos maquetas personalizadas con base,
-                    materiales premium y terminaciones listas para exhibicion.
+                    Si querés una pieza única, desarrollamos maquetas personalizadas con base,
+                    materiales premium y terminaciones listas para exhibición.
                 </p>
 
                 <div class="personalized__points">
                     <article class="personalized__point">
                         <span class="personalized__point-icon">${getIcon('design')}</span>
                         <strong>Diseño a medida personalizada</strong>
-                        <p>Adaptamos escala, base y presentacion segun el espacio donde la vayas a exhibir.</p>
+                        <p>Adaptamos escala, base y presentación según el espacio donde la vayas a exhibir.</p>
                     </article>
 
                     <article class="personalized__point">
                         <span class="personalized__point-icon">${getIcon('premium')}</span>
                         <strong>Terminacion premium</strong>
-                        <p>Trabajamos texturas, volumenes y detalles para que la maqueta tenga presencia real.</p>
+                        <p>Trabajamos texturas, volúmenes y detalles para que la maqueta tenga presencia real.</p>
                     </article>
 
                     <article class="personalized__point">
@@ -80,7 +80,7 @@ export const createPersonalized = (products) => {
 
                 <div class="personalized__actions">
                     <button class="personalized__button" type="button">Pedir maqueta personalizada</button>
-                    <span class="personalized__note">Tiempo estimado de produccion: consultar segun medida.</span>
+                    <span class="personalized__note">Tiempo estimado de producción: consultar según medida.</span>
                 </div>
             </div>
 
