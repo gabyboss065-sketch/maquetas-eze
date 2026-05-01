@@ -2,16 +2,15 @@ import { getIcon } from '../utils/icons.js';
 
 const DEFAULT_SIZE_OPTIONS = ['25 x 18 cm', '35 x 24 cm', '45 x 30 cm'];
 const CUSTOM_SIZE_VALUE = '__custom__';
+const filename = (url) => url?.split('/').pop()?.split('?')[0] ?? '';
+
 const getGalleryImages = (product) => {
-    if (Array.isArray(product.galeria) && product.galeria.length > 0) {
-        return product.galeria;
-    }
-
-    if (product.imagen) {
-        return [product.imagen];
-    }
-
-    return [];
+    const cover = product.imagen;
+    const coverFile = filename(cover);
+    const extra = Array.isArray(product.galeria)
+        ? product.galeria.filter(src => Boolean(src) && src !== cover && filename(src) !== coverFile)
+        : [];
+    return cover ? [cover, ...extra] : extra;
 };
 
 const getSizeOptions = (product) => {
@@ -204,7 +203,13 @@ export const createProductModal = (options = {}) => {
         addToCartButton.setAttribute('aria-disabled', String(!isAvailable));
     };
 
+    const exitFullscreen = () => {
+        const wrap = modal.querySelector('.product-modal__main-image-wrap');
+        wrap?.classList.remove('is-fullscreen');
+    };
+
     const close = () => {
+        exitFullscreen();
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('is-modal-open');
@@ -267,19 +272,15 @@ export const createProductModal = (options = {}) => {
 
         const fullscreenCloseButton = event.target.closest('[data-gallery-fullscreen-close]');
         if (fullscreenCloseButton) {
-            document.exitFullscreen?.();
+            const wrap = modal.querySelector('.product-modal__main-image-wrap');
+            wrap.classList.remove('is-fullscreen');
             return;
         }
 
         const fullscreenButton = event.target.closest('[data-gallery-fullscreen]');
-        if (fullscreenButton && mainImage) {
-            if (document.fullscreenElement) {
-                document.exitFullscreen?.();
-                return;
-            }
-
+        if (fullscreenButton) {
             const wrap = modal.querySelector('.product-modal__main-image-wrap');
-            (wrap ?? mainImage).requestFullscreen?.();
+            wrap.classList.add('is-fullscreen');
             return;
         }
 
@@ -368,7 +369,14 @@ export const createProductModal = (options = {}) => {
 
     document.addEventListener('keydown', (event) => {
         if (!modal.classList.contains('is-open')) return;
-        if (event.key === 'Escape') close();
+        if (event.key === 'Escape') {
+            const wrap = modal.querySelector('.product-modal__main-image-wrap');
+            if (wrap?.classList.contains('is-fullscreen')) {
+                exitFullscreen();
+            } else {
+                close();
+            }
+        }
     });
 
     document.addEventListener('cart:updated', () => {

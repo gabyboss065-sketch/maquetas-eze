@@ -23,10 +23,15 @@ const getSizeOptions = (product) => {
     return DEFAULT_SIZE_OPTIONS;
 };
 
+const filename = (url) => url?.split('/').pop()?.split('?')[0] ?? '';
+
 const getGalleryItems = (product) => {
-    const images = Array.isArray(product.galeria) && product.galeria.length > 0
-        ? product.galeria.filter(Boolean)
-        : (product.imagen ? [product.imagen] : []);
+    const cover = product.imagen;
+    const coverFile = filename(cover);
+    const extra = Array.isArray(product.galeria)
+        ? product.galeria.filter(src => Boolean(src) && src !== cover && filename(src) !== coverFile)
+        : [];
+    const images = cover ? [cover, ...extra] : extra;
 
     const totalSlots = Math.max(images.length, MIN_GALLERY_SLOTS);
     const galleryItems = images.map((src, index) => ({
@@ -370,12 +375,12 @@ const init = async () => {
     document.body.appendChild(createWhatsAppFloat());
 
     if (!product) {
-        document.title = 'Producto no encontrado | GEM Maquetas';
+        document.title = 'Producto no encontrado | Maquetas Ezequiel';
         renderNotFound();
         return;
     }
 
-    document.title = `${product.estadio} | GEM Maquetas`;
+    document.title = `${product.estadio} | Maquetas Ezequiel`;
     renderProductPage(product);
 };
 
