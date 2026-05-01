@@ -207,7 +207,7 @@ export const createAboutCreator = () => {
                 observer.unobserve(section);
             }
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0, rootMargin: '0px 0px -80px 0px' });
     observer.observe(section);
 
     return section;
