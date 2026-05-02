@@ -347,6 +347,8 @@ export const createPersonalized = (products) => {
     const projects = getPersonalizedProjects(products);
     const featured = projects.find((p) => p.id === 20) ?? projects[0];
     const rest = projects.filter((p) => p.id !== featured?.id);
+    const penarol = products.find((p) => p.id === 5) ?? null;
+    const othersRest = rest.filter((p) => p.id !== 5);
 
     const section = document.createElement('section');
     section.className = 'personalized';
@@ -358,7 +360,7 @@ export const createPersonalized = (products) => {
         <div class="personalized__mid">
             <div class="personalized__mid-shell">
                 ${createProcess()}
-                ${createOtherProjects([featured, ...rest])}
+                ${createOtherProjects([penarol, ...othersRest].filter(Boolean))}
             </div>
         </div>
         ${createTestimonials()}

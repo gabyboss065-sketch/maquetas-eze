@@ -1,10 +1,22 @@
 import { supabaseDB } from '../lib/supabase.js';
 import { maquetas as localData } from '../data.js';
 
+const clubAliases = {
+    'Penarol': 'Peñarol',
+};
+
+const estadioAliases = {
+    'Campeon del Siglo': 'Campeón del Siglo',
+};
+
+const normalizeEstadio = (name) => estadioAliases[name] ?? name;
+
+const normalizeClub = (name) => clubAliases[name] ?? name;
+
 const fromDB = (row) => ({
     id: row.id,
-    estadio: row.estadio,
-    club: row.club,
+    estadio: normalizeEstadio(row.estadio),
+    club: normalizeClub(row.club),
     escala: row.escala,
     precio: row.precio,
     stock: row.stock,
