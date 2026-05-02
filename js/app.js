@@ -31,7 +31,6 @@ const updateCatalogAddButtons = (store) => {
 
         button.disabled = !store.canAddProduct(product);
         button.setAttribute('aria-disabled', String(button.disabled));
-        button.textContent = 'Agregar';
     });
 };
 

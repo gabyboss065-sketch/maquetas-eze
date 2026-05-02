@@ -7,7 +7,14 @@
         linear-gradient(180deg, #f4f0e7 0%, #ece6db 100%);
 }
 
+/* Merged: animation state + layout in one block */
 .personalized__shell {
+    width: min(1200px, 100%);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+    gap: 42px;
+    align-items: center;
     opacity: 0;
     transform: translateX(60px);
     transition: opacity 0.7s ease-out, transform 0.7s ease-out;
@@ -16,15 +23,6 @@
 .personalized.is-animated .personalized__shell {
     opacity: 1;
     transform: translateX(0);
-}
-
-.personalized__shell {
-    width: min(1200px, 100%);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
-    gap: 42px;
-    align-items: center;
 }
 
 .personalized__eyebrow {
@@ -55,9 +53,10 @@
     color: rgba(17, 20, 23, 0.76);
 }
 
+/* auto-fit: 3 cols on desktop, 2 on tablet/mobile — no override needed */
 .personalized__points {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 16px;
     margin-bottom: 32px;
 }
@@ -174,19 +173,20 @@
     aspect-ratio: 4 / 5;
 }
 
-.personalized__media-slide,
-.personalized__meta-slide {
-    display: none;
-}
-
-.personalized__media-slide.is-active,
-.personalized__meta-slide.is-active {
-    display: block;
-}
-
+/* Slides use opacity/visibility so transitions can be added later */
 .personalized__media-slide {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.personalized__media-slide.is-active {
+    opacity: 1;
+    visibility: visible;
 }
 
 .personalized__image-placeholder {
@@ -201,13 +201,6 @@
     background:
         radial-gradient(circle at top, rgba(245, 215, 110, 0.42), transparent 38%),
         linear-gradient(180deg, #f6f0e2 0%, #ddd3c3 100%);
-}
-
-.personalized__image-placeholder span {
-    margin-bottom: 8px;
-    font-size: 0.78rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
 }
 
 .personalized__image-placeholder strong {
@@ -225,8 +218,21 @@
     padding: 22px 10px 10px;
 }
 
+/* Grid stacking: height is determined by all overlapping slides, no magic min-height */
 .personalized__meta-track {
-    min-height: 104px;
+    display: grid;
+}
+
+.personalized__meta-slide {
+    grid-area: 1 / 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.personalized__meta-slide.is-active {
+    opacity: 1;
+    visibility: visible;
 }
 
 .personalized__card-label {
@@ -302,10 +308,6 @@
 
 @media (max-width: 980px) {
     .personalized__shell {
-        grid-template-columns: 1fr;
-    }
-
-    .personalized__points {
         grid-template-columns: 1fr;
     }
 

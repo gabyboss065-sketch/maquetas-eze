@@ -1,6 +1,11 @@
 import { getIcon } from '../utils/icons.js';
 import { loadDeferredImage } from '../utils/imageLoader.js';
 
+const loadSlideImage = (slide) => {
+    if (!slide) return;
+    loadDeferredImage(slide.querySelector('img[data-deferred-image]'));
+};
+
 export const initPersonalizedSlider = (container) => {
     const imageSlides = container.querySelectorAll('[data-personalized-image]');
     const metaSlides = container.querySelectorAll('[data-personalized-meta]');
@@ -48,19 +53,17 @@ export const initPersonalizedSlider = (container) => {
         metaSlides[currentIndex].classList.add('is-active');
         dots[currentIndex].classList.add('is-active');
 
-        loadDeferredImage(imageSlides[currentIndex].querySelector('img[data-deferred-image]'));
-        loadDeferredImage(imageSlides[(currentIndex + 1) % totalSlides].querySelector('img[data-deferred-image]'));
+        loadSlideImage(imageSlides[currentIndex]);
+        loadSlideImage(imageSlides[(currentIndex + 1) % totalSlides]);
     };
 
     prevButton.addEventListener('click', () => updateSlider(currentIndex - 1));
     nextButton.addEventListener('click', () => updateSlider(currentIndex + 1));
 
     dots.forEach((dot) => {
-        dot.addEventListener('click', () => {
-            updateSlider(parseInt(dot.dataset.index, 10));
-        });
+        dot.addEventListener('click', () => updateSlider(parseInt(dot.dataset.index, 10)));
     });
 
-    loadDeferredImage(imageSlides[0].querySelector('img[data-deferred-image]'));
-    loadDeferredImage(imageSlides[1]?.querySelector('img[data-deferred-image]'));
+    loadSlideImage(imageSlides[0]);
+    loadSlideImage(imageSlides[1]);
 };
