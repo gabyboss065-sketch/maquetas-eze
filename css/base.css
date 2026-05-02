@@ -17,6 +17,13 @@
   margin: 0;
   padding: 0;
   font: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:active,
+button:active {
+  filter: brightness(0.82);
+  transition: filter 0.1s ease;
 }
 
 /* 3. Mejorar la legibilidad y el comportamiento del texto */

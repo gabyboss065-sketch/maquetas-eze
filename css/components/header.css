@@ -37,6 +37,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 .logo {
     display: flex;
@@ -193,6 +194,42 @@
     min-width: 0;
 }
 
+.search-btn {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-btn__icon {
+    position: absolute;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.search-btn__icon--close {
+    opacity: 0;
+    transform: rotate(-45deg);
+    filter: invert(1);
+}
+
+.search-btn__icon--open {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+.search-btn[aria-expanded="true"] .search-btn__icon--open {
+    opacity: 0;
+    transform: rotate(45deg);
+}
+
+.search-btn[aria-expanded="true"] .search-btn__icon--close {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
 .search-panel {
     position: absolute;
     top: calc(100% + 12px);
@@ -239,6 +276,20 @@
 
 .search-panel__input::placeholder {
     color: rgba(255, 255, 255, 0.52);
+}
+
+.search-panel__input::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-image: url("../../assets/icons/close.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(83%) sepia(40%) saturate(600%) hue-rotate(5deg) brightness(105%);
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 .search-panel__submit {
@@ -531,6 +582,16 @@ button {
     cursor: pointer;
     font-size: 1.2rem;
     color: white;
+}
+
+/* ── Logo centrado en mobile ─────────────────────────── */
+@media (max-width: 767px) {
+    .logo {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+    }
 }
 
 /* Media Query para escritorio (a partir de 768px) */
