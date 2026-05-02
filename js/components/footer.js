@@ -93,7 +93,7 @@ export const createFooter = () => {
                 <p class="site-footer__disclaimer">
                     Los nombres, escudos, camisetas, estadios, imágenes y demás signos distintivos de clubes, selecciones o instituciones deportivas pertenecen a sus respectivos titulares. En este sitio se utilizan únicamente con fines ilustrativos y descriptivos.
                 </p>
-                <span class="site-footer__badge">Hecho a mano con amor</span>
+                <span class="site-footer__badge">Maquetas hechas a mano con amor y dedicación.</span>
             </div>
         </div>
     `;

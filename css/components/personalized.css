@@ -287,7 +287,7 @@
 }
 
 .personalized__comparison-shell {
-    padding: 48px 40px 40px;
+    padding: 15px 10px 10px;
     border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     background: #141618;
@@ -329,7 +329,7 @@
 .personalized__panels {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
-    gap: 20px;
+    gap: 12px;
     align-items: center;
 }
 
@@ -339,6 +339,12 @@
     overflow: hidden;
     aspect-ratio: 16 / 10;
     background: #1a1d21;
+    z-index: 1;
+    border: 1px solid rgba(255, 255, 255, 0.308);
+}
+
+.personalized__panel--final {
+    border-color: #f5d76e;
 }
 
 .personalized__panel img {
@@ -374,12 +380,19 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
-    background: #f5d76e;
-    color: #111417;
+    background: rgba(10, 10, 11, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 2px solid rgba(245, 215, 110, 0.75);
+    box-shadow: 0 0 18px rgba(245, 215, 110, 0.35);
+    color: #f5d76e;
     flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    margin-inline: -35px;
 }
 
 /* ============================================================
@@ -811,10 +824,13 @@
     justify-content: center;
     width: 56px;
     height: 56px;
-    border-radius: 16px;
-    background: rgba(245, 215, 110, 0.1);
-    border: 1px solid rgba(245, 215, 110, 0.2);
+    background: none;
+    border: none;
     color: #f5d76e;
+}
+
+.personalized__cta-bar-icon svg {
+    filter: drop-shadow(0 0 8px rgba(245, 215, 110, 0.7));
 }
 
 .personalized__cta-bar-text strong {
@@ -825,8 +841,8 @@
 }
 
 .personalized__cta-bar-text span {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.58);
+    font-size: 1rem;
+    color: #f5d76e;
 }
 
 .personalized__cta-bar-btn {
@@ -842,12 +858,11 @@
     border: none;
     cursor: pointer;
     white-space: nowrap;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: background 0.2s ease;
 }
 
 .personalized__cta-bar-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 28px rgba(245, 215, 110, 0.28);
+    background: #c9a020;
 }
 
 /* ============================================================
@@ -930,7 +945,7 @@
     .personalized__featured-card {
         width: 100%;
         border-radius: 20px;
-        aspect-ratio: 9 / 13;
+        aspect-ratio: 4 / 3;
     }
 
     .personalized__featured-footer {
@@ -1036,13 +1051,14 @@
     .personalized__panel {
         aspect-ratio: 4 / 3;
         border-radius: 0;
+        border: none;
     }
 
     .personalized__arrow-circle {
         margin: 0 auto;
         transform: none;
         position: relative;
-        z-index: 1;
+        z-index: 3;
         margin-top: -24px;
         margin-bottom: -24px;
     }
@@ -1092,5 +1108,11 @@
     .personalized__cta-bar-btn {
         width: 100%;
         justify-content: center;
+    }
+}
+
+@media (max-width: 420px) {
+    .personalized__featured-card {
+        aspect-ratio: 9 / 13;
     }
 }
