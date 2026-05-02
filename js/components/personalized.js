@@ -88,6 +88,9 @@ const getPersonalizedProjects = (products) => {
     return [...refs].sort((a, b) => (a.orden ?? Infinity) - (b.orden ?? Infinity));
 };
 
+const FEATURED_HERO_IMAGE = 'assets/img/products/qatar/lusail-stadium/destacada_personalized.jpg';
+const FEATURED_REF_IMAGE = 'assets/img/products/qatar/lusail-stadium/referencia_real.webp?v=2';
+
 const createHero = (featured) => `
     <div class="personalized__hero">
         <div class="personalized__hero-shell">
@@ -116,9 +119,12 @@ const createHero = (featured) => `
 
             ${featured ? `
             <div class="personalized__hero-visual">
+                <p class="personalized__featured-kicker">
+                    ${getIcon('badge-star')} Proyecto Destacado
+                </p>
                 <div class="personalized__featured-card">
                     <img
-                        src="${featured.imagen}"
+                        src="${FEATURED_HERO_IMAGE}"
                         alt="Maqueta personalizada de ${featured.estadio}"
                         loading="eager"
                         fetchpriority="high"
@@ -146,7 +152,7 @@ const createHero = (featured) => `
 
 const createComparison = (featured) => {
     if (!featured) return '';
-    const refImg = featured.galeria?.[1] || featured.imagen;
+    const refImg = FEATURED_REF_IMAGE;
     const finalImg = featured.imagen;
     return `
         <div class="personalized__comparison">
@@ -156,14 +162,14 @@ const createComparison = (featured) => {
                 <div class="personalized__panels">
                     <div class="personalized__panel">
                         <span class="personalized__panel-tag">Referencia Real</span>
-                        ${getDeferredImageAttrs({ src: refImg, alt: `Referencia del estadio ${featured.estadio}`, eager: false })}
+                        <img src="${refImg}" alt="Referencia del estadio ${featured.estadio}" loading="lazy" decoding="async">
                     </div>
                     <div class="personalized__arrow-circle" aria-hidden="true">
                         <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                     </div>
                     <div class="personalized__panel personalized__panel--final">
                         <span class="personalized__panel-tag personalized__panel-tag--gold">Maqueta Final</span>
-                        ${getDeferredImageAttrs({ src: finalImg, alt: `Maqueta final de ${featured.estadio}`, eager: false })}
+                        <img src="${finalImg}" alt="Maqueta final de ${featured.estadio}" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -199,7 +205,7 @@ const createOtherProjects = (others) => `
             ${others.slice(0, 3).map((p) => `
                 <a class="personalized__other-card" href="product.html?id=${p.id}">
                     <div class="personalized__other-image">
-                        ${getDeferredImageAttrs({ src: p.imagen, alt: `Maqueta de ${p.estadio}`, eager: false })}
+                        <img src="${p.imagen}" alt="Maqueta de ${p.estadio}" loading="lazy" decoding="async">
                     </div>
                     <div class="personalized__other-info">
                         <strong>${p.estadio}</strong>
@@ -339,7 +345,8 @@ const observeAnimation = (section) => {
 
 export const createPersonalized = (products) => {
     const projects = getPersonalizedProjects(products);
-    const [featured, ...rest] = projects;
+    const featured = projects.find((p) => p.id === 20) ?? projects[0];
+    const rest = projects.filter((p) => p.id !== featured?.id);
 
     const section = document.createElement('section');
     section.className = 'personalized';
@@ -351,7 +358,7 @@ export const createPersonalized = (products) => {
         <div class="personalized__mid">
             <div class="personalized__mid-shell">
                 ${createProcess()}
-                ${createOtherProjects([featured, ...rest.filter((p) => p.orden !== 2)])}
+                ${createOtherProjects([featured, ...rest])}
             </div>
         </div>
         ${createQuoteCard()}
