@@ -78,7 +78,7 @@ export const createCatalog = (products) => {
             <div class="catalog__intro">
                 <p class="catalog__eyebrow">Más Vendidos</p>
                 <div class="catalog__heading">
-                    <h2>Nuestros modelos más vendidos</h2>
+                    <h2>Nuestros modelos más vendidos<span style="color:#f5d76e">.</span></h2>
                 </div>
             </div>
 
