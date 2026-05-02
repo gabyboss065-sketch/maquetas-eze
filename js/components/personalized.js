@@ -158,7 +158,7 @@ const createComparison = (featured) => {
         <div class="personalized__comparison">
             <div class="personalized__comparison-shell">
                 <p class="personalized__kicker personalized__kicker--center">De la idea a la realidad</p>
-                <p class="personalized__kicker-sub">Así transformamos una foto en una pieza única.</p>
+                <p class="personalized__kicker-sub">Así transformamos una referencia en una maqueta única.</p>
                 <div class="personalized__panels">
                     <div class="personalized__panel">
                         <span class="personalized__panel-tag">Referencia Real</span>
