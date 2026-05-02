@@ -646,6 +646,7 @@ textarea { resize: vertical; min-height: 72px; }
 @media (max-width: 480px) {
     .admin-header h1 { font-size: 14px; }
     .admin-header .btn { padding: 6px 10px; font-size: 12px; }
+    .admin-header a.btn { display: none; }
 
     .stats { grid-template-columns: 1fr 1fr; }
 
