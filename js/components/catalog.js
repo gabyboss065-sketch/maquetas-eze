@@ -58,8 +58,10 @@ const createProductCard = (product, index) => {
     <article
         class="product-card"
         data-product-id="${product.id}"
-        data-view-button
-        aria-label="Ver detalle de ${product.estadio}"
+        data-expand-button
+        data-image="${product.imagen}"
+        data-alt="${product.estadio}"
+        aria-label="Ver imagen de ${product.estadio}"
     >
         <img
             ${eager ? `src="${image}" loading="eager" fetchpriority="high"` : `src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="${image}" data-deferred-image loading="lazy" fetchpriority="low"`}
@@ -75,10 +77,21 @@ const createProductCard = (product, index) => {
         <div class="product-card__overlay">
             <p class="product-card__club">${product.club}</p>
             <h3 class="product-card__name">${product.estadio}</h3>
-            <span class="product-card__scale">
-                ${getIcon('scale')}
-                Escala ${product.escala}
-            </span>
+            <div class="product-card__footer">
+                <span class="product-card__scale">
+                    ${getIcon('scale')}
+                    Escala ${product.escala}
+                </span>
+                <button
+                    class="product-card__cart-btn"
+                    type="button"
+                    data-product-id="${product.id}"
+                    data-add-button
+                    aria-label="Agregar ${product.estadio} a la consulta"
+                >
+                    ${getIcon('cart')}
+                </button>
+            </div>
         </div>
 
         <div class="product-card__hover-actions">
@@ -153,15 +166,6 @@ export const createCatalog = (products) => {
             return;
         }
 
-        const viewButton = event.target.closest('[data-view-button]');
-        if (!viewButton) return;
-        const productId = Number(viewButton.dataset.productId);
-        const selectedProduct = products.find((p) => p.id === productId);
-        if (!selectedProduct) return;
-        section.dispatchEvent(new CustomEvent('catalog:view-product', {
-            bubbles: true,
-            detail: { product: selectedProduct }
-        }));
     });
 
     return section;
