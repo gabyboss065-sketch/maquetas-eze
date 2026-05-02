@@ -394,7 +394,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 64px;
-    align-items: start;
+    align-items: stretch;
 }
 
 /* --- Process --- */
@@ -486,25 +486,25 @@
 }
 
 /* --- Other projects --- */
+.personalized__others {
+    display: flex;
+    flex-direction: column;
+}
+
 .personalized__other-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+    flex: 1;
 }
 
 .personalized__other-card {
     position: relative;
     border-radius: 20px;
     overflow: hidden;
-    aspect-ratio: 9 / 13;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(245, 215, 110, 0.5);
     text-decoration: none;
     color: inherit;
-    transition: transform 0.3s ease;
-}
-
-.personalized__other-card:hover {
-    transform: translateY(-4px);
 }
 
 .personalized__other-card > img {
@@ -513,11 +513,15 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.5s ease;
+    transition: transform 0.4s ease;
 }
 
 .personalized__other-card:hover > img {
-    transform: scale(1.05);
+    transform: scale(1.06);
+}
+
+.personalized__other-grid .personalized__other-card {
+    height: 100%;
 }
 
 .personalized__other-overlay {
@@ -534,6 +538,11 @@
         rgba(0, 0, 0, 0.45) 60%,
         rgba(0, 0, 0, 0.88) 100%
     );
+    transition: opacity 0.35s ease;
+}
+
+.personalized__other-card:hover .personalized__other-overlay {
+    opacity: 0;
 }
 
 .personalized__other-club {
@@ -558,10 +567,9 @@
     align-items: center;
 }
 
-.personalized__stars {
-    color: #f5d76e;
-    font-size: 0.72rem;
-    letter-spacing: 1px;
+.personalized__star {
+    filter: invert(83%) sepia(40%) saturate(600%) hue-rotate(5deg) brightness(105%);
+    display: inline-block;
 }
 
 .personalized__other-score {
@@ -662,11 +670,12 @@
 }
 
 .personalized__review-icon {
-    font-size: 2.2rem;
-    line-height: 1;
-    color: #f5d76e;
-    font-family: Georgia, serif;
+    display: flex;
     margin: 0;
+}
+
+.personalized__review-icon img {
+    filter: invert(83%) sepia(40%) saturate(600%) hue-rotate(5deg) brightness(105%) drop-shadow(0 0 8px rgba(245, 215, 110, 0.6));
 }
 
 .personalized__review-text {
@@ -677,16 +686,9 @@
     margin: 0;
 }
 
-.personalized__review-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-}
-
-.personalized__review-footer strong {
+.personalized__review-author {
     font-size: 0.88rem;
-    color: #fff;
+    color: #f5d76e;
 }
 
 /* ============================================================
@@ -945,6 +947,16 @@
     .personalized__mid-shell {
         grid-template-columns: 1fr;
         gap: 48px;
+    }
+
+    .personalized__other-grid {
+        flex: unset;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .personalized__other-grid .personalized__other-card {
+        height: unset;
+        aspect-ratio: 4 / 3;
     }
 
     .personalized__review-grid {
