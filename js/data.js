@@ -96,7 +96,7 @@ export const maquetas = [
     {
         id: 5,
         estadio: 'Campeon del Siglo',
-        club: 'Penarol',
+        club: 'Peñarol',
         escala: '1:600',
         precio: 214000,
         stock: 3,
