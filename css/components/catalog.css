@@ -71,6 +71,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    cursor: zoom-in;
     transition: transform 0.5s ease;
 }
 
@@ -146,6 +147,13 @@
     line-height: 1.05;
     color: #fff;
     letter-spacing: -0.02em;
+}
+
+.product-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
 }
 
 .product-card__scale {
@@ -290,6 +298,10 @@
 @media (max-width: 960px) {
     .catalog__grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .product-card__hover-actions {
+        display: none;
     }
 }
 
