@@ -147,12 +147,6 @@ export const createCatalog = (products) => {
     `;
 
     section.addEventListener('click', (event) => {
-        const expandButton = event.target.closest('[data-expand-button]');
-        if (expandButton) {
-            lightbox.open(expandButton.dataset.image, `Maqueta de ${expandButton.dataset.alt}`);
-            return;
-        }
-
         const addButton = event.target.closest('[data-add-button]');
         if (addButton) {
             if (addButton.disabled) return;
@@ -166,6 +160,11 @@ export const createCatalog = (products) => {
             return;
         }
 
+        const expandButton = event.target.closest('[data-expand-button]');
+        if (expandButton) {
+            lightbox.open(expandButton.dataset.image, `Maqueta de ${expandButton.dataset.alt}`);
+            return;
+        }
     });
 
     return section;

@@ -7,7 +7,10 @@ export const createHeader = () => {
     
     header.innerHTML = `
         <div class="nav-container">
-            <button id="menu-toggle" class="icon-btn mobile-only">${getIcon('menu')}</button>
+            <button id="menu-toggle" class="icon-btn mobile-only" aria-label="Abrir menú">
+                <img src="assets/icons/hamburger.svg" class="menu-icon menu-icon--open" width="24" height="24" alt="">
+                <img src="assets/icons/close.svg" class="menu-icon menu-icon--close" width="24" height="24" alt="">
+            </button>
             
             <a class="logo" href="./inicio.html">
                 <span class="logo__text">
@@ -80,32 +83,44 @@ export const createHeader = () => {
     const navMenu = header.querySelector('.nav-menu');
 
     menuToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('is-active');
+        const isOpen = navMenu.classList.toggle('is-active');
+        menuToggle.classList.toggle('is-active', isOpen);
+        menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
     });
 
     const navLinks = header.querySelectorAll('.nav-menu a');
     const sectionIds = ['inicio', 'todos-los-productos', 'sobre-mi'];
 
-    const updateActiveLink = () => {
-        const scrollY = window.scrollY;
-        let activeId = 'inicio';
-
-        for (const id of sectionIds) {
-            const section = document.getElementById(id);
-            if (section) {
-                const offsetTop = section.offsetTop - 120;
-                if (scrollY >= offsetTop) {
-                    activeId = id;
-                }
-            }
-        }
-
+    const setActiveLink = (activeId) => {
         navLinks.forEach((link) => {
             const href = link.getAttribute('href');
             const linkId = href?.split('#')[1];
             link.classList.toggle('is-active', linkId === activeId);
         });
     };
+
+    const updateActiveLink = () => {
+        const scrollY = window.scrollY;
+        let activeId = 'inicio';
+        for (const id of sectionIds) {
+            const section = document.getElementById(id);
+            if (section && scrollY >= section.offsetTop - 120) {
+                activeId = id;
+            }
+        }
+        setActiveLink(activeId);
+    };
+
+    navLinks.forEach((link) => {
+        link.addEventListener('click', () => {
+            const href = link.getAttribute('href');
+            const linkId = href?.split('#')[1];
+            if (linkId) setActiveLink(linkId);
+            navMenu.classList.remove('is-active');
+            menuToggle.classList.remove('is-active');
+            menuToggle.setAttribute('aria-label', 'Abrir menú');
+        });
+    });
 
     updateActiveLink();
     window.addEventListener('scroll', updateActiveLink, { passive: true });
