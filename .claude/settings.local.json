@@ -6,7 +6,8 @@
       "Bash(git commit -m ' *)",
       "Bash(dir \"assets\\\\img\\\\\")",
       "PowerShell(Get-Content \"C:\\\\Users\\\\gabz\\\\Desktop\\\\Maquetas Eze\\\\.claude\\\\worktrees\\\\hardcore-villani-723d49\\\\.gitignore\" | ForEach-Object { \"'$_'\" })",
-      "mcp__Claude_in_Chrome__tabs_context_mcp"
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "PowerShell($env:PATH -split \";\" | Where-Object { Test-Path $_ } | ForEach-Object { Get-ChildItem $_ -Filter \"node.exe\" -ErrorAction SilentlyContinue } | Select-Object FullName)"
     ]
   }
 }

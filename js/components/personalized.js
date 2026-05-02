@@ -204,14 +204,12 @@ const createOtherProjects = (others) => `
         <div class="personalized__other-grid">
             ${others.slice(0, 3).map((p) => `
                 <a class="personalized__other-card" href="product.html?id=${p.id}">
-                    <div class="personalized__other-image">
-                        <img src="${p.imagen}" alt="Maqueta de ${p.estadio}" loading="lazy" decoding="async">
-                    </div>
-                    <div class="personalized__other-info">
-                        <strong>${p.estadio}</strong>
-                        <span>${p.club}</span>
+                    <img src="${p.imagen}" alt="Maqueta de ${p.estadio}" loading="lazy" decoding="async">
+                    <div class="personalized__other-overlay">
+                        <span class="personalized__other-club">${p.club}</span>
+                        <strong class="personalized__other-name">${p.estadio}</strong>
                         <div class="personalized__other-rating">
-                            ${renderStars()} <span>5.0</span>
+                            ${renderStars()} <span class="personalized__other-score">5.0</span>
                         </div>
                     </div>
                 </a>
