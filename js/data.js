@@ -317,7 +317,8 @@ export const maquetas = [
             'assets/img/products/rosario-central/gigante-de-arroyito/gallery-06.jpg',
             'assets/img/products/rosario-central/gigante-de-arroyito/gallery-07.jpg'
         ],
-        referenciaPersonalizada: true
+        referenciaPersonalizada: true,
+        orden: 2
     },
     {
         id: 16,
@@ -340,7 +341,8 @@ export const maquetas = [
             'assets/img/products/seleccion-de-japon/olimpico-de-tokio/gallery-06.jpg',
             'assets/img/products/seleccion-de-japon/olimpico-de-tokio/gallery-07.jpg'
         ],
-        referenciaPersonalizada: true
+        referenciaPersonalizada: true,
+        orden: 3
     },
     {
         id: 17,
@@ -361,7 +363,8 @@ export const maquetas = [
             'assets/img/products/estudiantes-de-caseros/ciudad-de-caseros/gallery-04.webp',
             'assets/img/products/estudiantes-de-caseros/ciudad-de-caseros/gallery-05.webp'
         ],
-        referenciaPersonalizada: true
+        referenciaPersonalizada: true,
+        orden: 4
     },
     {
         id: 18,
@@ -425,7 +428,8 @@ export const maquetas = [
             'assets/img/products/qatar/lusail-stadium/gallery-07.jpg',
             'assets/img/products/qatar/lusail-stadium/gallery-08.jpg'
         ],
-        referenciaPersonalizada: true
+        referenciaPersonalizada: true,
+        orden: 1
     },
     {
         id: 21,

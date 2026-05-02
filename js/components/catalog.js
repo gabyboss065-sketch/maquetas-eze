@@ -1,63 +1,62 @@
 import { getIcon } from '../utils/icons.js';
 import { getProductDetailUrl } from '../utils/productLinks.js';
-import { getDeferredImageAttrs } from '../utils/imageLoader.js';
 
 const topSellerClubs = ['Boca Juniors', 'River Plate', 'Racing Club', 'Independiente'];
 
+const bestSellsImages = {
+    'Boca Juniors':  'assets/img/best-sells/boca_best_sells.webp',
+    'River Plate':   'assets/img/best-sells/river_best_sells.webp',
+    'Racing Club':   'assets/img/best-sells/racing_best_sells.webp',
+    'Independiente': 'assets/img/best-sells/independiente_best_sells.webp',
+};
+
+const editionIconMap = {
+    'Edicion Club':      'badge-star',
+    'Serie Arquitectura': 'badge-building',
+    'Hincha Edition':    'badge-heart',
+    'Rojo Legendario':   'badge-flame',
+};
+
 const createProductCard = (product, index) => {
+    const image = bestSellsImages[product.club] ?? product.imagen;
+    const badgeIcon = getIcon(editionIconMap[product.edicion] ?? 'badge-star');
     const eager = index < 2;
+
     return `
-    <article class="product-card">
-        <div class="product-card__media">
-            <img
-                ${eager ? `src="${product.imagen}" loading="eager" fetchpriority="high"` : `src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="${product.imagen}" data-deferred-image loading="lazy" fetchpriority="low"`}
-                alt="Maqueta de ${product.estadio}" decoding="async">
-            <span class="product-card__badge">${product.edicion}</span>
+    <article
+        class="product-card"
+        data-product-id="${product.id}"
+        data-view-button
+        aria-label="Ver detalle de ${product.estadio}"
+    >
+        <img
+            ${eager ? `src="${image}" loading="eager" fetchpriority="high"` : `src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="${image}" data-deferred-image loading="lazy" fetchpriority="low"`}
+            alt="Maqueta de ${product.estadio}"
+            decoding="async"
+        >
+
+        <div class="product-card__badge">
+            ${badgeIcon}
+            ${product.edicion}
         </div>
 
-        <div class="product-card__content">
-            <div class="product-card__meta">
-                <p class="product-card__club">${product.club}</p>
-                <p class="product-card__scale">Escala ${product.escala}</p>
-            </div>
-
-            <a
-                class="product-card__title-link"
-                href="${getProductDetailUrl(product.id)}"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abrir ficha de ${product.estadio} en una nueva pestaña"
-            >
-                <h3>${product.estadio}</h3>
-            </a>
-            <p class="product-card__description">${product.descripcion}</p>
-
-            <div class="product-card__details">
-                <span>${product.material}</span>
-                <span>Pedido personalizado</span>
-            </div>
-
+        <div class="product-card__overlay">
+            <p class="product-card__club">${product.club}</p>
+            <h3 class="product-card__name">${product.estadio}</h3>
             <div class="product-card__footer">
-                <div class="product-card__actions">
-                    <button
-                        class="product-card__button"
-                        type="button"
-                        data-product-id="${product.id}"
-                        data-add-button
-                    >
-                        Agregar
-                    </button>
-                    <button
-                        class="product-card__button product-card__button--view"
-                        type="button"
-                        data-product-id="${product.id}"
-                        data-view-button
-                        aria-label="Ver detalle de ${product.estadio}"
-                    >
-                        ${getIcon('eye')}
-                        <span>VER</span>
-                    </button>
-                </div>
+                <span class="product-card__scale">
+                    ${getIcon('scale')}
+                    Escala ${product.escala}
+                </span>
+                <button
+                    class="product-card__cart-btn"
+                    type="button"
+                    data-product-id="${product.id}"
+                    data-add-button
+                    aria-label="Agregar ${product.estadio} a la consulta"
+                >
+                    ${getIcon('cart')}
+                </button>
             </div>
         </div>
     </article>
@@ -79,13 +78,7 @@ export const createCatalog = (products) => {
             <div class="catalog__intro">
                 <p class="catalog__eyebrow">Más Vendidos</p>
                 <div class="catalog__heading">
-                    <div>
-                        <h2>Las maquetas que más salen del taller</h2>
-                        <p>
-                            Una selección con los cuatro estadios más pedidos por los coleccionistas:
-                            Boca, River, Racing e Independiente.
-                        </p>
-                    </div>
+                    <h2>Nuestros modelos más vendidos</h2>
                 </div>
             </div>
 
@@ -106,9 +99,7 @@ export const createCatalog = (products) => {
 
             section.dispatchEvent(new CustomEvent('catalog:add-product', {
                 bubbles: true,
-                detail: {
-                    product: selectedProduct
-                }
+                detail: { product: selectedProduct }
             }));
             return;
         }
@@ -122,9 +113,7 @@ export const createCatalog = (products) => {
 
         section.dispatchEvent(new CustomEvent('catalog:view-product', {
             bubbles: true,
-            detail: {
-                product: selectedProduct
-            }
+            detail: { product: selectedProduct }
         }));
     });
 

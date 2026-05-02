@@ -3,6 +3,26 @@ import { getDeferredImageAttrs } from '../utils/imageLoader.js';
 import { getIcon } from '../utils/icons.js';
 import { buildWhatsappUrl } from '../utils/whatsapp.js';
 
+const FEATURE_POINTS = [
+    {
+        icon: 'design',
+        title: 'Diseño a medida personalizada',
+        description: 'Adaptamos escala, base y presentación según el espacio donde la vayas a exhibir.'
+    },
+    {
+        icon: 'premium',
+        title: 'Terminacion premium',
+        description: 'Trabajamos texturas, volúmenes y detalles para que la maqueta tenga presencia real.'
+    },
+    {
+        icon: 'shipping',
+        title: 'Entrega a todo el pais',
+        description: 'Empaquetado reforzado y seguimiento para que la pieza llegue segura y lista para regalar.'
+    }
+];
+
+const CTA_MESSAGE = 'Hola, me interesa solicitar una maqueta personalizada. ¿Qué información necesito proporcionar?';
+
 const createVisualSlide = (product, index) => {
     const activeClass = index === 0 ? 'is-active' : '';
     const imageContent = product.imagen
@@ -12,12 +32,9 @@ const createVisualSlide = (product, index) => {
             eager: index === 0,
             fetchpriority: index === 1 ? 'high' : 'low'
         })
-        : `
-            <div class="personalized__image-placeholder">
-                <span>Agregar imagen de referencia</span>
-                <strong>${product.estadio}</strong>
-            </div>
-        `;
+        : `<div class="personalized__image-placeholder">
+               <strong>${product.estadio}</strong>
+           </div>`;
 
     return `
         <div class="personalized__media-slide ${activeClass}" data-personalized-image>
@@ -34,15 +51,43 @@ const createMetaSlide = (product, index) => `
     </div>
 `;
 
+const createFeaturePoint = ({ icon, title, description }) => `
+    <article class="personalized__point">
+        <span class="personalized__point-icon">${getIcon(icon)}</span>
+        <strong>${title}</strong>
+        <p>${description}</p>
+    </article>
+`;
+
+const getSliderProjects = (products) => {
+    const references = products.filter((p) => p.referenciaPersonalizada);
+    if (references.length === 0) {
+        const fallback = products.find((p) => p.destacado) ?? products[0];
+        return fallback ? [fallback] : [];
+    }
+    return [...references].sort((a, b) => (a.orden ?? Infinity) - (b.orden ?? Infinity));
+};
+
+const bindCtaButton = (section) => {
+    section.querySelector('.personalized__button')?.addEventListener('click', () => {
+        window.open(buildWhatsappUrl(CTA_MESSAGE), '_blank', 'noopener,noreferrer');
+    });
+};
+
+const observeAnimation = (section) => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                section.classList.add('is-animated');
+                observer.unobserve(section);
+            }
+        });
+    }, { threshold: 0.15 });
+    observer.observe(section);
+};
+
 export const createPersonalized = (products) => {
-    const referenceProjects = products.filter((product) => product.referenciaPersonalizada);
-    const lusail = referenceProjects.find((p) => p.estadio === 'Lusail Stadium');
-    const ordered = lusail
-        ? [lusail, ...referenceProjects.filter((p) => p !== lusail)]
-        : referenceProjects;
-    const sliderProjects = ordered.length > 0
-        ? ordered
-        : [products.find((product) => product.destacado) || products[0]];
+    const sliderProjects = getSliderProjects(products);
 
     const section = document.createElement('section');
     section.className = 'personalized';
@@ -59,23 +104,7 @@ export const createPersonalized = (products) => {
                 </p>
 
                 <div class="personalized__points">
-                    <article class="personalized__point">
-                        <span class="personalized__point-icon">${getIcon('design')}</span>
-                        <strong>Diseño a medida personalizada</strong>
-                        <p>Adaptamos escala, base y presentación según el espacio donde la vayas a exhibir.</p>
-                    </article>
-
-                    <article class="personalized__point">
-                        <span class="personalized__point-icon">${getIcon('premium')}</span>
-                        <strong>Terminacion premium</strong>
-                        <p>Trabajamos texturas, volúmenes y detalles para que la maqueta tenga presencia real.</p>
-                    </article>
-
-                    <article class="personalized__point">
-                        <span class="personalized__point-icon">${getIcon('shipping')}</span>
-                        <strong>Entrega a todo el pais</strong>
-                        <p>Empaquetado reforzado y seguimiento para que la pieza llegue segura y lista para regalar.</p>
-                    </article>
+                    ${FEATURE_POINTS.map(createFeaturePoint).join('')}
                 </div>
 
                 <div class="personalized__actions">
@@ -101,22 +130,8 @@ export const createPersonalized = (products) => {
     `;
 
     initPersonalizedSlider(section);
-
-    const ctaButton = section.querySelector('.personalized__button');
-    ctaButton?.addEventListener('click', () => {
-        const url = buildWhatsappUrl('Hola, me interesa solicitar una maqueta personalizada. ¿Qué información necesito proporcionar?');
-        window.open(url, '_blank', 'noopener,noreferrer');
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                section.classList.add('is-animated');
-                observer.unobserve(section);
-            }
-        });
-    }, { threshold: 0.15 });
-    observer.observe(section);
+    bindCtaButton(section);
+    observeAnimation(section);
 
     return section;
 };
