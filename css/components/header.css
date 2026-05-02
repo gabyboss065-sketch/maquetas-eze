@@ -84,6 +84,45 @@
 
 .mobile-only { display: block; }
 
+#menu-toggle {
+    position: relative;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.menu-icon {
+    position: absolute;
+    inset: 0;
+    width: 24px;
+    height: 24px;
+    filter: invert(1);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.menu-icon--close {
+    opacity: 0;
+    transform: rotate(-45deg);
+}
+
+.menu-icon--open {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+#menu-toggle.is-active .menu-icon--open {
+    opacity: 0;
+    transform: rotate(45deg);
+}
+
+#menu-toggle.is-active .menu-icon--close {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
 .nav-menu ul {
     display: flex;
     list-style: none;
