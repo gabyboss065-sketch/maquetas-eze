@@ -29,8 +29,9 @@ export const createHeader = () => {
 
             <div class="nav-actions">
                 <div class="search-shell">
-                    <button id="search-btn" class="icon-btn" type="button" aria-expanded="false" aria-controls="search-panel">
-                        ${getIcon('search')}
+                    <button id="search-btn" class="icon-btn search-btn" type="button" aria-expanded="false" aria-controls="search-panel">
+                        <span class="search-btn__icon search-btn__icon--open">${getIcon('search')}</span>
+                        <img src="assets/icons/close.svg" class="search-btn__icon search-btn__icon--close" width="20" height="20" alt="" aria-hidden="true">
                     </button>
                     <div id="search-panel" class="search-panel">
                         <form id="search-form" class="search-panel__form">
