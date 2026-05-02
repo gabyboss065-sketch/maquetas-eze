@@ -24,14 +24,14 @@
     align-items: center;
     gap: 8px;
     margin-bottom: 28px;
-    padding: 6px 14px;
-    border: 1px solid rgba(245, 215, 110, 0.3);
-    border-radius: 999px;
+    padding: 0;
+    border: none;
+    border-radius: 0;
     font-size: 0.72rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: #f5d76e;
-    background: rgba(245, 215, 110, 0.08);
+    background: transparent;
 }
 
 /* ============================================================
@@ -427,10 +427,12 @@
     width: 48px;
     height: 48px;
     border-radius: 14px;
-    background: rgba(245, 215, 110, 0.1);
-    border: 1px solid rgba(245, 215, 110, 0.2);
-    color: #f5d76e;
+    background: #f5d76e;
+    border: none;
+    border-radius: 50%;
+    color: #111417;
     flex-shrink: 0;
+    box-shadow: 0 0 20px rgba(245, 215, 110, 0.5);
 }
 
 .personalized__step-connector {
@@ -485,76 +487,88 @@
 
 /* --- Other projects --- */
 .personalized__other-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
 }
 
 .personalized__other-card {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    gap: 14px;
-    align-items: center;
-    padding: 14px;
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(255, 255, 255, 0.04);
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 9 / 13;
+    border: 1px solid rgba(255, 255, 255, 0.18);
     text-decoration: none;
     color: inherit;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition: transform 0.3s ease;
 }
 
 .personalized__other-card:hover {
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(255, 255, 255, 0.14);
+    transform: translateY(-4px);
 }
 
-.personalized__other-image {
-    border-radius: 10px;
-    overflow: hidden;
-    aspect-ratio: 1;
-    background: #1a1d21;
-}
-
-.personalized__other-image img {
+.personalized__other-card > img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
-.personalized__other-info {
+.personalized__other-card:hover > img {
+    transform: scale(1.05);
+}
+
+.personalized__other-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    justify-content: flex-end;
+    padding: 16px;
+    background: linear-gradient(
+        180deg,
+        transparent 35%,
+        rgba(0, 0, 0, 0.45) 60%,
+        rgba(0, 0, 0, 0.88) 100%
+    );
 }
 
-.personalized__other-info strong {
-    font-size: 0.95rem;
+.personalized__other-club {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #f5d76e;
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 4px;
+}
+
+.personalized__other-name {
+    font-size: clamp(0.9rem, 1.4vw, 1.1rem);
+    line-height: 1.1;
     color: #fff;
-}
-
-.personalized__other-info span {
-    font-size: 0.82rem;
-    color: rgba(255, 255, 255, 0.52);
+    letter-spacing: -0.01em;
+    margin-bottom: 8px;
 }
 
 .personalized__other-rating {
     display: flex;
     align-items: center;
-    gap: 6px;
-    margin-top: 4px;
 }
 
 .personalized__stars {
     color: #f5d76e;
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     letter-spacing: 1px;
 }
 
-.personalized__other-rating span {
-    font-size: 0.82rem;
+.personalized__other-score {
+    font-size: 0.78rem;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.72);
+    margin-left: 4px;
 }
 
 /* ============================================================
@@ -1030,11 +1044,12 @@
     }
 
     .personalized__other-grid {
-        gap: 12px;
+        grid-template-columns: 1fr;
+        gap: 10px;
     }
 
     .personalized__other-card {
-        grid-template-columns: 90px 1fr;
+        aspect-ratio: 16 / 13;
     }
 
     .personalized__quote-wrap {

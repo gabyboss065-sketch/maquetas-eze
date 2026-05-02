@@ -318,7 +318,7 @@
     }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 374px) {
     .all-products__grid {
         grid-template-columns: 1fr;
     }
