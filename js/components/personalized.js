@@ -63,7 +63,7 @@ const FAQ_ITEMS = [
     },
     {
         q: '¿Cuánto tiempo tarda el proceso?',
-        a: 'Según la complejidad y las medidas, el proceso puede tardar entre 2 y 4 semanas. Te informamos el tiempo exacto al recibir tu consulta.'
+        a: 'Según la complejidad y las medidas. Te informamos el tiempo exacto al recibir tu consulta.'
     },
     {
         q: '¿Hacen envíos a todo el país?',
@@ -81,7 +81,9 @@ const FAQ_ITEMS = [
 
 const ARROW_SVG = `<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
 
-const renderStars = () => `<span class="personalized__stars" aria-hidden="true">★★★★★</span>`;
+const renderStars = () => Array.from({ length: 5 }, () =>
+    `<img src="assets/icons/star.svg" class="personalized__star" width="14" height="14" alt="" aria-hidden="true">`
+).join('');
 
 const getPersonalizedProjects = (products) => {
     const refs = products.filter((p) => p.referenciaPersonalizada);
@@ -242,13 +244,13 @@ const createTestimonials = () => `
             <div class="personalized__review-grid">
                 ${TESTIMONIALS.map((t) => `
                     <div class="personalized__review-card">
-                        <p class="personalized__review-icon" aria-hidden="true">""</p>
+                        <div class="personalized__review-icon" aria-hidden="true">
+                            <img src="assets/icons/quote.svg" width="28" height="28" alt="">
+                        </div>
                         <p class="personalized__review-text">${t.text}</p>
-                        <div class="personalized__review-footer">
-                            <strong>${t.author}</strong>
-                            <div class="personalized__other-rating">
-                                ${renderStars()} <span>5.0</span>
-                            </div>
+                        <strong class="personalized__review-author">${t.author}</strong>
+                        <div class="personalized__other-rating">
+                            ${renderStars()}
                         </div>
                     </div>
                 `).join('')}
@@ -359,7 +361,6 @@ export const createPersonalized = (products) => {
                 ${createOtherProjects([featured, ...rest])}
             </div>
         </div>
-        ${createQuoteCard()}
         ${createTestimonials()}
         ${createFaq()}
         ${createCtaBar()}
