@@ -48,45 +48,79 @@ const workshopPhotos = [
 const mediaCards = [
     {
         outlet: 'Clarín',
+        outletColor: '#D9261C',
+        type: 'destacada',
+        typeLabel: 'NOTA DESTACADA',
+        date: '15 de diciembre, 2023',
         title: 'Vecino del GBA deslumbra con réplicas de madera de los grandes estadios argentinos',
-        excerpt: 'Un perfil sobre el crecimiento del taller y el impacto que generan sus maquetas entre hinchas de distintos clubes.',
         href: 'https://www.clarin.com/zonales/vecino-gba-deslumbra-replicas-maderas-grandes-estadios-argentina_0_ekiPCdLRtm.html',
         image: 'assets/img/about/press/01.jpg',
         imageAlt: 'Imagen de la nota de Clarin'
     },
     {
         outlet: 'Infobae',
+        outletColor: '#F47C2E',
+        type: 'entrevista',
+        typeLabel: 'ENTREVISTA',
+        date: '7 de mayo, 2023',
         title: 'La Bombonera y el Monumental que creó un artista callejero que se reinventó',
-        excerpt: 'La nota repasa su historia antes y después de la pandemia, y cómo transformó el oficio artesanal en su trabajo principal.',
         href: 'https://www.infobae.com/sociedad/2023/05/07/la-bombonera-y-el-monumental-que-creo-un-artista-callejero-que-se-reinvento-y-hace-maquetas-de-canchas/',
         image: 'assets/img/about/press/02.webp',
         imageAlt: 'Imagen de la nota de Infobae'
     },
     {
         outlet: 'Zonales',
+        outletColor: '#1F8A4C',
+        type: 'nota',
+        typeLabel: 'NOTA',
+        date: '10 de marzo, 2023',
         title: 'Las increíbles maquetas de un vecino de Hurlingham que son furor entre los futboleros',
-        excerpt: 'Una historia local sobre su reinvención durante la pandemia y el salto de las ferias al taller propio.',
         href: 'https://zonales.com/hurlingham-maquetas-estadios-furor-futboleros/',
         image: 'assets/img/about/press/03.webp',
         imageAlt: 'Imagen de la nota de Zonales'
     },
     {
         outlet: 'La Ciudad',
+        outletColor: '#2B3F6C',
+        type: 'nota',
+        typeLabel: 'NOTA',
+        date: '4 de agosto, 2023',
         title: 'La Bombonera o el Monumental: el proyecto de un vecino de Hurlingham',
-        excerpt: 'Una cobertura centrada en la precisión del trabajo, la escala de las piezas y la expansión del emprendimiento.',
         href: 'https://laciudadweb.com.ar/la-bombonera-o-el-monumental-en-tamano-miniatura-el-increible-proyecto-de-un-vecino-de-hurlingham/',
         image: 'assets/img/about/press/04.webp',
         imageAlt: 'Imagen de la nota de La Ciudad'
     },
     {
         outlet: 'Optimism',
+        outletColor: '#7A4FB5',
+        type: 'nota',
+        typeLabel: 'NOTA',
+        date: '22 de junio, 2023',
         title: 'Es artista callejero y hace maquetas de canchas',
-        excerpt: 'Una versión inspiracional de su historia, enfocada en el oficio, la reinvención y la pasión por crear estadios en miniatura.',
         href: 'https://optimism.com.ar/es-artista-callejero-y-hace-maquetas-de-canchas/',
         image: 'assets/img/about/press/05.webp',
         imageAlt: 'Imagen de la nota de Optimism'
     }
 ];
+
+const pressLogos = [
+    { name: 'Clarín' },
+    { name: 'infobae' },
+    { name: 'Zonales' },
+    { name: 'La Ciudad' },
+    { name: 'Optimism' }
+];
+
+const getTypeIcon = (type) => {
+    if (type === 'destacada') return getIcon('press-star');
+    if (type === 'entrevista') return getIcon('press-mic');
+    return getIcon('press-doc');
+};
+
+const getCtaLabel = (type) => {
+    if (type === 'entrevista') return 'Ver entrevista';
+    return 'Ver nota completa';
+};
 
 const createMediaImageMarkup = (card) => {
     if (card.image) {
@@ -157,42 +191,106 @@ export const createAboutCreator = () => {
                 </div>
             </div>
 
-            <div class="about-creator__media">
-                <div class="about-creator__media-heading">
-                    <h3>Prensa y medios</h3>
-                    <p>Notas y entrevistas donde compartí el camino del taller.</p>
-                </div>
-                <div class="about-creator__media-slider" data-media-slider>
-                    <button class="about-creator__media-arrow about-creator__media-arrow--prev" type="button" aria-label="Notas anteriores" data-media-prev>
+            <div class="about-creator__media press">
+                <header class="press__header">
+                    <div class="press__header-left">
+                        <span class="press__eyebrow">
+                            <span class="press__eyebrow-icon">${getIcon('press-star')}</span>
+                            Apariciones destacadas
+                        </span>
+                        <h3 class="press__title">
+                            Nuestro trabajo <br>en <span class="press__title-accent">medios.</span>
+                        </h3>
+                        <p class="press__subtitle">
+                            Historias reales que reflejan pasión, dedicación
+                            y un trabajo que inspira.
+                        </p>
+                    </div>
+
+                    <div class="press__header-right">
+                        <div class="press__stat-pill">
+                            <span class="press__stat-icon">${getIcon('press-users')}</span>
+                            <p class="press__stat-text">
+                                <strong>+${mediaCards.length * 2}</strong>
+                                <span>apariciones en<br>medios nacionales</span>
+                            </p>
+                        </div>
+                        <div class="press__visto">
+                            <span class="press__visto-label">Visto en</span>
+                            <span class="press__visto-divider"></span>
+                            <ul class="press__visto-logos">
+                                ${pressLogos.map((logo) => `
+                                    <li class="press__visto-logo">${logo.name}</li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="press__slider about-creator__media-slider" data-media-slider>
+                    <button class="press__arrow press__arrow--prev" type="button" aria-label="Notas anteriores" data-media-prev>
                         ${getIcon('chevron-left')}
                     </button>
 
-                    <div class="about-creator__media-viewport">
-                        <div class="about-creator__media-track" data-media-track>
-                    ${mediaCards.map((card) => `
-                        <article class="about-creator__media-card">
-                            <div class="about-creator__media-thumb">
-                                ${createMediaImageMarkup(card)}
-                            </div>
-                            <p class="about-creator__media-outlet">${card.outlet}</p>
-                            <h4>
-                                <a class="about-creator__media-title" href="${card.href}" target="_blank" rel="noreferrer">
-                                    ${card.title}
-                                </a>
-                            </h4>
-                            <p>${card.excerpt}</p>
-                            <a href="${card.href}" target="_blank" rel="noreferrer" class="about-creator__media-link">Ver nota</a>
-                        </article>
-                    `).join('')}
+                    <div class="press__viewport about-creator__media-viewport">
+                        <div class="press__track about-creator__media-track" data-media-track>
+                            ${mediaCards.map((card) => `
+                                <article class="press-card${card.type === 'destacada' ? ' press-card--featured' : ''}" data-press-type="${card.type}">
+                                    <a class="press-card__link" href="${card.href}" target="_blank" rel="noreferrer">
+                                        <div class="press-card__media">
+                                            <span class="press-card__brand" style="--brand: ${card.outletColor}">${card.outlet}</span>
+                                            <div class="press-card__thumb">
+                                                ${createMediaImageMarkup(card)}
+                                            </div>
+                                        </div>
+                                        <span class="press-card__type">
+                                            <span class="press-card__type-icon">${getTypeIcon(card.type)}</span>
+                                            ${card.typeLabel}
+                                        </span>
+                                        <span class="press-card__date">
+                                            <span class="press-card__date-icon">${getIcon('press-calendar')}</span>
+                                            ${card.date}
+                                        </span>
+                                        <div class="press-card__body">
+                                            <h4 class="press-card__title">${card.title}</h4>
+                                            <span class="press-card__cta">
+                                                ${getCtaLabel(card.type)}
+                                                <span class="press-card__cta-icon">${getIcon('arrow-right')}</span>
+                                            </span>
+                                        </div>
+                                    </a>
+                                </article>
+                            `).join('')}
                         </div>
                     </div>
 
-                    <button class="about-creator__media-arrow about-creator__media-arrow--next" type="button" aria-label="Siguientes notas" data-media-next>
+                    <button class="press__arrow press__arrow--next" type="button" aria-label="Siguientes notas" data-media-next>
                         ${getIcon('chevron-right')}
                     </button>
                 </div>
 
-                <div class="about-creator__media-dots" data-media-dots></div>
+                <div class="press__dots about-creator__media-dots" data-media-dots></div>
+
+                <div class="press__cta-bar">
+                    <div class="press__cta-block press__cta-block--quote">
+                        <span class="press__cta-icon">${getIcon('press-quote')}</span>
+                        <p class="press__cta-text">
+                            Cada detalle importa.
+                            <strong>Cada proyecto es único.</strong>
+                        </p>
+                    </div>
+                    <div class="press__cta-divider"></div>
+                    <div class="press__cta-block press__cta-block--message">
+                        <span class="press__cta-icon">${getIcon('press-gift')}</span>
+                        <p class="press__cta-text">
+                            ¿Querés que tu historia
+                            <strong>sea la próxima?</strong>
+                        </p>
+                    </div>
+                    <a class="press__cta-button" href="#personalizados">
+                        Diseñar mi maqueta
+                        <span class="press__cta-button-icon">${getIcon('arrow-right')}</span>
+                    </a>
                 </div>
             </div>
         </div>
