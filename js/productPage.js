@@ -8,7 +8,7 @@ import { createCartDropdownController } from './components/cartDropdown.js';
 import { createSearchController } from './components/searchController.js';
 
 const MIN_GALLERY_SLOTS = 6;
-const DEFAULT_SIZE_OPTIONS = ['25 x 18 cm', '35 x 24 cm', '45 x 30 cm'];
+const DEFAULT_SIZE_OPTIONS = ['60 x 50 cm', '70 x 60 cm', '1 metro x 80 cm'];
 const CUSTOM_SIZE_VALUE = '__custom__';
 
 const getProductIdFromUrl = () => {
