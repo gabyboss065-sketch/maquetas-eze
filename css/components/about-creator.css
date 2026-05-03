@@ -188,16 +188,17 @@
 /* ---------- HEADER ---------- */
 
 .press__header {
-    display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-    gap: 56px;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
     margin-bottom: 48px;
 }
 
 .press__header-left {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    text-align: center;
     gap: 22px;
 }
 
@@ -257,7 +258,8 @@
 .press__header-right {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
     gap: 28px;
     padding-top: 4px;
 }
@@ -308,7 +310,7 @@
 
 .press__visto {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     grid-template-rows: auto auto;
     column-gap: 18px;
     row-gap: 16px;
@@ -317,7 +319,7 @@
 }
 
 .press__visto-label {
-    grid-column: 1;
+    grid-column: 2;
     grid-row: 1;
     font-size: 0.72rem;
     letter-spacing: 0.24em;
@@ -325,14 +327,23 @@
     color: var(--press-text-dim);
     font-weight: 600;
     white-space: nowrap;
+    text-align: center;
 }
 
 .press__visto-divider {
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 1;
     height: 1px;
     width: 100%;
     background: linear-gradient(90deg, var(--press-accent) 0%, var(--press-accent-dim) 80%, transparent 100%);
+}
+
+.press__visto::before {
+    content: "";
+    grid-column: 1;
+    grid-row: 1;
+    height: 1px;
+    background: linear-gradient(270deg, var(--press-accent) 0%, var(--press-accent-dim) 80%, transparent 100%);
 }
 
 .press__visto-logos {
@@ -343,6 +354,7 @@
     padding: 0;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 28px;
     flex-wrap: wrap;
 }
@@ -473,7 +485,6 @@
 .press-card__body { grid-area: body; }
 
 .press-card__link:hover {
-    transform: translateY(-4px);
     border-color: rgba(255, 255, 255, 0.16);
     box-shadow: 0 22px 44px rgba(0, 0, 0, 0.45);
 }
