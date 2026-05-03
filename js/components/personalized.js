@@ -58,24 +58,28 @@ const TESTIMONIALS = [
 
 const FAQ_ITEMS = [
     {
-        q: '¿Qué información necesito enviar?',
-        a: 'Una foto o referencia del estadio, las medidas aproximadas y el espacio donde lo vas a exhibir. Con eso podemos darte un presupuesto ajustado.'
+        q: '¿Cómo son las formas de pago?',
+        a: 'Pedimos una seña del 30% para confirmar el pedido, destinada a la compra de materiales. El resto se puede ir abonando en cuotas durante el proceso, hasta en 3 cuotas sin intereses al momento de la entrega. Al señar, el precio queda congelado en lo pactado.'
     },
     {
-        q: '¿Cuánto tiempo tarda el proceso?',
-        a: 'Según la complejidad y las medidas. Te informamos el tiempo exacto al recibir tu consulta.'
+        q: '¿Qué medios de pago aceptan?',
+        a: 'Transferencia bancaria, Mercado Pago o efectivo acercándote al taller en Hurlingham, Buenos Aires.'
+    },
+    {
+        q: '¿Qué información necesito enviar para hacer mi pedido?',
+        a: 'Una foto o referencia del estadio, las medidas aproximadas y el espacio donde lo vas a exhibir. Con eso podemos darte un presupuesto ajustado a tu proyecto.'
+    },
+    {
+        q: '¿En qué medidas están disponibles?',
+        a: 'Trabajamos con tres medidas estándar: 60×50 cm, 70×60 cm y 1m×80 cm. También realizamos medidas personalizadas según el espacio disponible.'
+    },
+    {
+        q: '¿Con qué materiales están hechas?',
+        a: 'Usamos maderas nobles (pino, tilo, balsa, cedro), acrílicos, metales, cuero y plásticos de primera calidad. Todas incluyen iluminación LED integrada con fuente de 12V, lista para enchufar con 4 posiciones de luces. No utilizamos fibrofacil ni cartón.'
     },
     {
         q: '¿Hacen envíos a todo el país?',
         a: 'Sí, enviamos a todo el país con embalaje reforzado y número de seguimiento. El costo se calcula según la distancia y el tamaño de la pieza.'
-    },
-    {
-        q: '¿Las maquetas incluyen luces?',
-        a: 'Sí, todas incluyen iluminación LED integrada. Si preferís una versión sin luces, podemos adaptarlo.'
-    },
-    {
-        q: '¿Puedo pedir un tamaño especial?',
-        a: 'Sí, trabajamos con medidas personalizadas. Indicanos el espacio disponible y te recomendamos la escala más adecuada.'
     }
 ];
 
