@@ -1,5 +1,13 @@
-# Claude Code worktrees
-.claude/worktrees/
+# Claude Code
+.claude/
+
+# Development scripts
+scripts/push-ediciones.js
+
+# Development docs
+agents.md
+assets/img/products/README.md
+assets/img/products/manifest.json
 
 # Dependencies
 node_modules/

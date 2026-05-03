@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maquetasezequiel.com/sitemap.xml
