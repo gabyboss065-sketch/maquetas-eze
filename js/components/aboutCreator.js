@@ -208,13 +208,6 @@ export const createAboutCreator = () => {
                     </div>
 
                     <div class="press__header-right">
-                        <div class="press__stat-pill">
-                            <span class="press__stat-icon">${getIcon('press-users')}</span>
-                            <p class="press__stat-text">
-                                <strong>+${mediaCards.length * 2}</strong>
-                                <span>apariciones en<br>medios nacionales</span>
-                            </p>
-                        </div>
                         <div class="press__visto">
                             <span class="press__visto-label">Visto en</span>
                             <span class="press__visto-divider"></span>
