@@ -111,12 +111,11 @@
 }
 
 .all-products__content {
-    display: grid;
-    grid-template-rows: minmax(2rem, auto) minmax(2.4rem, auto) minmax(2.8rem, auto) auto auto;
+    display: flex;
+    flex-direction: column;
     gap: 10px;
     padding: 16px;
     flex: 1;
-    align-content: start;
 }
 
 .all-products__meta,
@@ -177,6 +176,7 @@
 }
 
 .all-products__meta {
+    margin-top: auto;
     padding-top: 10px;
     border-top: 1px solid rgba(17, 20, 23, 0.08);
     color: rgba(17, 20, 23, 0.72);
@@ -203,7 +203,7 @@
 .all-products__button {
     width: 100%;
     min-height: 42px;
-    margin-top: 2px;
+    margin-top: auto;
     padding: 10px 14px;
     border: 1px solid rgba(140, 107, 25, 0.22);
     border-radius: 999px;
