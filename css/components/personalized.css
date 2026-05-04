@@ -744,10 +744,6 @@
     transition: color 0.2s ease;
 }
 
-.personalized__faq-q:hover {
-    color: #f5d76e;
-}
-
 .personalized__faq-icon {
     flex-shrink: 0;
     width: 28px;
@@ -761,10 +757,16 @@
     transition: background 0.2s ease, color 0.2s ease;
 }
 
-.personalized__faq-q:hover .personalized__faq-icon {
-    background: rgba(245, 215, 110, 0.12);
-    color: #f5d76e;
-    border-color: rgba(245, 215, 110, 0.3);
+@media (hover: hover) {
+    .personalized__faq-q:hover {
+        color: #f5d76e;
+    }
+
+    .personalized__faq-q:hover .personalized__faq-icon {
+        background: rgba(245, 215, 110, 0.12);
+        color: #f5d76e;
+        border-color: rgba(245, 215, 110, 0.3);
+    }
 }
 
 .personalized__faq-minus {

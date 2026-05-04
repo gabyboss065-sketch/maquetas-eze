@@ -305,13 +305,25 @@ const createCtaBar = () => `
 `;
 
 const initFaqAccordion = (section) => {
-    section.querySelectorAll('[data-faq-item]').forEach((item) => {
+    const items = Array.from(section.querySelectorAll('[data-faq-item]'));
+
+    const closeItem = (item) => {
+        const trigger = item.querySelector('[data-faq-trigger]');
+        const answer = item.querySelector('[data-faq-answer]');
+        if (!trigger || !answer) return;
+        trigger.setAttribute('aria-expanded', 'false');
+        answer.style.maxHeight = '0';
+        item.classList.remove('is-open');
+    };
+
+    items.forEach((item) => {
         const trigger = item.querySelector('[data-faq-trigger]');
         const answer = item.querySelector('[data-faq-answer]');
         if (!trigger || !answer) return;
 
         trigger.addEventListener('click', () => {
             const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+            items.forEach((other) => { if (other !== item) closeItem(other); });
             trigger.setAttribute('aria-expanded', String(!isOpen));
             answer.style.maxHeight = isOpen ? '0' : `${answer.scrollHeight}px`;
             item.classList.toggle('is-open', !isOpen);
