@@ -21,7 +21,7 @@ export const supabaseAuth = {
         const data = await res.json();
         if (data.access_token) {
             authToken = data.access_token;
-            sessionStorage.setItem('sb_token', data.access_token);
+            localStorage.setItem('sb_token', data.access_token);
         }
         return data;
     },
@@ -32,17 +32,17 @@ export const supabaseAuth = {
             headers: headers(),
         }).catch(() => {});
         authToken = SUPABASE_ANON_KEY;
-        sessionStorage.removeItem('sb_token');
+        localStorage.removeItem('sb_token');
     },
 
     restore() {
-        const token = sessionStorage.getItem('sb_token');
+        const token = localStorage.getItem('sb_token');
         if (token) authToken = token;
         return !!token;
     },
 
     isAuthenticated() {
-        return !!sessionStorage.getItem('sb_token');
+        return !!localStorage.getItem('sb_token');
     },
 };
 
