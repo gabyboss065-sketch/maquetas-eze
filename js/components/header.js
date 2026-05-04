@@ -23,6 +23,7 @@ export const createHeader = () => {
                 <ul>
                     <li><a href="./inicio.html#inicio">Inicio</a></li>
                     <li><a href="./inicio.html#todos-los-productos">Productos</a></li>
+                    <li><a href="./inicio.html#personalizados">Personalizados</a></li>
                     <li><a href="./inicio.html#sobre-mi">Sobre mí</a></li>
                 </ul>
             </nav>
@@ -90,7 +91,7 @@ export const createHeader = () => {
     });
 
     const navLinks = header.querySelectorAll('.nav-menu a');
-    const sectionIds = ['inicio', 'todos-los-productos', 'sobre-mi'];
+    const sectionIds = ['inicio', 'todos-los-productos', 'personalizados', 'sobre-mi'];
 
     const setActiveLink = (activeId) => {
         navLinks.forEach((link) => {

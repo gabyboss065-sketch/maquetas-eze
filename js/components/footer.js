@@ -1,10 +1,10 @@
 import { getIcon } from '../utils/icons.js';
 
 const NAV_LINKS = [
-    { label: 'Inicio',    href: './inicio.html#inicio' },
-    { label: 'Productos', href: './inicio.html#todos-los-productos' },
-    { label: 'Sobre mí', href: './inicio.html#sobre-mi' },
-    { label: 'Ingresar', href: './admin.html' },
+    { label: 'Inicio',          href: './inicio.html#inicio' },
+    { label: 'Productos',       href: './inicio.html#todos-los-productos' },
+    { label: 'Personalizados',  href: './inicio.html#personalizados' },
+    { label: 'Sobre mí',        href: './inicio.html#sobre-mi' },
 ];
 
 const SOCIAL = [
