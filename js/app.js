@@ -124,6 +124,14 @@ const init = async () => {
             productModal.open(selectedProduct);
         }
     }
+
+    const hash = window.location.hash;
+    if (hash && !hash.startsWith('#producto-')) {
+        requestAnimationFrame(() => {
+            const target = document.querySelector(hash);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
 };
 
 document.addEventListener('DOMContentLoaded', init);
