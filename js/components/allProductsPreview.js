@@ -31,9 +31,7 @@ const createProductCard = (product) => {
             <a
                 class="all-products__title-button"
                 href="${getProductDetailUrl(product.id)}"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Abrir ficha de ${product.estadio} en una nueva pestaña"
+                aria-label="Ver ficha de ${product.estadio}"
             >
                 <h3>${product.estadio}</h3>
             </a>
