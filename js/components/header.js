@@ -52,7 +52,8 @@ export const createHeader = () => {
                 </div>
                 <div class="cart-menu">
                     <button id="cart-btn" class="icon-btn" type="button" aria-haspopup="true" aria-expanded="false">
-                        ${getIcon('cart')}
+                        <span class="cart-btn__icon cart-btn__icon--open">${getIcon('cart')}</span>
+                        <img src="assets/icons/close.svg" class="cart-btn__icon cart-btn__icon--close" width="20" height="20" alt="" aria-hidden="true">
                     </button>
                     <div id="cart-dropdown" class="cart-dropdown" aria-hidden="true">
                         <div class="cart-dropdown__header">
