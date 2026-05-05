@@ -1,10 +1,10 @@
 import { getIcon } from '../utils/icons.js';
 
 const NAV_LINKS = [
-    { label: 'Inicio',          href: './inicio.html#inicio' },
-    { label: 'Productos',       href: './inicio.html#todos-los-productos' },
-    { label: 'Personalizados',  href: './inicio.html#personalizados' },
-    { label: 'Sobre mí',        href: './inicio.html#sobre-mi' },
+    { label: 'Inicio',          section: 'inicio' },
+    { label: 'Productos',       section: 'todos-los-productos' },
+    { label: 'Personalizados',  section: 'personalizados' },
+    { label: 'Sobre mí',        section: 'sobre-mi' },
 ];
 
 const SOCIAL = [
@@ -40,6 +40,11 @@ const CONTACT = [
     },
 ];
 
+const onMainPage = () => {
+    const p = window.location.pathname;
+    return p === '/' || p.endsWith('/inicio.html');
+};
+
 export const createFooter = () => {
     const footer = document.createElement('footer');
     footer.className = 'site-footer';
@@ -67,8 +72,8 @@ export const createFooter = () => {
                 <div class="site-footer__nav">
                     <p class="site-footer__col-title">Navegación</p>
                     <ul>
-                        ${NAV_LINKS.map(({ label, href }) => `
-                            <li><a href="${href}">${label}</a></li>
+                        ${NAV_LINKS.map(({ label, section }) => `
+                            <li><a href="/" data-section="${section}">${label}</a></li>
                         `).join('')}
                     </ul>
                 </div>
@@ -97,6 +102,24 @@ export const createFooter = () => {
             </div>
         </div>
     `;
+
+    footer.querySelectorAll('a[data-section]').forEach((link) => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const section = link.dataset.section;
+            if (onMainPage()) {
+                if (section === 'inicio') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const target = document.getElementById(section);
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                }
+            } else {
+                sessionStorage.setItem('scrollTo', section);
+                window.location.href = '/';
+            }
+        });
+    });
 
     return footer;
 };
