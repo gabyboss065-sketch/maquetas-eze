@@ -12,7 +12,7 @@ export const createHeader = () => {
                 <img src="assets/icons/close.svg" class="menu-icon menu-icon--close" width="24" height="24" alt="">
             </button>
             
-            <a class="logo" href="./inicio.html">
+            <a class="logo" href="/">
                 <span class="logo__text">
                     <span class="logo__maquetas">MAQUETAS</span>
                     <span class="logo__ezequiel">EZEQUIEL</span>
@@ -132,6 +132,9 @@ export const createHeader = () => {
                 const target = document.getElementById(sectionId);
                 if (target) target.scrollIntoView({ behavior: 'smooth' });
                 setActiveLink(sectionId);
+            } else if (sectionId) {
+                e.preventDefault();
+                window.location.href = `/?section=${sectionId}`;
             }
         });
     });

@@ -15,8 +15,9 @@ import { createToastController } from './components/toast.js';
 import { productsService } from './services/productsService.js';
 import { createCartStore } from './store/cartStore.js';
 import { observeDeferredImages } from './utils/imageLoader.js';
+import { slugify } from './utils/productLinks.js';
 
-const getProductHash = (productId) => `#producto-${productId}`;
+const getProductHash = (product) => `#${slugify(product.estadio)}`;
 const getProductIdFromHash = () => {
     const match = window.location.hash.match(/^#producto-(\d+)$/);
     return match ? Number(match[1]) : null;
@@ -68,7 +69,7 @@ const init = async () => {
         const selectedProduct = event.detail?.product;
         if (!selectedProduct) return;
         productModal.open(selectedProduct);
-        const nextHash = getProductHash(selectedProduct.id);
+        const nextHash = getProductHash(selectedProduct);
         if (window.location.hash !== nextHash) {
             history.replaceState(null, '', nextHash);
         }
