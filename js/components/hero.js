@@ -1,6 +1,7 @@
 // js/components/hero.js
 import { initHeroSlider } from '../modules/heroSlider.js';
 import { getDeferredImageAttrs } from '../utils/imageLoader.js';
+import { getProductDetailUrl } from '../utils/productLinks.js';
 
 export const createHero = (maquetas) => {
     const hero = document.createElement('section');
@@ -15,7 +16,7 @@ export const createHero = (maquetas) => {
     hero.innerHTML = `
         <div class="slider-wrapper">
             ${slidesData.map((m, index) => `
-                <div class="slide ${index === 0 ? 'active' : ''}" data-product-id="${m.id}">
+                <div class="slide ${index === 0 ? 'active' : ''}" data-product-id="${m.id}" data-product-url="${getProductDetailUrl(m)}">
                     ${getDeferredImageAttrs({
                         src: m.imagen,
                         alt: `Maqueta del estadio ${m.estadio}`,

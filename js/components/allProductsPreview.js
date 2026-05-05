@@ -30,7 +30,7 @@ const createProductCard = (product) => {
 
             <a
                 class="all-products__title-button"
-                href="${getProductDetailUrl(product.id)}"
+                href="${getProductDetailUrl(product)}"
                 aria-label="Ver ficha de ${product.estadio}"
             >
                 <h3>${product.estadio}</h3>
