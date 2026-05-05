@@ -98,9 +98,8 @@ const init = async () => {
     syncUI();
 
     document.addEventListener('product-modal:closed', () => {
-        if (getProductIdFromHash() !== null) {
-            const nextUrl = `${window.location.pathname}${window.location.search}`;
-            history.replaceState(null, '', nextUrl);
+        if (window.location.hash) {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
         }
     });
 
@@ -130,6 +129,15 @@ const init = async () => {
     if (hash && !hash.startsWith('#producto-')) {
         requestAnimationFrame(() => {
             const target = document.querySelector(hash);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    const scrollTarget = sessionStorage.getItem('scrollTo');
+    if (scrollTarget) {
+        sessionStorage.removeItem('scrollTo');
+        requestAnimationFrame(() => {
+            const target = document.getElementById(scrollTarget);
             if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
     }

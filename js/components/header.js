@@ -134,7 +134,8 @@ export const createHeader = () => {
                 setActiveLink(sectionId);
             } else if (sectionId) {
                 e.preventDefault();
-                window.location.href = `/?section=${sectionId}`;
+                sessionStorage.setItem('scrollTo', sectionId);
+                window.location.href = '/';
             }
         });
     });
