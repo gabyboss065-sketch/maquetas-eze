@@ -129,8 +129,12 @@ export const createHeader = () => {
 
             if (sectionId && onMainPage()) {
                 e.preventDefault();
-                const target = document.getElementById(sectionId);
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
+                if (sectionId === 'inicio') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const target = document.getElementById(sectionId);
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                }
                 setActiveLink(sectionId);
             } else if (sectionId) {
                 e.preventDefault();
