@@ -130,16 +130,6 @@ const init = async () => {
         requestAnimationFrame(() => {
             const target = document.querySelector(hash);
             if (target) target.scrollIntoView({ behavior: 'smooth' });
-            history.replaceState(null, '', '/');
-        });
-    }
-
-    const sectionParam = new URLSearchParams(window.location.search).get('section');
-    if (sectionParam) {
-        requestAnimationFrame(() => {
-            const target = document.getElementById(sectionParam);
-            if (target) target.scrollIntoView({ behavior: 'smooth' });
-            history.replaceState(null, '', '/');
         });
     }
 };

@@ -12,19 +12,19 @@ export const createHeader = () => {
                 <img src="assets/icons/close.svg" class="menu-icon menu-icon--close" width="24" height="24" alt="">
             </button>
             
-            <a class="logo" href="/">
+            <a class="logo" href="./inicio.html">
                 <span class="logo__text">
                     <span class="logo__maquetas">MAQUETAS</span>
                     <span class="logo__ezequiel">EZEQUIEL</span>
                 </span>
             </a>
-
+            
             <nav class="nav-menu">
                 <ul>
-                    <li><a href="/" data-scroll-to="inicio">Inicio</a></li>
-                    <li><a href="/" data-scroll-to="todos-los-productos">Productos</a></li>
-                    <li><a href="/" data-scroll-to="personalizados">Personalizados</a></li>
-                    <li><a href="/" data-scroll-to="sobre-mi">Sobre mí</a></li>
+                    <li><a href="./inicio.html#inicio">Inicio</a></li>
+                    <li><a href="./inicio.html#todos-los-productos">Productos</a></li>
+                    <li><a href="./inicio.html#personalizados">Personalizados</a></li>
+                    <li><a href="./inicio.html#sobre-mi">Sobre mí</a></li>
                 </ul>
             </nav>
 
@@ -92,12 +92,12 @@ export const createHeader = () => {
 
     const navLinks = header.querySelectorAll('.nav-menu a');
     const sectionIds = ['inicio', 'todos-los-productos', 'personalizados', 'sobre-mi'];
-    const isMainPage = () => document.getElementById('inicio') !== null;
 
     const setActiveLink = (activeId) => {
         navLinks.forEach((link) => {
-            const sectionId = link.dataset.scrollTo;
-            link.classList.toggle('is-active', sectionId === activeId);
+            const href = link.getAttribute('href');
+            const linkId = href?.split('#')[1];
+            link.classList.toggle('is-active', linkId === activeId);
         });
     };
 
@@ -114,25 +114,13 @@ export const createHeader = () => {
     };
 
     navLinks.forEach((link) => {
-        link.addEventListener('click', (e) => {
-            const sectionId = link.dataset.scrollTo;
+        link.addEventListener('click', () => {
+            const href = link.getAttribute('href');
+            const linkId = href?.split('#')[1];
+            if (linkId) setActiveLink(linkId);
             navMenu.classList.remove('is-active');
             menuToggle.classList.remove('is-active');
             menuToggle.setAttribute('aria-label', 'Abrir menú');
-
-            if (!sectionId) return;
-
-            if (isMainPage()) {
-                e.preventDefault();
-                const target = document.getElementById(sectionId);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                    setActiveLink(sectionId);
-                }
-            } else {
-                e.preventDefault();
-                window.location.href = `/?section=${sectionId}`;
-            }
         });
     });
 
