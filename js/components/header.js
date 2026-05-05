@@ -154,8 +154,10 @@ export const createHeader = () => {
         });
     });
 
-    updateActiveLink();
-    window.addEventListener('scroll', updateActiveLink, { passive: true });
+    if (onMainPage()) {
+        updateActiveLink();
+        window.addEventListener('scroll', updateActiveLink, { passive: true });
+    }
 
     let lastScrollY = window.scrollY;
     const revealThreshold = 24;
