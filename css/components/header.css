@@ -383,14 +383,14 @@
 
 #cart-btn {
     position: relative;
-    width: 24px;
-    height: 24px;
-    padding: 0;
+    display: grid;
+    place-items: center;
 }
 
 .cart-btn__icon {
-    position: absolute;
+    grid-area: 1 / 1;
     transition: opacity 0.2s ease, transform 0.2s ease;
+    display: flex;
 }
 
 .cart-btn__icon--close {
