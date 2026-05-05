@@ -1,6 +1,7 @@
 import { getDeferredImageAttrs } from '../utils/imageLoader.js';
 import { getIcon } from '../utils/icons.js';
 import { buildWhatsappUrl } from '../utils/whatsapp.js';
+import { getProductDetailUrl } from '../utils/productLinks.js';
 
 const CTA_MESSAGE = 'Hola, me interesa solicitar una maqueta personalizada. ¿Qué información necesito proporcionar?';
 const CTA_BAR_MESSAGE = 'Hola, quiero mi estadio personalizado. ¿Cómo empezamos?';
@@ -144,7 +145,7 @@ const createHero = (featured) => `
                         <h3 class="personalized__featured-name">${featured.estadio}</h3>
                         <div class="personalized__featured-footer">
                             <span class="personalized__featured-label">Proyecto personalizado</span>
-                            <a href="product.html?id=${featured.id}" class="personalized__featured-link">
+                            <a href="${getProductDetailUrl(featured)}" class="personalized__featured-link">
                                 Ver proyecto completo ${ARROW_SVG}
                             </a>
                         </div>
@@ -209,7 +210,7 @@ const createOtherProjects = (others) => `
         <p class="personalized__kicker">Otros Proyectos Personalizados</p>
         <div class="personalized__other-grid">
             ${others.slice(0, 3).map((p) => `
-                <a class="personalized__other-card" href="product.html?id=${p.id}">
+                <a class="personalized__other-card" href="${getProductDetailUrl(p)}">
                     <img src="${p.imagen}" alt="Maqueta de ${p.estadio}" loading="lazy" decoding="async">
                     <div class="personalized__other-overlay">
                         <span class="personalized__other-club">${p.club}</span>

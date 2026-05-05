@@ -15,8 +15,9 @@ import { createToastController } from './components/toast.js';
 import { productsService } from './services/productsService.js';
 import { createCartStore } from './store/cartStore.js';
 import { observeDeferredImages } from './utils/imageLoader.js';
+import { slugify } from './utils/productLinks.js';
 
-const getProductHash = (productId) => `#producto-${productId}`;
+const getProductHash = (product) => `#${slugify(product.estadio)}`;
 const getProductIdFromHash = () => {
     const match = window.location.hash.match(/^#producto-(\d+)$/);
     return match ? Number(match[1]) : null;
@@ -68,7 +69,7 @@ const init = async () => {
         const selectedProduct = event.detail?.product;
         if (!selectedProduct) return;
         productModal.open(selectedProduct);
-        const nextHash = getProductHash(selectedProduct.id);
+        const nextHash = getProductHash(selectedProduct);
         if (window.location.hash !== nextHash) {
             history.replaceState(null, '', nextHash);
         }
@@ -97,9 +98,8 @@ const init = async () => {
     syncUI();
 
     document.addEventListener('product-modal:closed', () => {
-        if (getProductIdFromHash() !== null) {
-            const nextUrl = `${window.location.pathname}${window.location.search}`;
-            history.replaceState(null, '', nextUrl);
+        if (window.location.hash) {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
         }
     });
 
@@ -129,6 +129,15 @@ const init = async () => {
     if (hash && !hash.startsWith('#producto-')) {
         requestAnimationFrame(() => {
             const target = document.querySelector(hash);
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    const scrollTarget = sessionStorage.getItem('scrollTo');
+    if (scrollTarget) {
+        sessionStorage.removeItem('scrollTo');
+        requestAnimationFrame(() => {
+            const target = document.getElementById(scrollTarget);
             if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
     }

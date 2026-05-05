@@ -88,7 +88,7 @@ export const createSearchController = (products) => {
 
     const navigateToProduct = (product) => {
         if (!product) return;
-        window.location.href = getProductDetailUrl(product.id);
+        window.location.href = getProductDetailUrl(product);
     };
 
     const renderSuggestions = (query) => {

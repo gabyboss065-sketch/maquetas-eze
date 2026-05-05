@@ -12,7 +12,7 @@ export const createHeader = () => {
                 <img src="assets/icons/close.svg" class="menu-icon menu-icon--close" width="24" height="24" alt="">
             </button>
             
-            <a class="logo" href="./inicio.html">
+            <a class="logo" href="/">
                 <span class="logo__text">
                     <span class="logo__maquetas">MAQUETAS</span>
                     <span class="logo__ezequiel">EZEQUIEL</span>
@@ -52,7 +52,8 @@ export const createHeader = () => {
                 </div>
                 <div class="cart-menu">
                     <button id="cart-btn" class="icon-btn" type="button" aria-haspopup="true" aria-expanded="false">
-                        ${getIcon('cart')}
+                        <span class="cart-btn__icon cart-btn__icon--open">${getIcon('cart')}</span>
+                        <img src="assets/icons/close.svg" class="cart-btn__icon cart-btn__icon--close" width="20" height="20" alt="" aria-hidden="true">
                     </button>
                     <div id="cart-dropdown" class="cart-dropdown" aria-hidden="true">
                         <div class="cart-dropdown__header">
@@ -84,11 +85,20 @@ export const createHeader = () => {
     const menuToggle = header.querySelector('#menu-toggle');
     const navMenu = header.querySelector('.nav-menu');
 
+    const closeMenu = () => {
+        navMenu.classList.remove('is-active');
+        menuToggle.classList.remove('is-active');
+        menuToggle.setAttribute('aria-label', 'Abrir menú');
+    };
+
     menuToggle.addEventListener('click', () => {
         const isOpen = navMenu.classList.toggle('is-active');
         menuToggle.classList.toggle('is-active', isOpen);
         menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
     });
+
+    header.querySelector('#search-btn')?.addEventListener('click', closeMenu);
+    header.querySelector('#cart-btn')?.addEventListener('click', closeMenu);
 
     const navLinks = header.querySelectorAll('.nav-menu a');
     const sectionIds = ['inicio', 'todos-los-productos', 'personalizados', 'sobre-mi'];
@@ -113,19 +123,41 @@ export const createHeader = () => {
         setActiveLink(activeId);
     };
 
+    const onMainPage = () => {
+        const p = window.location.pathname;
+        return p === '/' || p.endsWith('/inicio.html');
+    };
+
     navLinks.forEach((link) => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
-            const linkId = href?.split('#')[1];
-            if (linkId) setActiveLink(linkId);
+            const sectionId = href?.split('#')[1];
+
             navMenu.classList.remove('is-active');
             menuToggle.classList.remove('is-active');
             menuToggle.setAttribute('aria-label', 'Abrir menú');
+
+            if (sectionId && onMainPage()) {
+                e.preventDefault();
+                if (sectionId === 'inicio') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const target = document.getElementById(sectionId);
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                }
+                setActiveLink(sectionId);
+            } else if (sectionId) {
+                e.preventDefault();
+                sessionStorage.setItem('scrollTo', sectionId);
+                window.location.href = '/';
+            }
         });
     });
 
-    updateActiveLink();
-    window.addEventListener('scroll', updateActiveLink, { passive: true });
+    if (onMainPage()) {
+        updateActiveLink();
+        window.addEventListener('scroll', updateActiveLink, { passive: true });
+    }
 
     let lastScrollY = window.scrollY;
     const revealThreshold = 24;

@@ -383,6 +383,35 @@
 
 #cart-btn {
     position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.cart-btn__icon {
+    grid-area: 1 / 1;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: flex;
+}
+
+.cart-btn__icon--close {
+    opacity: 0;
+    transform: rotate(-45deg);
+    filter: invert(1);
+}
+
+.cart-btn__icon--open {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+#cart-btn[aria-expanded="true"] .cart-btn__icon--open {
+    opacity: 0;
+    transform: rotate(45deg);
+}
+
+#cart-btn[aria-expanded="true"] .cart-btn__icon--close {
+    opacity: 1;
+    transform: rotate(0deg);
 }
 
 #cart-btn.has-count::after {

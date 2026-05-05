@@ -71,9 +71,9 @@ export const initHeroSlider = (container) => {
         if (!discoverBtn) return;
 
         const activeSlide = container.querySelector('.slide.active');
-        const productId = activeSlide?.dataset.productId;
-        if (productId) {
-            window.location.href = getProductDetailUrl(productId);
+        const productUrl = activeSlide?.dataset.productUrl;
+        if (productUrl) {
+            window.location.href = productUrl;
         }
     });
 

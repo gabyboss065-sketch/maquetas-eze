@@ -6,15 +6,19 @@ import { createHeader } from './components/header.js';
 import { createCartStore } from './store/cartStore.js';
 import { createCartDropdownController } from './components/cartDropdown.js';
 import { createSearchController } from './components/searchController.js';
+import { slugify } from './utils/productLinks.js';
 
 const MIN_GALLERY_SLOTS = 6;
 const DEFAULT_SIZE_OPTIONS = ['60 x 50 cm', '70 x 60 cm', '1 metro x 80 cm'];
 const CUSTOM_SIZE_VALUE = '__custom__';
 
-const getProductIdFromUrl = () => {
-    const params = new URLSearchParams(window.location.search);
-    return Number(params.get('id'));
+const getSlugFromUrl = () => {
+    const parts = window.location.pathname.replace(/\/$/, '').split('/');
+    return parts[parts.length - 1];
 };
+
+const findProductBySlug = (products, slug) =>
+    products.find((p) => slugify(p.estadio) === slug);
 
 const getSizeOptions = (product) => {
     if (Array.isArray(product.medidas) && product.medidas.length > 0) {
@@ -140,9 +144,9 @@ const renderProductPage = (product) => {
         <section class="product-detail">
             <div class="product-detail__shell">
                 <nav class="product-detail__breadcrumbs" aria-label="Navegación secundaria">
-                    <a href="./inicio.html">Inicio</a>
+                    <a href="/">Inicio</a>
                     <span>/</span>
-                    <a href="./inicio.html#todos-los-productos">Catálogo</a>
+                    <a href="/?section=todos-los-productos">Catálogo</a>
                     <span>/</span>
                     <strong>${product.estadio}</strong>
                 </nav>
@@ -217,7 +221,7 @@ const renderProductPage = (product) => {
                                 ${getIcon('whatsapp')}
                                 <span>Consultar por WhatsApp</span>
                             </a>
-                            <a class="product-detail__cta product-detail__cta--ghost" href="./inicio.html#todos-los-productos">
+                            <a class="product-detail__cta product-detail__cta--ghost" href="/?section=todos-los-productos">
                                 Volver al catálogo
                             </a>
                         </div>
@@ -230,7 +234,7 @@ const renderProductPage = (product) => {
                             <p class="product-detail__eyebrow">Seguí explorando</p>
                             <h2>Volver al catálogo completo</h2>
                         </div>
-                        <a href="./inicio.html#todos-los-productos">Ver todos los productos</a>
+                        <a href="/?section=todos-los-productos">Ver todos los productos</a>
                     </div>
                 </section>
             </div>
@@ -346,7 +350,7 @@ const renderNotFound = () => {
                     <p class="product-detail__eyebrow">Producto no encontrado</p>
                     <h1>No pudimos cargar esta ficha</h1>
                     <p>Revisa el enlace o volve al catalogo para elegir otro producto.</p>
-                    <a class="product-detail__cta product-detail__cta--primary" href="./inicio.html#todos-los-productos">
+                    <a class="product-detail__cta product-detail__cta--primary" href="/?section=todos-los-productos">
                         Volver al catalogo
                     </a>
                 </div>
@@ -379,8 +383,8 @@ const init = async () => {
         syncHeaderUI();
     }
 
-    const productId = getProductIdFromUrl();
-    const product = maquetas.find((item) => item.id === productId);
+    const slug = getSlugFromUrl();
+    const product = findProductBySlug(maquetas, slug);
 
     document.body.appendChild(createWhatsAppFloat());
 
