@@ -84,11 +84,20 @@ export const createHeader = () => {
     const menuToggle = header.querySelector('#menu-toggle');
     const navMenu = header.querySelector('.nav-menu');
 
+    const closeMenu = () => {
+        navMenu.classList.remove('is-active');
+        menuToggle.classList.remove('is-active');
+        menuToggle.setAttribute('aria-label', 'Abrir menú');
+    };
+
     menuToggle.addEventListener('click', () => {
         const isOpen = navMenu.classList.toggle('is-active');
         menuToggle.classList.toggle('is-active', isOpen);
         menuToggle.setAttribute('aria-label', isOpen ? 'Cerrar menú' : 'Abrir menú');
     });
+
+    header.querySelector('#search-btn')?.addEventListener('click', closeMenu);
+    header.querySelector('#cart-btn')?.addEventListener('click', closeMenu);
 
     const navLinks = header.querySelectorAll('.nav-menu a');
     const sectionIds = ['inicio', 'todos-los-productos', 'personalizados', 'sobre-mi'];
