@@ -113,14 +113,26 @@ export const createHeader = () => {
         setActiveLink(activeId);
     };
 
+    const onMainPage = () => {
+        const p = window.location.pathname;
+        return p === '/' || p.endsWith('/inicio.html');
+    };
+
     navLinks.forEach((link) => {
-        link.addEventListener('click', () => {
+        link.addEventListener('click', (e) => {
             const href = link.getAttribute('href');
-            const linkId = href?.split('#')[1];
-            if (linkId) setActiveLink(linkId);
+            const sectionId = href?.split('#')[1];
+
             navMenu.classList.remove('is-active');
             menuToggle.classList.remove('is-active');
             menuToggle.setAttribute('aria-label', 'Abrir menú');
+
+            if (sectionId && onMainPage()) {
+                e.preventDefault();
+                const target = document.getElementById(sectionId);
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+                setActiveLink(sectionId);
+            }
         });
     });
 
