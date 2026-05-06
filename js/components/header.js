@@ -21,10 +21,10 @@ export const createHeader = () => {
             
             <nav class="nav-menu">
                 <ul>
-                    <li><a href="./inicio.html#inicio">Inicio</a></li>
-                    <li><a href="./inicio.html#todos-los-productos">Productos</a></li>
-                    <li><a href="./inicio.html#personalizados">Personalizados</a></li>
-                    <li><a href="./inicio.html#sobre-mi">Sobre mí</a></li>
+                    <li><a href="/#inicio">Inicio</a></li>
+                    <li><a href="/#todos-los-productos">Productos</a></li>
+                    <li><a href="/#personalizados">Personalizados</a></li>
+                    <li><a href="/#sobre-mi">Sobre mí</a></li>
                 </ul>
             </nav>
 
