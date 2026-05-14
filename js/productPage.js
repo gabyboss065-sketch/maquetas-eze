@@ -86,8 +86,11 @@ const updateWhatsAppCta = (cta, product, size, customSize = '') => {
     cta.tabIndex = isReady ? 0 : -1;
 };
 
-const renderGalleryItem = (item, index, isActive) => {
+const renderGalleryItem = (item, index, isActive, product) => {
     if (item.kind === 'image') {
+        const alt = product
+            ? `${product.estadio} — ${product.club}, vista ${index + 1}`
+            : item.label;
         return `
             <button
                 class="product-detail__thumb ${isActive ? 'is-active' : ''}"
@@ -95,7 +98,7 @@ const renderGalleryItem = (item, index, isActive) => {
                 data-gallery-index="${index}"
                 aria-label="Ver ${item.label}"
             >
-                <img src="${item.src}" alt="${item.label}" loading="lazy" decoding="async">
+                <img src="${item.src}" alt="${alt}" width="120" height="90" loading="${index === 0 ? 'eager' : 'lazy'}" decoding="async">
             </button>
         `;
     }
@@ -115,7 +118,7 @@ const renderGalleryItem = (item, index, isActive) => {
 const renderMainMedia = (item, product) => {
     if (item.kind === 'image') {
         return `
-            <img class="product-detail__main-image" src="${item.src}" alt="Detalle de ${product.estadio}" loading="eager" decoding="async">
+            <img class="product-detail__main-image" src="${item.src}" alt="Maqueta del ${product.estadio} — ${product.club}, escala ${product.escala}" width="800" height="600" sizes="(max-width: 768px) 100vw, 50vw" loading="eager" decoding="async">
             <button class="product-detail__fullscreen-close" type="button" data-gallery-fullscreen-close aria-label="Salir de pantalla completa">
                 ${getIcon('close')}
             </button>
@@ -158,7 +161,7 @@ const renderProductPage = (product) => {
                         </div>
 
                         <div class="product-detail__thumbs" data-gallery-thumbs>
-                            ${galleryItems.map((item, index) => renderGalleryItem(item, index, index === 0)).join('')}
+                            ${galleryItems.map((item, index) => renderGalleryItem(item, index, index === 0, product)).join('')}
                         </div>
                     </div>
 
@@ -359,6 +362,69 @@ const renderNotFound = () => {
     `;
 };
 
+const BASE_URL = 'https://maquetasezequiel.com';
+
+const updatePageMeta = (product) => {
+    const slug = slugify(product.estadio);
+    const url = `${BASE_URL}/productos/${slug}`;
+    const imageUrl = `${BASE_URL}/${product.imagen}`;
+    const title = `${product.estadio} (${product.club}) | Maquetas Ezequiel`;
+    const description = `${product.descripcion} Maqueta del ${product.estadio} — ${product.club}. Escala ${product.escala}. Hecha a mano en Argentina, envíos a todo el país.`;
+
+    document.title = title;
+
+    const setMeta = (selector, value) => {
+        const el = document.querySelector(selector);
+        if (el) el.setAttribute('content', value);
+    };
+
+    setMeta('meta[name="description"]', description);
+    setMeta('meta[property="og:title"]', title);
+    setMeta('meta[property="og:description"]', description);
+    setMeta('meta[property="og:image"]', imageUrl);
+    setMeta('meta[property="og:url"]', url);
+    setMeta('meta[property="og:type"]', 'product');
+    setMeta('meta[name="twitter:title"]', title);
+    setMeta('meta[name="twitter:description"]', description);
+    setMeta('meta[name="twitter:image"]', imageUrl);
+
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+        canonical = document.createElement('link');
+        canonical.rel = 'canonical';
+        document.head.appendChild(canonical);
+    }
+    canonical.href = url;
+
+    const schema = {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.estadio,
+        description: product.descripcion,
+        image: imageUrl,
+        brand: { '@type': 'Brand', name: 'Maquetas Ezequiel' },
+        offers: {
+            '@type': 'Offer',
+            price: String(product.precio),
+            priceCurrency: 'ARS',
+            availability: product.stock > 0
+                ? 'https://schema.org/InStock'
+                : 'https://schema.org/OutOfStock',
+            url,
+            seller: { '@type': 'Organization', name: 'Maquetas Ezequiel' }
+        }
+    };
+
+    let ldScript = document.querySelector('script[data-schema="product"]');
+    if (!ldScript) {
+        ldScript = document.createElement('script');
+        ldScript.type = 'application/ld+json';
+        ldScript.dataset.schema = 'product';
+        document.head.appendChild(ldScript);
+    }
+    ldScript.textContent = JSON.stringify(schema);
+};
+
 const init = async () => {
     const maquetas = await productsService.getAll();
 
@@ -394,7 +460,7 @@ const init = async () => {
         return;
     }
 
-    document.title = `${product.estadio} | Maquetas Ezequiel`;
+    updatePageMeta(product);
     renderProductPage(product);
 };
 

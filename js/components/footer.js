@@ -62,7 +62,7 @@ export const createFooter = () => {
                                 class="site-footer__social-btn"
                                 href="${href}"
                                 target="_blank"
-                                rel="noreferrer noopener"
+                                rel="nofollow noreferrer noopener"
                                 aria-label="${label}"
                             >${icon}</a>
                         `).join('')}
@@ -73,7 +73,7 @@ export const createFooter = () => {
                     <p class="site-footer__col-title">Navegación</p>
                     <ul>
                         ${NAV_LINKS.map(({ label, section }) => `
-                            <li><a href="/" data-section="${section}">${label}</a></li>
+                            <li><a href="${section === 'inicio' ? '/' : `/#${section}`}" data-section="${section}">${label}</a></li>
                         `).join('')}
                     </ul>
                 </div>
